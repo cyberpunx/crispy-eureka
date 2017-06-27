@@ -50,7 +50,7 @@ class VehicleCreateView(CreateView):
     template_name = 'main/vehicle/vehicle_form.html'
     model = Vehicle
     fields = ['licence_plate', 'color', 'year', 'model', 'transmission', 'client']
-
+    success_url = reverse_lazy('main:vehicle-index')
 
 class VehicleUpdateView(UpdateView):
     template_name = 'main/vehicle/vehicle_form.html'
@@ -75,6 +75,7 @@ class BrandCreateView(CreateView):
     template_name = 'main/brand/brand_form.html'
     model = Brand
     fields = ['brand_name']
+    success_url = reverse_lazy('main:brand-index')
 
 
 class ModelIndexView(generic.ListView):
@@ -88,3 +89,4 @@ class ModelCreateView(CreateView):
     template_name = 'main/model/model_form.html'
     model = Model
     fields = ['model_name', 'brand']
+    success_url = reverse_lazy('main:model-index')

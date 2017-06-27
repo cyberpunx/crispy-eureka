@@ -23,6 +23,7 @@
                                         <th>Patente</th>
                                         <th>Year</th>
                                         <th>Transmision</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,6 +35,10 @@
                                         <td>{{ vehicle.licence_plate }}</td>
                                         <td>{{ vehicle.year }}</td>
                                         <td>{{ vehicle.transmission }}</td>
+                                        <td class="center">
+                                            <a href="{% url 'main:client-detail' vehicle.client.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:vehicle-update' vehicle.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
