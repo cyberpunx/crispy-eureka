@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "Empleados" "main:employee-index"%}
+{% endblock %}
+
+{% block title %}
+    Detalle Empleado: {{ employee.first_name }} {{ employee.last_name }}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div style="padding-top:25px;"></div> <!-- This line is ONLY for maaking space from the top! -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-warning alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <strong>Information</strong> The stylish idea got from <a href="http://bootsnipp.com/snippets/featured/user-profile-widget" target="_blank">http://bootsnipp.com/snippets/featured/user-profile-widget</a>.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <strong>Information</strong> The buttons style got from <a href="http://bootsnipp.com/snippets/featured/onvenient-buttons" target="_blank">http://bootsnipp.com/snippets/featured/onvenient-buttons</a>.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-12">
+                        {% if employee.active %}
+                            <span class="label label-success pull-right"><h5>Activo</h5></span>
+                        {% else %}
+                            <span class="label label-danger pull-right"><h5>Inactivo</h5></span>
+                        {% endif %}
+                        <div class="well well-sm">
+                            <div class="row">
+
+                                <div class="col-sm-6 col-md-4">
+
+                                    <h3>{{ employee.first_name }} {{ employee.last_name }}</h3>
+                                    <p>
+                                        <i class="glyphicon glyphicon-envelope"></i> {{ employee.email }} <br />
+                                        <i class="glyphicon glyphicon-phone"></i> {{ employee.phone }} <br />
+                                    </p>
+                                </div>
+                                <div class="col-sm-6 col-md-12">
+                                    <div class="row nav">
+                                        <div class="col-md-12" style="margin: 0px;">
+                                            <hr>
+                                            <a href="{% url 'main:employee-update' employee.id %}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Editar</button></a>
+                                            <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> Historial</button>
+                                            <a href="{% url 'main:employee-delete' employee.id %}"><span class="pull-right"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+{% endblock %}
+

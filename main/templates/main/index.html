@@ -1,4 +1,10 @@
 {% extends 'main/base.html' %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+{% endblock %}
+
 
 {% block title %}
     Inicio

@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     {% load staticfiles %}
+    {% load django_bootstrap_breadcrumbs %}
 
     <title>TITULO</title>
 
@@ -47,7 +48,14 @@
 
 </head>
 
+{% block breadcrumbs %}
+            {% clear_breadcrumbs %}
+            {% breadcrumb "Inicio" "main:index" %}
+{% endblock %}
+
 <body>
+
+
 
     <div id="wrapper">
 
@@ -101,28 +109,13 @@
                             <a href="{% url 'main:index' %}"><i class="glyphicon glyphicon-home fa-fw"></i> Inicio</a>
                         </li>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-user fa-fw"></i> Clientes<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{% url 'main:client-index' %}">Listar Clientes</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'main:vehicle-index' %}">Listar Automotores</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="{% url 'main:client-index' %}"><i class="glyphicon glyphicon-user fa-fw"></i> Clientes</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-file-text fa-fw"></i> Tickets<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Listar Ordenes de Trabajo</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Listar Presupuestos</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="{% url 'main:vehicle-index' %}"><i class="fa fa-truck fa-fw"></i> Automotores</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:workorder-index' %}"><i class="fa fa-file-text fa-fw"></i> Ordenes de Trabajo</a>
                         </li>
                         <li>
                             <a href="index.html"><i class="glyphicon glyphicon-calendar fa-fw"></i> Calendario</a>
@@ -135,6 +128,15 @@
                                 </li>
                                 <li>
                                     <a href="{% url 'main:model-index' %}">Modelos</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:category-index' %}">Categorías</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:class-index' %}">Clases</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:employee-index' %}">Empleados</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -151,8 +153,17 @@
 
         <!-- Page Content -->
         <div id="page-wrapper">
+
             <div class="container-fluid">
+
+                <div class="row small">
+                    <div class="well-sm">
+                        {% render_breadcrumbs "django_bootstrap_breadcrumbs/bootstrap3.html" %}
+                    </div>
+                </div>
+
                 <div class="row">
+
                     <div class="col-lg-12">
                         <h1 class="page-header">{% block title %}Title{% endblock %}</h1>
                     </div>
@@ -161,8 +172,9 @@
                 <!-- /.row -->
 
                 <!-- START CONTENT -->
-
                 {% block body %}
+
+
                 {% endblock %}
 
                 <!-- END CONTENT -->
@@ -177,6 +189,9 @@
 
     <!-- jQuery -->
     <script src="{% static 'main/sb_admin2/vendor/jquery/jquery.min.js' %}"></script>
+
+    {% block extra_js_scripts %}
+    {% endblock %}
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static 'main/sb_admin2/vendor/bootstrap/js/bootstrap.min.js' %}"></script>

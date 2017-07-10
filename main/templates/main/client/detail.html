@@ -1,5 +1,11 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "clientes" "main:client-index"%}
+{% endblock %}
 
 {% block title %}
     Detalle cliente: {{ client.business_name }}
@@ -54,7 +60,7 @@
                                         <div class="col-md-12" style="margin: 0px;">
                                             <hr>
                                             <a href="{% url 'main:client-update' client.id %}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Editar</button></a>
-                                            <a href="{% url 'main:vehicle-add' %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Automotor</button></a>
+                                            <a href="{% url 'main:vehicle-add' client.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Automotor</button></a>
                                             <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> Historial</button>
                                             <a href="{% url 'main:client-delete' client.id %}"><span class="pull-right"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></span></a>
                                         </div>

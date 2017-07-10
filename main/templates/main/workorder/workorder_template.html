@@ -1,0 +1,144 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+{% load django_bootstrap_breadcrumbs %}
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb "workorders" "main:employee-index"%}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <form id="my-form" class="form-horizontal" action="" method="post" >
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="invoice-title">
+                    <h2>Orden de Trabajo # {{ workorder.id }}</h2>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Cliente</div>
+                            <div class="panel-body">
+                                <strong>{{ workorder.vehicle.client.business_name }}</strong><br>
+                                {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}<br>
+                                {{ workorder.vehicle.client.phone }}<br>
+                                {{ workorder.vehicle.client.alt_phone }}<br>
+                                {{ workorder.vehicle.client.email }}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Automotor</div>
+                            <div class="panel-body">
+                                <strong>{{ workorder.vehicle.model }}</strong><br>
+                                Año: {{ workorder.vehicle.year }}<br>
+                                Color: {{ workorder.vehicle.color }}<br>
+                                Patente: {{ workorder.vehicle.licence_plate }}<br>
+                                Transmisión: {{ workorder.vehicle.transmission }}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Notas</div>
+                            <div class="panel-body">
+                                Notas del automotor
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Observaciones</div>
+                            <div class="panel-body">
+                                {{ workorder.note }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Detalle</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td colspan="2"><strong>Concepto</strong></td>
+                                        <td class="text-center"><strong>Cantidad</strong></td>
+                                        <td class="text-center"><strong>Descuento</strong></td>
+                                        <td class="text-right"><strong>Total</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="individual-form">
+                                    {{ formset.management_form }}
+                                    {% csrf_token %}
+                                    {% for form in formset %}
+                                    <tr>
+                                        <td>{{ form.labor_name }}</td>
+                                        <td>{{ form.belongs_to_class  }}</td>
+                                        <td class="text-center">{{ form.time_required }}</td>
+                                        <td class="text-right">0%</td>
+                                        <td class="text-right">{{ form.instance.labor_price }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tbody>
+                                    <tr>
+
+                                        <td class="thick-line" colspan="3"></td>
+                                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                        <td class="thick-line text-right">$670.99</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line" colspan="3"></td>
+                                        <td class="no-line text-center"><strong>IVA</strong></td>
+                                        <td class="no-line text-right">0,00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line" colspan="3"></td>
+                                        <td class="no-line text-center"><strong>Total</strong></td>
+                                        <td class="no-line text-right">$685.99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Aceptar</button>
+                </div>
+            </div>
+    </form>
+    </div>
+{% endblock %}
+
+{% block exta_script %}
+    <script src="{% static 'main/js/jquery_formset.js' %}" type="text/javascript"> </script>
+    <script type="text/javascript">
+        $('.individual-form').formset();
+    </script>s
+{% endblock %}
