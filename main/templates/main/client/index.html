@@ -1,11 +1,5 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
-{% load django_bootstrap_breadcrumbs %}
-
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% breadcrumb "clientes" "main:client-index"%}
-{% endblock %}
 
 {% block title %}
     Clientes

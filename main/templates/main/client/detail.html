@@ -1,15 +1,5 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
-{% load django_bootstrap_breadcrumbs %}
-
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% breadcrumb "clientes" "main:client-index"%}
-{% endblock %}
-
-{% block title %}
-    Detalle cliente: {{ client.business_name }}
-{% endblock %}
 
 {% block body %}
     <div class="container-fluid">

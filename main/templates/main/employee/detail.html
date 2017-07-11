@@ -1,11 +1,6 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
-{% load django_bootstrap_breadcrumbs %}
 
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% breadcrumb "Empleados" "main:employee-index"%}
-{% endblock %}
 
 {% block title %}
     Detalle Empleado: {{ employee.first_name }} {{ employee.last_name }}

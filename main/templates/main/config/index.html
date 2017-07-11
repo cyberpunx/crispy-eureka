@@ -1,11 +1,5 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
-{% load django_bootstrap_breadcrumbs %}
-
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% breadcrumb "configuración" "main:employee-index"%}
-{% endblock %}
 
 {% block title %}
     Configuración
