@@ -133,7 +133,7 @@
                                     <a href="{% url 'main:category-index' %}">Categorías</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'main:class-index' %}">Clases</a>
+                                    <a href="{% url 'main:subcategory-index' %}">Subcategorías</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'main:employee-index' %}">Empleados</a>
@@ -142,7 +142,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="glyphicon glyphicon-cog fa-fw"></i> Configuración</a>
+                            <a href="{% url 'main:config-index' %}"><i class="glyphicon glyphicon-cog fa-fw"></i> Configuración</a>
                         </li>
                     </ul>
                 </div>

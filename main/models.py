@@ -2,6 +2,14 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 
+class ClientManager(models.Manager):
+    def active(self):
+        return self.get(active=True)
+
+    def inactive(self):
+        return self.get(active=False)
+
+
 class Client(models.Model):
     business_name = models.CharField(max_length=60, verbose_name="Nombre Comercial")
     first_name = models.CharField(max_length=20, verbose_name="Nombre")
@@ -17,6 +25,9 @@ class Client(models.Model):
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name + ' [' + self.business_name + ']'
+
+    objects = ClientManager()
+    # usage: Client.objects.active() / Client.objects.inactive()
 
 
 class Brand(models.Model):
@@ -63,13 +74,13 @@ class Category(models.Model):
         return self.category_name
 
 
-class Class(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name="Categoría", default='')
-    class_name = models.CharField(max_length=40, verbose_name="Clase")
+class SubCategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name="Categoría")
+    subcategory_name = models.CharField(max_length=40, verbose_name="Subcategoría")
     description = models.CharField(blank=True, max_length=140, verbose_name="Descripción")
 
     def __str__(self):
-        return self.category.category_name + ' - ' + self.class_name
+        return self.category.category_name + ' / ' + self.subcategory_name
 
 
 class Employee(models.Model):
@@ -79,39 +90,74 @@ class Employee(models.Model):
     phone = models.CharField(max_length=40, verbose_name="Telefono")
     active = models.BooleanField(default=True, verbose_name="Activo")
 
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+
+class Status(models.Model):
+    STATUS_CHOICES = (
+        ('PRE', 'Presupuesto'),
+        ('ABI', 'Abierta'),
+        ('PRO', 'En Progreso'),
+        ('PAU', 'Pausada'),
+        ('COM', 'Completa'),
+        ('CER', 'Cerrada'),
+        ('CAN', 'Cancelada'),
+    )
+    status = models.CharField(max_length=3, choices=STATUS_CHOICES, verbose_name="Estado")
+    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name="Empleado")
+    date = models.DateTimeField(auto_now=True)
+
 
 class WorkOrder(models.Model):
     vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT, verbose_name="Vehiculo")
-    note = models.CharField(blank=True, max_length=140, verbose_name="Notas")
+    #status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Estado")
+    STATUS_CHOICES = (
+        ('PRE', 'Presupuesto'),
+        ('ABI', 'Abierta'),
+        ('PRO', 'En Progreso'),
+        ('PAU', 'Pausada'),
+        ('COM', 'Completa'),
+        ('CER', 'Cerrada'),
+        ('CAN', 'Cancelada'),
+    )
+    status = models.CharField(max_length=3, choices=STATUS_CHOICES, verbose_name="Estado")
+    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name="Empleado", default='')
+    date = models.DateTimeField(auto_now=True)
+    note = models.CharField(blank=True, max_length=140, verbose_name="Observaciones")
 
 
 class Part(models.Model):
     part_name = models.CharField(max_length=40, verbose_name="Repuesto")
-    belongs_to_class = models.ForeignKey(Class, on_delete=models.PROTECT, verbose_name="Clase")
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name="SubCategoría")
     price = models.FloatField(verbose_name="Precio")
-    cost = models.FloatField(verbose_name="Costo")
-    provider = models.CharField(blank=True, max_length=140, verbose_name="Proveedores")
-    description = models.CharField(blank=True, max_length=140, verbose_name="Descripción")
-    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio", default='')
+    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
 
 
-class Labor(models.Model):
-    labor_name = models.CharField(max_length=40, verbose_name="Trabajo")
-    belongs_to_class = models.ForeignKey(Class, on_delete=models.PROTECT, verbose_name="Clase")
+class Work(models.Model):
+    work_name = models.CharField(max_length=40, verbose_name="Trabajo")
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name="SubCategoría")
     time_required = models.IntegerField(verbose_name="Tiempo")
-    description = models.CharField(blank=True, max_length=140, verbose_name="Descripción")
-    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio", default='')
+    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
 
-    def labor_price(self):
-        if not(self.time_required):
-            self.time_required=1
-        return str(self.time_required * 700)
+    def work_price(self):
+        if not self.time_required:
+            self.time_required = 1
+        return str(self.time_required * int(Config.labor_rate()))
 
 
-class Detail(models.Model):
-    work_order = models.ForeignKey(WorkOrder, on_delete=models.PROTECT, verbose_name="Orden de Trabajo")
-    labor = models.ForeignKey(Labor, on_delete=models.PROTECT, blank=True, verbose_name="Trabajo")
-    part = models.ForeignKey(Part, on_delete=models.PROTECT, blank=True, verbose_name="Repuesto")
-    quantity = models.IntegerField(verbose_name="Cantidad")
+class Config(models.Model):
+    SECTION_CHOICES = (
+        ('GLOBAL', 'Global'),
+    )
+    TYPE_CHOICES = (
+        ('INT', 'INT'),
+        ('CHAR', 'CHAR'),
+    )
+    section = models.CharField(max_length=20, choices=SECTION_CHOICES, verbose_name="Sección")
+    key = models.CharField(max_length=20, verbose_name="Clave")
+    value = models.CharField(max_length=140, verbose_name="Valor")
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name="Tipo")
 
+    def labor_rate():
+        return Config.objects.values_list('value', flat=True).get(pk=1)
 

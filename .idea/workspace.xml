@@ -2,31 +2,628 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bc09ca1-5038-47c7-a7f8-6cb89c3e75c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/forms.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/category/category_form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/category/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/class/class_form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/class/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/employee/confirm_delete.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/employee/detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/employee/employee_form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/employee/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/vehicle/autocomplete_form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/workorder/detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/workorder/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main/templates/main/workorder/workorder_template.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/migrations/0002_brand_model_vehicle.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/migrations/0002_class_category.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/migrations/0003_auto_20170707_0052.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/migrations/0004_auto_20170707_1835.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/templates/main/class/class_form.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/templates/main/class/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/templates/main/workorder/workorder_template.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/base.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/changelists.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/dashboard.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/fonts.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/forms.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/login.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/rtl.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/css/widgets.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/fonts/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/fonts/README.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/fonts/Roboto-Bold-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/fonts/Roboto-Light-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/fonts/Roboto-Regular-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/README.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/calendar-icons.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/gis/move_vertex_off.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/gis/move_vertex_on.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-addlink.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-alert.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-calendar.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-changelink.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-clock.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-deletelink.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-no.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-unknown-alt.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-unknown.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/icon-yes.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/inline-delete.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/search.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/selector-icons.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/sorting-icons.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/tooltag-add.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/img/tooltag-arrowright.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/SelectBox.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/SelectFilter2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/actions.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/actions.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/admin/DateTimeShortcuts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/admin/RelatedObjectLookups.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/calendar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/cancel.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/change_form.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/collapse.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/collapse.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/inlines.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/inlines.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/jquery.init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/popup_response.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/prepopulate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/prepopulate.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/prepopulate_init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/timeparse.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/urlify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/vendor/jquery/LICENSE-JQUERY.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/vendor/jquery/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/vendor/jquery/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/vendor/xregexp/LICENSE-XREGEXP.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/vendor/xregexp/xregexp.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/admin/js/vendor/xregexp/xregexp.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/autocomplete.init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/jquery.init.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/select2.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/select2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/component.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/css/select2.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/css/select2.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/ar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/az.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/bg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/ca.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/cs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/da.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/de.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/el.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/en.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/es.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/et.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/eu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/fa.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/fi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/fr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/gl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/he.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/hi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/hr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/hu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/id.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/is.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/it.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/ja.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/km.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/ko.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/lt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/lv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/mk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/ms.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/nb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/nl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/pl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/pt-BR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/pt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/ro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/ru.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/sk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/sl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/sr-Cyrl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/sr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/sv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/th.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/tr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/uk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/vi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/zh-CN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/i18n/zh-TW.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/select2.full.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/select2.full.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/select2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/dist/js/select2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/select2.jquery.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/banner.end.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/banner.start.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/jquery.mousewheel.shim.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/jquery.select2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/jquery.shim.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/compat/containerCss.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/compat/dropdownCss.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/compat/initSelection.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/compat/inputData.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/compat/matcher.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/compat/query.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/compat/utils.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/core.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/ajax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/array.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/base.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/maximumInputLength.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/maximumSelectionLength.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/minimumInputLength.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/select.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/tags.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/data/tokenizer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/defaults.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/diacritics.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/attachBody.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/attachContainer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/closeOnSelect.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/hidePlaceholder.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/infiniteScroll.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/minimumResultsForSearch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/search.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/selectOnClose.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/dropdown/stopPropagation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/ar.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/az.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/bg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/ca.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/cs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/da.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/de.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/el.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/en.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/es.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/et.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/eu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/fa.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/fi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/fr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/gl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/he.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/hi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/hr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/hu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/hy.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/id.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/is.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/it.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/ja.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/km.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/ko.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/lt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/lv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/mk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/ms.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/nb.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/nl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/pl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/pt-BR.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/pt.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/ro.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/ru.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/sk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/sl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/sr-Cyrl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/sr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/sv.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/th.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/tr.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/uk.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/vi.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/zh-CN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/i18n/zh-TW.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/keys.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/options.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/results.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/allowClear.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/base.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/clickMask.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/eventRelay.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/multiple.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/placeholder.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/search.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/single.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/selection/stopPropagation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/translation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/select2/utils.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/wrapper.end.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/src/js/wrapper.start.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/a11y/search-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/a11y/selection-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/array-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/base-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/inputData-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/maximumInputLength-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/maximumSelectionLength-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/minimumInputLength-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/select-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/tags-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/data/tokenizer-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/dropdown/dropdownCss-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/dropdown/positioning-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/dropdown/selectOnClose-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/dropdown/stopPropagation-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/helpers.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/integration.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/integration/dom-changes.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/integration/jquery-calls.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/integration/select2-methods.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/options/ajax-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/options/data-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/options/deprecated-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/options/translation-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/options/width-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/results/focusing-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/selection/allowClear-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/selection/containerCss-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/selection/multiple-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/selection/placeholder-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/selection/search-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/selection/single-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/selection/stopPropagation-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/unit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/utils/decorator-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/utils/escapeMarkup-tests.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/vendor/jquery-1.7.2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/vendor/qunit-1.23.1.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/tests/vendor/qunit-1.23.1.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/autocomplete_light/vendor/select2/vendor/jquery-2.1.0.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/dynamic_formsets/jquery.formset.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.semanticui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/css/autoFill.semanticui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.foundation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.foundation.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.jqueryui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.jqueryui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.semanticui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/autoFill.semanticui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/dataTables.autoFill.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/AutoFill-2.2.0/js/dataTables.autoFill.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.semanticui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/buttons.semanticui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/common.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/css/mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.colVis.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.colVis.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.flash.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.flash.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.foundation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.foundation.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.html5.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.html5.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.jqueryui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.jqueryui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.print.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.print.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.semanticui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/buttons.semanticui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/dataTables.buttons.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/js/dataTables.buttons.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Buttons-1.3.1/swf/flashExport.swf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/css/colReorder.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/js/dataTables.colReorder.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/ColReorder-1.3.3/js/dataTables.colReorder.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.semanticui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/dataTables.semanticui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/jquery.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/jquery.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/css/jquery.dataTables_themeroller.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/images/sort_asc.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/images/sort_asc_disabled.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/images/sort_both.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/images/sort_desc.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/images/sort_desc_disabled.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.foundation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.foundation.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.jqueryui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.jqueryui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.semanticui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/dataTables.semanticui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/jquery.dataTables.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/DataTables-1.10.15/js/jquery.dataTables.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/css/fixedColumns.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/js/dataTables.fixedColumns.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedColumns-3.2.2/js/dataTables.fixedColumns.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/css/fixedHeader.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/js/dataTables.fixedHeader.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/FixedHeader-3.1.2/js/dataTables.fixedHeader.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.semanticui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/css/keyTable.semanticui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/js/dataTables.keyTable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/KeyTable-2.2.1/js/dataTables.keyTable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/css/responsive.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/dataTables.responsive.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/dataTables.responsive.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/responsive.bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/responsive.bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/responsive.foundation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/responsive.foundation.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/responsive.jqueryui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Responsive-2.1.1/js/responsive.jqueryui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.bootstrap4.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.bootstrap4.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.semanticui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/css/rowGroup.semanticui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/js/dataTables.rowGroup.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/RowGroup-1.0.0/js/dataTables.rowGroup.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/css/scroller.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/js/dataTables.scroller.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Scroller-1.4.2/js/dataTables.scroller.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.semanticui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/css/select.semanticui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/js/dataTables.select.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/Select-1.2.2/js/dataTables.select.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/datatables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/datatables.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/datatables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/datatables.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/jQuery-2.2.4/jquery-2.2.4.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/DataTables/jQuery-2.2.4/jquery-2.2.4.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/css/mystile.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/js/add_inline.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/js/dynamic-formset.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/js/formset_dynamic.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/data/flot-data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/data/morris-data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/dist/css/sb-admin-2.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/dist/css/sb-admin-2.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/dist/js/sb-admin-2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/dist/js/sb-admin-2.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/gulpfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/js/sb-admin-2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/less/mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/less/sb-admin-2.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/less/variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/blank.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/buttons.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/flot.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/forms.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/grid.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/icons.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/morris.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/notifications.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/panels-wells.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/tables.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/pages/typography.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap-social/bootstrap-social.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap-social/bootstrap-social.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap-social/bootstrap-social.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/js/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/bootstrap/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables-plugins/dataTables.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables-plugins/dataTables.bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables-plugins/dataTables.bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables-plugins/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables-responsive/dataTables.responsive.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables-responsive/dataTables.responsive.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables-responsive/dataTables.responsive.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.bootstrap4.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.bootstrap4.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.foundation.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.foundation.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.jqueryui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.jqueryui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.material.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.material.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.semanticui.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.semanticui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.uikit.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/dataTables.uikit.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/jquery.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/jquery.dataTables.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/css/jquery.dataTables_themeroller.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/images/Sorting icons.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/images/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/images/sort_asc.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/images/sort_asc_disabled.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/images/sort_both.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/images/sort_desc.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/images/sort_desc_disabled.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.bootstrap4.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.bootstrap4.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.foundation.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.foundation.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.jqueryui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.jqueryui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.material.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.material.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.semanticui.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.semanticui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.uikit.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/dataTables.uikit.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/jquery.dataTables.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/jquery.dataTables.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/datatables/js/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot-tooltip/jquery.flot.tooltip.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot-tooltip/jquery.flot.tooltip.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot-tooltip/jquery.flot.tooltip.source.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/excanvas.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/excanvas.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.colorhelpers.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.canvas.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.categories.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.crosshair.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.errorbars.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.fillbetween.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.image.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.navigate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.pie.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.resize.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.selection.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.stack.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.symbol.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.threshold.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.flot.time.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/flot/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/HELP-US-OUT.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/css/font-awesome.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/css/font-awesome.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/css/font-awesome.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/fonts/FontAwesome.otf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/fonts/fontawesome-webfont.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/fonts/fontawesome-webfont.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/fonts/fontawesome-webfont.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/fonts/fontawesome-webfont.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/fonts/fontawesome-webfont.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/animated.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/bordered-pulled.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/core.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/extras.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/fixed-width.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/font-awesome.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/icons.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/larger.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/list.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/mixins.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/path.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/rotated-flipped.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/screen-reader.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/spinning.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/stacked.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/less/variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_animated.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_bordered-pulled.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_core.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_extras.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_fixed-width.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_icons.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_larger.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_list.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_mixins.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_path.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_rotated-flipped.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_screen-reader.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_spinning.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_stacked.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/font-awesome/scss/font-awesome.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/jquery/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/jquery/jquery.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/metisMenu/metisMenu.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/metisMenu/metisMenu.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/metisMenu/metisMenu.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/metisMenu/metisMenu.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/morrisjs/morris.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/morrisjs/morris.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/morrisjs/morris.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/raphael/raphael.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/static/main/sb_admin2/vendor/raphael/raphael.min.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/forms.py" afterPath="$PROJECT_DIR$/main/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/main/migrations/0001_initial.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/models.py" afterPath="$PROJECT_DIR$/main/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/static/main/css/mystile.css" afterPath="$PROJECT_DIR$/main/static/main/css/mystile.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/base.html" afterPath="$PROJECT_DIR$/main/templates/main/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/brand/index.html" afterPath="$PROJECT_DIR$/main/templates/main/brand/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/client/detail.html" afterPath="$PROJECT_DIR$/main/templates/main/client/detail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/client/index.html" afterPath="$PROJECT_DIR$/main/templates/main/client/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/index.html" afterPath="$PROJECT_DIR$/main/templates/main/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/model/index.html" afterPath="$PROJECT_DIR$/main/templates/main/model/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/workorder/detail.html" afterPath="$PROJECT_DIR$/main/templates/main/workorder/detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/workorder/index.html" afterPath="$PROJECT_DIR$/main/templates/main/workorder/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html" afterPath="$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/urls.py" afterPath="$PROJECT_DIR$/main/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/views.py" afterPath="$PROJECT_DIR$/main/views.py" />
     </list>
@@ -55,8 +652,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1700">
-              <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
+            <state relative-caret-position="497">
+              <caret line="144" column="64" lean-forward="false" selection-start-line="144" selection-start-column="64" selection-end-line="144" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -65,8 +662,8 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="82" lean-forward="false" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
+            <state relative-caret-position="420">
+              <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -77,8 +674,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1660">
-              <caret line="84" column="61" lean-forward="false" selection-start-line="84" selection-start-column="61" selection-end-line="84" selection-end-column="61" />
+            <state relative-caret-position="545">
+              <caret line="105" column="52" lean-forward="false" selection-start-line="105" selection-start-column="52" selection-end-line="105" selection-end-column="52" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -89,50 +686,50 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="800">
-              <caret line="40" column="82" lean-forward="false" selection-start-line="40" selection-start-column="82" selection-end-line="40" selection-end-column="82" />
+            <state relative-caret-position="400">
+              <caret line="41" column="44" lean-forward="false" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="156" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="135" column="69" lean-forward="false" selection-start-line="135" selection-start-column="58" selection-end-line="135" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="227" column="12" lean-forward="true" selection-start-line="227" selection-start-column="12" selection-end-line="227" selection-end-column="12" />
+            <state relative-caret-position="208">
+              <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
               <folding>
-                <element signature="e#0#45#0" expanded="true" />
+                <element signature="e#0#35#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="detail.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="925">
-              <caret line="93" column="40" lean-forward="false" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
+            <state relative-caret-position="468">
+              <caret line="130" column="75" lean-forward="false" selection-start-line="130" selection-start-column="75" selection-end-line="130" selection-end-column="75" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="workorder_template.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/workorder_template.html">
+      <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/client/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-536">
-              <caret line="93" column="46" lean-forward="false" selection-start-line="93" selection-start-column="39" selection-end-line="93" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workorder_form.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="38" selection-end-column="18" />
+            <state relative-caret-position="120">
+              <caret line="78" column="30" lean-forward="true" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -161,6 +758,10 @@
       <find>static</find>
       <find>add</find>
       <find>formset</find>
+      <find>class-</find>
+      <find>default</find>
+      <find>SubCategory</find>
+      <find>class</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,17 +770,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main/migrations/urls.py" />
-        <option value="$PROJECT_DIR$/main/admin.py" />
-        <option value="$PROJECT_DIR$/main/static/main/sb_admin2/pages/tables.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/client-index.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/vehicle-list.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/vehicle-index.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/brand-index.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/model-index.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/client/form.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/client/form-template.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/vehicle/vehicle_form.html" />
         <option value="$PROJECT_DIR$/main/templates/main/model/model_form.html" />
         <option value="$PROJECT_DIR$/main/templates/main/brand/brand_form.html" />
         <option value="$PROJECT_DIR$/main/templates/main/client/confirm_delete.html" />
@@ -207,18 +797,30 @@
         <option value="$PROJECT_DIR$/main/static/main/js/add_inline.js" />
         <option value="$PROJECT_DIR$/main/templates/main/client/client_form.html" />
         <option value="$PROJECT_DIR$/main/static/main/js/formset_dynamic.js" />
-        <option value="$PROJECT_DIR$/admincar/settings.py" />
         <option value="$PROJECT_DIR$/main/templates/main/form-template.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/base.html" />
         <option value="$PROJECT_DIR$/main/static/main/js/jquery_formset.js" />
-        <option value="$PROJECT_DIR$/main/urls.py" />
-        <option value="$PROJECT_DIR$/main/templates/main/workorder/index.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html" />
-        <option value="$PROJECT_DIR$/main/forms.py" />
-        <option value="$PROJECT_DIR$/main/models.py" />
-        <option value="$PROJECT_DIR$/main/templates/main/workorder/detail.html" />
         <option value="$PROJECT_DIR$/main/templates/main/workorder/workorder_template.html" />
+        <option value="$PROJECT_DIR$/admincar/settings.py" />
+        <option value="$PROJECT_DIR$/main/templates/main/subcategory/class_form.html" />
+        <option value="$PROJECT_DIR$/main/fixtures/config" />
+        <option value="$PROJECT_DIR$/main/templates/main/base.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/config/config_form.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/config/index.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/subcategory/index.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/workorder/autocomplete_form.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/status/status_form.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/workorder/DEPRECATED_detail.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/workorder/index.html" />
+        <option value="$PROJECT_DIR$/main/forms.py" />
+        <option value="$PROJECT_DIR$/main/templates/main/part/part_form.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/work/work_form.html" />
+        <option value="$PROJECT_DIR$/main/models.py" />
+        <option value="$PROJECT_DIR$/main/templates/main/work/confirm_delete.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/part/confirm_delete.html" />
+        <option value="$PROJECT_DIR$/main/urls.py" />
         <option value="$PROJECT_DIR$/main/views.py" />
+        <option value="$PROJECT_DIR$/main/templates/main/workorder/detail.html" />
       </list>
     </option>
   </component>
@@ -313,37 +915,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="workorder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admincar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admincar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="fixtures" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,19 +944,19 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/main/templates/main/part" />
+      <recent name="$PROJECT_DIR$/main/templates/main/work" />
+      <recent name="$PROJECT_DIR$/main/templates/main/status" />
+      <recent name="$PROJECT_DIR$/main/templates/main/workorder" />
+      <recent name="$PROJECT_DIR$/main/templates/main/config" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/main/templates/main/vehicle" />
       <recent name="$PROJECT_DIR$/main/templates/main" />
       <recent name="$PROJECT_DIR$/main/templates/main/model" />
       <recent name="$PROJECT_DIR$/main/templates/main/client" />
       <recent name="$PROJECT_DIR$/main/templates/main/brand" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/main/templates/main/workorder" />
-      <recent name="$PROJECT_DIR$/main/templates/main/employee" />
-      <recent name="$PROJECT_DIR$/main/templates/main" />
-      <recent name="$PROJECT_DIR$/main/templates/main/category" />
-      <recent name="$PROJECT_DIR$/main/templates/main/vehicle" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -617,16 +1189,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-19" width="1920" height="1072" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16185898" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.311493" sideWeight="0.50213677" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.311493" sideWeight="0.50213677" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.311493" sideWeight="0.49786323" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30827066" sideWeight="0.49786323" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22341569" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16185898" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -636,7 +1210,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -653,98 +1226,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/static/main/sb_admin2/vendor/jquery/jquery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/static/main/sb_admin2/vendor/datatables/js/dataTables.jqueryui.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/static/main/sb_admin2/vendor/datatables-responsive/dataTables.responsive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/static/main/DataTables/datatables.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/static/main/sb_admin2/pages/buttons.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8700">
-          <caret line="435" column="37" lean-forward="false" selection-start-line="434" selection-start-column="28" selection-end-line="435" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/brand/brand_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/client/confirm_delete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="56" lean-forward="false" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admincar/wsgi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/vehicle/confirm_delete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.virtualenvs/django/lib/python3.5/site-packages/django/urls/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/vehicle/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="39" column="93" lean-forward="false" selection-start-line="39" selection-start-column="93" selection-end-line="39" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.virtualenvs/django/lib/python3.5/site-packages/dal_select2/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.virtualenvs/django/lib/python3.5/site-packages/dal/autocomplete.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admincar/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -771,27 +1252,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/client/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="62" column="210" lean-forward="true" selection-start-line="62" selection-start-column="44" selection-end-line="62" selection-end-column="210" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/class/class_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/class/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="165" lean-forward="false" selection-start-line="12" selection-start-column="165" selection-end-line="12" selection-end-column="165" />
         </state>
       </provider>
     </entry>
@@ -907,77 +1367,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admincar/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="135" column="38" lean-forward="false" selection-start-line="135" selection-start-column="38" selection-end-line="135" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="117" column="65" lean-forward="false" selection-start-line="117" selection-start-column="65" selection-end-line="117" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/form-template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/static/main/js/jquery_formset.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="280" column="30" lean-forward="false" selection-start-line="280" selection-start-column="30" selection-end-line="280" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1660">
-          <caret line="84" column="61" lean-forward="false" selection-start-line="84" selection-start-column="61" selection-end-line="84" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="40" column="82" lean-forward="false" selection-start-line="40" selection-start-column="82" selection-end-line="40" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="82" lean-forward="false" selection-start-line="16" selection-start-column="82" selection-end-line="16" selection-end-column="82" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="86" column="0" lean-forward="false" selection-start-line="86" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="38" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -997,13 +1390,209 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="38" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admincar/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="654">
+          <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/fixtures/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/config/config_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="25" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/config/update.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/config/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="38" column="66" lean-forward="false" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/config/config_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="25" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/form-template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/subcategory/subcategory_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/subcategory/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="27" column="40" lean-forward="false" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/status/status_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/autocomplete_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/workorder_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/part/part_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/work/work_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="135" column="69" lean-forward="false" selection-start-line="135" selection-start-column="58" selection-end-line="135" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="41" column="44" lean-forward="false" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="156" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/work/confirm_delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/part/confirm_delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="105" column="52" lean-forward="false" selection-start-line="105" selection-start-column="52" selection-end-line="105" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="144" column="64" lean-forward="false" selection-start-line="144" selection-start-column="64" selection-end-line="144" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/client/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="78" column="30" lean-forward="true" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="227" column="12" lean-forward="true" selection-start-line="227" selection-start-column="12" selection-end-line="227" selection-end-column="12" />
+        <state relative-caret-position="208">
+          <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="130" column="75" lean-forward="false" selection-start-line="130" selection-start-column="75" selection-end-line="130" selection-end-column="75" />
+          <folding />
         </state>
       </provider>
     </entry>

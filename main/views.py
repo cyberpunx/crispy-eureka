@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
-from .models import Client, Vehicle, Model, Brand, Category, Class, Employee, Labor, WorkOrder, Part
+from django.shortcuts import render
+from .models import Client, Vehicle, Model, Brand, Category, SubCategory, Employee, WorkOrder, Config, Work, Part
 from dal import autocomplete
-from .forms import VehicleForm, LaborFormSet, WorkOrderUpdateForm
+from .forms import VehicleForm, WorkOrderForm
 from django.views import generic
+from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -55,8 +56,6 @@ class VehicleIndexView(generic.ListView):
 
 
 class VehicleCreateView(CreateView):
-    #template_name = 'main/vehicle/vehicle_form.html'
-    #fields = ['licence_plate', 'color', 'year', 'model', 'transmission']
     template_name = 'main/vehicle/autocomplete_form.html'
     form_class = VehicleForm
     model = Vehicle
@@ -67,12 +66,6 @@ class VehicleCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('main:client-detail', kwargs={'pk': self.object.client.pk})
-
-
-#class VehicleUpdateView(UpdateView):
-#    template_name = 'main/vehicle/vehicle_form.html'
-#    model = Vehicle
-#    fields = ['licence_plate', 'color', 'year', 'model', 'transmission', 'client']
 
 
 class VehicleUpdateView(UpdateView):
@@ -134,18 +127,18 @@ class CategoryCreateView(CreateView):
     success_url = reverse_lazy('main:category-index')
 
 
-class ClassIndexView(generic.ListView):
-    template_name = 'main/class/index.html'
+class SubCategoryIndexView(generic.ListView):
+    template_name = 'main/subcategory/index.html'
 
     def get_queryset(self):
-        return Class.objects.all()
+        return SubCategory.objects.all()
 
 
-class ClassCreateView(CreateView):
-    template_name = 'main/class/class_form.html'
-    model = Class
-    fields = ['class_name', 'description', 'category']
-    success_url = reverse_lazy('main:class-index')
+class SubCategoryCreateView(CreateView):
+    template_name = 'main/subcategory/subcategory_form.html'
+    model = SubCategory
+    fields = '__all__'
+    success_url = reverse_lazy('main:subcategory-index')
 
 
 class EmployeeIndexView(generic.ListView):
@@ -187,89 +180,92 @@ class WorkOrderIndexView(generic.ListView):
         return WorkOrder.objects.all()
 
 
-class WorkOrderCreateView(CreateView):
-    template_name = 'main/workorder/workorder_form.html'
-    model = WorkOrder
-    success_url = reverse_lazy('main:workorder-index')
-    fields = '__all__'
-
-    def get_context_data(self, **kwargs):
-        context = super(WorkOrderCreateView, self).get_context_data(**kwargs)
-        if self.request.POST:
-            context['formset'] = LaborFormSet(self.request.POST)
-        else:
-            context['formset'] = LaborFormSet()
-        return context
-
-    def form_valid(self, form):
-        context = self.get_context_data()
-        formset = context['formset']
-        if formset.is_valid():
-            self.object = form.save()
-            formset.instance = self.object
-            formset.save()
-            return redirect(self.success_url)
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
-
-
-class WorkOrderUpdateView(UpdateView):
-    #form_class = WorkOrderUpdateForm
-    #template_name = 'main/workorder/workorder_form.html'
-    template_name = 'main/workorder/workorder_template.html'
-    model = WorkOrder
-    success_url = reverse_lazy('main:workorder-index')
-    fields = '__all__'
-
-    def get_context_data(self, **kwargs):
-        context = super(WorkOrderUpdateView, self).get_context_data(**kwargs)
-        if self.request.POST:
-            context['formset'] = LaborFormSet(self.request.POST, instance=self.object)
-            context['formset'].full_clean()
-        else:
-            context['formset'] = LaborFormSet(instance=self.object)
-        return context
-
-    def form_valid(self, form):
-        context = self.get_context_data()
-        formset = context['formset']
-        if formset.is_valid():
-            self.object = form.save()
-            formset.instance = self.object
-            formset.save()
-            return redirect(self.success_url)
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
-
-
 class WorkOrderDetailView(generic.DetailView):
-    #form_class = WorkOrderUpdateForm
     template_name = 'main/workorder/detail.html'
     model = WorkOrder
-    success_url = reverse_lazy('main:workorder-index')
-    fields = '__all__'
 
-    def get_context_data(self, **kwargs):
-        context = super(WorkOrderDetailView, self).get_context_data(**kwargs)
-        if self.request.POST:
-            context['formset'] = LaborFormSet(self.request.POST, instance=self.object)
-            context['formset'].full_clean()
-        else:
-            context['formset'] = LaborFormSet(instance=self.object)
-        return context
+
+class WorkOrderCreateView(CreateView):
+    template_name = 'main/workorder/autocomplete_form.html'
+    model = WorkOrder
+    form_class = WorkOrderForm
+    success_url = reverse_lazy('main:workorder-index')
+
+
+class WorkCreateView(CreateView):
+    template_name = 'main/work/work_form.html'
+    model = Work
+    fields = ['work_name', 'subcategory', 'time_required']
 
     def form_valid(self, form):
-        context = self.get_context_data()
-        formset = context['formset']
-        if formset.is_valid():
-            self.object = form.save()
-            formset.instance = self.object
-            formset.save()
-            return redirect(self.success_url)
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
+        form.instance.work_order_id = self.kwargs.get('pk')
+        return super(WorkCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
 
+class WorkUpdateView(UpdateView):
+    template_name = 'main/work/work_form.html'
+    model = Work
+    fields = ['work_name', 'subcategory', 'time_required']
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+
+class WorkDeleteView(DeleteView):
+    template_name = 'main/work/confirm_delete.html'
+    model = Work
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+
+class PartCreateView(CreateView):
+    template_name = 'main/part/part_form.html'
+    model = Part
+    fields = ['part_name', 'subcategory', 'price']
+
+    def form_valid(self, form):
+        form.instance.work_order_id = self.kwargs.get('pk')
+        return super(PartCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+
+class PartUpdateView(UpdateView):
+    template_name = 'main/part/part_form.html'
+    model = Part
+    fields = ['part_name', 'subcategory', 'price']
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+
+class PartDeleteView(DeleteView):
+    template_name = 'main/part/confirm_delete.html'
+    model = Part
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+class ConfigIndexView(generic.ListView):
+    template_name = 'main/config/index.html'
+
+    def get_queryset(self):
+        return Config.objects.all()
+
+
+class ConfigUpdateView(UpdateView):
+    template_name = 'main/config/config_form.html'
+    model = Config
+    fields = '__all__'
+    success_url = reverse_lazy('main:config-index')
+
+
+## ---------------------- AUTOCOMPLETE VIEWS ---------------------- ##
 class ModelAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
@@ -293,6 +289,24 @@ class ClientAutocomplete(autocomplete.Select2QuerySetView):
         qs = Client.objects.all()
 
         if self.q:
-            qs = qs.filter(first_name__istartswith=self.q) | qs.filter(last_name__istartswith=self.q)
+            qs = qs.filter(first_name__istartswith=self.q) | qs.filter(last_name__istartswith=self.q) \
+                 | qs.filter(business_name__istartswith=self.q)
+
+        return qs
+
+
+class VehicleAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        #if not self.request.user.is_authenticated():
+        #    return Vehicle.objects.none()
+
+        qs = Vehicle.objects.all()
+
+        if self.q:
+            qs = qs.filter(client__first_name__istartswith=self.q) | qs.filter(client__last_name__istartswith=self.q) \
+                 | qs.filter(client__business_name__istartswith=self.q) \
+                 | qs.filter(model__model_name__istartswith=self.q) \
+                 | qs.filter(model__brand_brand_name__istartswith=self.q)
 
         return qs

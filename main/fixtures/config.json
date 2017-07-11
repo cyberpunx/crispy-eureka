@@ -1,0 +1,12 @@
+[
+  {
+    "model": "main.config",
+    "pk": 1,
+    "fields": {
+      "section": "GLOBAL",
+      "key": "labor_rate",
+      "value": "700",
+      "type": "INT"
+    }
+  }
+]

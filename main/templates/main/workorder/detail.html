@@ -1,12 +1,5 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
-{% load django_bootstrap_breadcrumbs %}
-{% load crispy_forms_tags %}
-
-{% block breadcrumbs %}
-    {{ block.super }}
-    {% breadcrumb "workorders" "main:employee-index"%}
-{% endblock %}
 
 {% block title %}
 
@@ -17,8 +10,10 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="invoice-title">
-                    <h2>Orden de Trabajo # {{ workorder.id }}</h2>
+                    <h2>Orden de Trabajo # {{ workorder.id }} <span class="pull-right">{{ workorder.get_status_display }}</span></h2>
                 </div>
+                    <h5>Fecha: {{ workorder.date }}</h5>
+                    <h5>Técnico: {{ workorder.employee }}</h5>
                 <hr>
                 <div class="row">
                     <div class="col-xs-6">
@@ -83,26 +78,54 @@
                             <table class="table table-condensed">
                                 <thead>
                                     <tr>
-                                        <td colspan="2"><strong>Concepto</strong></td>
-                                        <td class="text-center"><strong>Cantidad</strong></td>
+                                        <td colspan="2"><strong>Trabajo</strong></td>
+                                        <td class="text-center"><strong>Tiempo</strong></td>
                                         <td class="text-center"><strong>Descuento</strong></td>
                                         <td class="text-right"><strong>Total</strong></td>
+                                        <td class="text-right"><strong></strong></td>
                                     </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for form in formset %}
+                                    {% for work in workorder.work_set.all %}
                                     <tr>
-                                        <td>{{ form.labor_name.value }}</td>
-                                        <td>{{ form.belongs_to_class  }}</td>
-                                        <td class="text-center">{{ form.time_required.value }}</td>
-                                        <td class="text-right">0%</td>
-                                        <td class="text-right">{{ form.instance.labor_price }}</td>
+                                        <td>{{ work.work_name }}</td>
+                                        <td>{{ work.subcategory }}</td>
+                                        <td class="text-center">{{ work.time_required }}</td>
+                                        <td class="text-center">0%</td>
+                                        <td class="text-right">{{ work.work_price }}</td>
+                                        <td class="text-right">
+                                            <a href="{% url 'main:work-update' work.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:work-delete' work.id %}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <td colspan="2"><strong>Repuestos</strong></td>
+                                        <td class="text-center"><strong>Precio</strong></td>
+                                        <td class="text-center"><strong>Descuento</strong></td>
+                                        <td class="text-right"><strong>Total</strong></td>
+                                        <td class="text-right"><strong></strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="individual-form">
+                                    {% for part in workorder.part_set.all %}
+                                    <tr>
+                                        <td>{{ part.part_name }}</td>
+                                        <td>{{ part.subcategory }}</td>
+                                        <td class="text-center">{{ part.price }}</td>
+                                        <td class="text-center">0%</td>
+                                        <td class="text-right">{{ part.price }}</td>
+                                        <td class="text-right">
+                                            <a href="{% url 'main:part-update' part.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:part-delete' part.id %}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                                 <tbody>
                                     <tr>
-
                                         <td class="thick-line" colspan="3"></td>
                                         <td class="thick-line text-center"><strong>Subtotal</strong></td>
                                         <td class="thick-line text-right">$</td>
@@ -124,5 +147,7 @@
                 </div>
             </div>
         </div>
+        <a href="{% url 'main:work-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button></a>
+        <a href="{% url 'main:part-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Repuesto</button></a>
     </div>
 {% endblock %}
