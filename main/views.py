@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from .models import Client, Vehicle, Model, Brand, Category, SubCategory, Employee, WorkOrder, Config, Work, Part
 from dal import autocomplete
