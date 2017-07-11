@@ -16,7 +16,7 @@ class WorkOrderForm(forms.ModelForm):
 
     class Meta:
         model = WorkOrder
-        fields = '__all__'
+        fields = ['vehicle', 'status', 'employee', 'note']
         widgets = {
             'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
             'note': forms.Textarea()

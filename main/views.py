@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import Client, Vehicle, Model, Brand, Category, SubCategory, Employee, WorkOrder, Config, Work, Part
+from .models import Client, Vehicle, Model, Brand, Category, SubCategory, Employee, WorkOrder, Work, Part
 from dal import autocomplete
+from main import models
 from .forms import VehicleForm, WorkOrderForm
 from django.views import generic
 from django.db.models import Sum
@@ -181,10 +182,30 @@ class WorkOrderIndexView(generic.ListView):
     def get_queryset(self):
         return WorkOrder.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderIndexView, self).get_context_data(**kwargs)
+        context['labor_rate'] = models.WorkOrder.settings.labor_rate
+        return context
+
 
 class WorkOrderDetailView(generic.DetailView):
     template_name = 'main/workorder/detail.html'
     model = WorkOrder
+
+
+class WorkOrderDeleteView(DeleteView):
+    template_name = 'main/workorder/confirm_delete.html'
+    model = WorkOrder
+    success_url = reverse_lazy('main:workorder-index')
+
+
+class WorkOrderUpdateView(UpdateView):
+    template_name = 'main/workorder/workorder_form.html'
+    model = WorkOrder
+    form_class = WorkOrderForm
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
 
 
 class WorkOrderCreateView(CreateView):
@@ -253,21 +274,10 @@ class PartDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
-class ConfigIndexView(generic.ListView):
-    template_name = 'main/config/index.html'
 
-    def get_queryset(self):
-        return Config.objects.all()
+# ---------------------- AUTOCOMPLETE VIEWS ---------------------- #
 
 
-class ConfigUpdateView(UpdateView):
-    template_name = 'main/config/config_form.html'
-    model = Config
-    fields = '__all__'
-    success_url = reverse_lazy('main:config-index')
-
-
-## ---------------------- AUTOCOMPLETE VIEWS ---------------------- ##
 class ModelAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !

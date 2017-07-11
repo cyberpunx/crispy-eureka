@@ -95,7 +95,7 @@
                                         <td class="text-right">{{ work.work_price }}</td>
                                         <td class="text-right">
                                             <a href="{% url 'main:work-update' work.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="{% url 'main:work-delete' work.id %}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:work-delete' work.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -119,7 +119,7 @@
                                         <td class="text-right">{{ part.price }}</td>
                                         <td class="text-right">
                                             <a href="{% url 'main:part-update' part.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="{% url 'main:part-delete' part.id %}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:part-delete' part.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -149,5 +149,7 @@
         </div>
         <a href="{% url 'main:work-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button></a>
         <a href="{% url 'main:part-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Repuesto</button></a>
+        <a href="{% url 'main:workorder-update' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar Datos</button></a>
+        <a href="{% url 'main:workorder-delete' workorder.id %}"><button type="button" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-remove"></i> Eliminar Orden</button></a>
     </div>
 {% endblock %}

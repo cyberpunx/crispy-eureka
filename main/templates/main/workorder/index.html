@@ -20,7 +20,11 @@
                                     <tr>
                                         <th>Cliente</th>
                                         <th>Automotor</th>
-                                        <th>Descripción</th>
+                                        <th>Técnico</th>
+                                        <th>Total</th>
+                                        <th>Observaciones</th>
+                                        <th>Estado</th>
+                                        <th>Fecha</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -28,12 +32,36 @@
                                 {% for workorder in object_list %}
                                     <tbody>
                                     <tr class="odd gradeX">
-                                        <td>{{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}</td>
+                                        <td>{{ workorder.vehicle.client.business_name }} - {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}</td>
                                         <td>{{ workorder.vehicle.model }} / {{ workorder.vehicle.year }} / {{ workorder.vehicle.color }} / Patente: {{ workorder.vehicle.licence_plate }}</td>
+                                        <td>{{ workorder.employee }}</td>
+                                        <td>{{ workorder.total }}</td>
                                         <td>{{ workorder.note }}</td>
+                                        {% if workorder.status == 'PRE' %}
+                                            <td class="info">{{ workorder.get_status_display }}</td>
+                                        {% endif %}
+                                        {% if workorder.status == 'ABI' %}
+                                            <td class="warning">{{ workorder.get_status_display }}</td>
+                                        {% endif %}
+                                        {% if workorder.status == 'PRO' %}
+                                            <td class="warning">{{ workorder.get_status_display }}</td>
+                                        {% endif %}
+                                        {% if workorder.status == 'PAU' %}
+                                            <td class="danger">{{ workorder.get_status_display }}</td>
+                                        {% endif %}
+                                        {% if workorder.status == 'COM' %}
+                                            <td class="success">{{ workorder.get_status_display }}</td>
+                                        {% endif %}
+                                        {% if workorder.status == 'CER' %}
+                                            <td class="succes">{{ workorder.get_status_display }}</td>
+                                        {% endif %}
+                                        {% if workorder.status == 'CAN' %}
+                                            <td class="danger">{{ workorder.get_status_display }}</td>
+                                        {% endif %}
+                                        <th>{{ workorder.date }}</th>
                                         <td class="center">
                                             <a href="{% url 'main:workorder-detail' workorder.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
-                                            <a href="{% url 'main:workorder-index' %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:workorder-update' workorder.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
                                     </tbody>

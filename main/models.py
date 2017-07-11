@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.core.urlresolvers import reverse
+import dbsettings
 
 
 class ClientManager(models.Manager):
@@ -95,6 +96,7 @@ class Employee(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
+
 class Status(models.Model):
     STATUS_CHOICES = (
         ('PRE', 'Presupuesto'),
@@ -108,6 +110,10 @@ class Status(models.Model):
     status = models.CharField(max_length=3, choices=STATUS_CHOICES, verbose_name="Estado")
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name="Empleado")
     date = models.DateTimeField(auto_now=True)
+
+
+class Global(dbsettings.Group):
+    labor_rate = dbsettings.PositiveIntegerValue(default='0', help_text='Valor de la hora de trabajo')
 
 
 class WorkOrder(models.Model):
@@ -124,8 +130,11 @@ class WorkOrder(models.Model):
     )
     status = models.CharField(max_length=3, choices=STATUS_CHOICES, verbose_name="Estado")
     employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name="Empleado", default='')
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateField(auto_now=True)
     note = models.CharField(blank=True, max_length=140, verbose_name="Observaciones")
+    total = models.FloatField(blank=True, default=0, verbose_name="Total")
+
+    settings = Global('Global Settings')
 
 
 class Part(models.Model):
@@ -141,25 +150,28 @@ class Work(models.Model):
     time_required = models.IntegerField(verbose_name="Tiempo")
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
 
-    def work_price(self):
-        if not self.time_required:
-            self.time_required = 1
-        return str(self.time_required * int(Config.labor_rate()))
+#     def work_price(self):
+#         if not self.time_required:
+#             self.time_required = 1
+#         return str(self.time_required * int(Config.labor_rate()))
+#
+#
+# class Config(models.Model):
+#     SECTION_CHOICES = (
+#         ('GLOBAL', 'Global'),
+#     )
+#     TYPE_CHOICES = (
+#         ('INT', 'INT'),
+#         ('CHAR', 'CHAR'),
+#     )
+#     section = models.CharField(max_length=20, choices=SECTION_CHOICES, verbose_name="Sección")
+#     key = models.CharField(max_length=20, verbose_name="Clave")
+#     value = models.CharField(max_length=140, verbose_name="Valor")
+#     type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name="Tipo")
+#
+#     def labor_rate():
+#         return Config.objects.values_list('value', flat=True).get(pk=1)
 
 
-class Config(models.Model):
-    SECTION_CHOICES = (
-        ('GLOBAL', 'Global'),
-    )
-    TYPE_CHOICES = (
-        ('INT', 'INT'),
-        ('CHAR', 'CHAR'),
-    )
-    section = models.CharField(max_length=20, choices=SECTION_CHOICES, verbose_name="Sección")
-    key = models.CharField(max_length=20, verbose_name="Clave")
-    value = models.CharField(max_length=140, verbose_name="Valor")
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES, verbose_name="Tipo")
 
-    def labor_rate():
-        return Config.objects.values_list('value', flat=True).get(pk=1)
 

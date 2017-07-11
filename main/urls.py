@@ -84,8 +84,11 @@ urlpatterns = [
     # /main/workorders/<workorder_id>/
     url(r'workorders/(?P<pk>[0-9]+)/$', views.WorkOrderDetailView.as_view(), name='workorder-detail'),
 
+    # /main/workorders/<part_id>/delete/
+    url(r'workorders/(?P<pk>[0-9]+)/delete/$', views.WorkOrderDeleteView.as_view(), name='workorder-delete'),
+
     # /main/workorders/update/<workorder_id>/
-    #url(r'workorders/update/(?P<pk>[0-9]+)/$', views.WorkOrderUpdateView.as_view(), name='workorder-update'),
+    url(r'workorders/update/(?P<pk>[0-9]+)/$', views.WorkOrderUpdateView.as_view(), name='workorder-update'),
 
     # /main/parts/add/<workorder_id>/
     url(r'parts/add/(?P<pk>[0-9]+)/$', views.PartCreateView.as_view(), name='part-add'),
@@ -104,12 +107,6 @@ urlpatterns = [
 
     # /main/works/<part_id>/delete/
     url(r'works/(?P<pk>[0-9]+)/delete/$', views.WorkDeleteView.as_view(), name='work-delete'),
-
-    # /main/config/
-    url(r'config/$', views.ConfigIndexView.as_view(), name='config-index'),
-
-    # /main/config/update/<employee_id>/
-    url(r'config/update/(?P<pk>[0-9]+)/$', views.ConfigUpdateView.as_view(), name='config-update'),
 
     # autocomplete
     url(r'^model-autocomplete/$', views.ModelAutocomplete.as_view(), name='model-autocomplete'),
