@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .models import Client, Vehicle, Model, Brand, Category, SubCategory, Employee, WorkOrder, Work, Part
 from dal import autocomplete
 from main import models
-from .forms import VehicleForm, WorkOrderForm
+from .forms import VehicleForm, WorkOrderForm, WorkForm
 from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -192,6 +192,10 @@ class WorkOrderDetailView(generic.DetailView):
     template_name = 'main/workorder/detail.html'
     model = WorkOrder
 
+class WorkOrderPrintView(generic.DetailView):
+    template_name = 'main/workorder/print.html'
+    model = WorkOrder
+
 
 class WorkOrderDeleteView(DeleteView):
     template_name = 'main/workorder/confirm_delete.html'
@@ -214,11 +218,10 @@ class WorkOrderCreateView(CreateView):
     form_class = WorkOrderForm
     success_url = reverse_lazy('main:workorder-index')
 
-
 class WorkCreateView(CreateView):
-    template_name = 'main/work/work_form.html'
+    template_name = 'main/work/autocomplete_form.html'
     model = Work
-    fields = ['work_name', 'subcategory', 'time_required']
+    form_class = WorkForm
 
     def form_valid(self, form):
         form.instance.work_order_id = self.kwargs.get('pk')
@@ -226,6 +229,19 @@ class WorkCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+
+# class WorkCreateView(CreateView):
+#     template_name = 'main/work/work_form.html'
+#     model = Work
+#     fields = ['work_name', 'subcategory', 'time_required']
+#
+#     def form_valid(self, form):
+#         form.instance.work_order_id = self.kwargs.get('pk')
+#         return super(WorkCreateView, self).form_valid(form)
+#
+#     def get_success_url(self):
+#         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
 
 class WorkUpdateView(UpdateView):
@@ -248,7 +264,7 @@ class WorkDeleteView(DeleteView):
 class PartCreateView(CreateView):
     template_name = 'main/part/part_form.html'
     model = Part
-    fields = ['part_name', 'subcategory', 'price']
+    fields = ['part_name', 'subcategory', 'price', 'quantity']
 
     def form_valid(self, form):
         form.instance.work_order_id = self.kwargs.get('pk')
@@ -320,5 +336,18 @@ class VehicleAutocomplete(autocomplete.Select2QuerySetView):
                  | qs.filter(client__business_name__istartswith=self.q) \
                  | qs.filter(model__model_name__istartswith=self.q) \
                  | qs.filter(model__brand_brand_name__istartswith=self.q)
+
+        return qs
+
+class SubcategoryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        #if not self.request.user.is_authenticated():
+        #    return Vehicle.objects.none()
+
+        qs = SubCategory.objects.all()
+
+        if self.q:
+            qs = qs.filter(category__category_name__icontains=self.q) | qs.filter(subcategory_name__icontains=self.q)
 
         return qs

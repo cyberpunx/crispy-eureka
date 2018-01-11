@@ -1,0 +1,160 @@
+{% extends 'main/print_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+<div class="panel-title text-center">
+    <img src="{% static "/main/img/logo.png" %}" alt="Logo" width="215" height="100"/>
+    <hr />
+</div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="invoice-title">
+                    <h2>Orden de Trabajo # {{ workorder.id }}
+                            <span class="pull-right">{{ workorder.get_status_display }}</span>
+                    </h2>
+                </div>
+                    <h5>Fecha: {{ workorder.date|date:'d-m-Y' }}</h5>
+                    <h5>Técnico: {{ workorder.employee }}</h5>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="panel panel-default" >
+                            <div class="panel-heading">Cliente</div>
+                            <div class="panel-body" style="min-height: 16em">
+                                <strong>{{ workorder.vehicle.client.business_name }}</strong><br>
+                                {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}<br>
+                                {{ workorder.vehicle.client.phone }}<br>
+                                {{ workorder.vehicle.client.email }}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Automotor</div>
+                            <div class="panel-body" style="min-height: 16em">
+                                <strong>{{ workorder.vehicle.model }}</strong><br>
+                                Año: {{ workorder.vehicle.year }}<br>
+                                Color: {{ workorder.vehicle.color }}<br>
+                                Patente: {{ workorder.vehicle.licence_plate }}<br>
+                                {% if workorder.vehicle.engine is not None %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
+                                {% if workorder.vehicle.vin is not None %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
+                                {% if workorder.vehicle.engine_number is not None %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
+                                Kilometraje: {{ workorder.vehicle.kilometers }}<br>
+                                Tanque combustible: {{ workorder.fuel_level }}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Descripción cliente</div>
+                            <div class="panel-body" style="min-height: 16em">
+                                {{ workorder.initial_obs }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Diagnóstico</div>
+                            <div class="panel-body" style="min-height: 16em">
+                                {{ workorder.diagnostic }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">Observaciones</div>
+                    <div class="panel-body" style="min-height: 4em">
+                        {{ workorder.note }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Detalle</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td colspan="2"><strong>Trabajo</strong></td>
+                                        <td class="text-center"><strong>Descuento</strong></td>
+                                        <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
+                                        <td class="text-center"><strong>Precio</strong></td>
+                                        <td class="text-right"><strong>Importe</strong></td>
+                                        <td class="text-right"><strong></strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="individual-form">
+                                    {% for work in workorder.work_set.all %}
+                                    <tr>
+                                        <td>{{ work.work_name }}</td>
+                                        <td>{{ work.subcategory }}</td>
+                                        <td class="text-center">0%</td>
+                                        <td class="text-center">{{ work.time_required }}</td>
+                                        <td class="text-center">{{ work.labor_rate }}</td>
+                                        <td class="text-right">${{ work.work_price }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <td colspan="2"><strong>Repuestos</strong></td>
+                                        <td class="text-center"><strong></strong></td>
+                                        <td class="text-center"><strong></strong></td>
+                                        <td class="text-right"><strong></strong></td>
+                                        <td class="text-right"><strong></strong></td>
+                                        <td class="text-right"><strong></strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="individual-form">
+                                    {% for part in workorder.part_set.all %}
+                                    <tr>
+                                        <td>{{ part.part_name }}</td>
+                                        <td>{{ part.subcategory }}</td>
+                                        <td class="text-center">0%</td>
+                                        <td class="text-center">{{ part.quantity }}</td>
+                                        <td class="text-center">{{ part.price }}</td>
+                                        <td class="text-right">{{ part.part_price }}</td>
+                                        <td class="text-right">
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td class="thick-line" colspan="4"></td>
+                                        <td class="thick-line text-right">Subtotal</td>
+                                        <td class="thick-line text-right">${{ workorder.total }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line" colspan="4"></td>
+                                        <td class="no-line text-right">0% IVA</td>
+                                        <td class="no-line text-right">0,0</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"><strong>Repuestos: ${{ workorder.part_sum }}</strong></td>
+                                        <td class="no-line"><strong>Mano de obra: ${{ workorder.work_sum }}</strong></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-right"><strong>Total</strong></td>
+                                        <td class="no-line text-right">${{ workorder.total }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}

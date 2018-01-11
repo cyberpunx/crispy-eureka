@@ -84,6 +84,9 @@ urlpatterns = [
     # /main/workorders/<workorder_id>/
     url(r'workorders/(?P<pk>[0-9]+)/$', views.WorkOrderDetailView.as_view(), name='workorder-detail'),
 
+    # /main/workorders/<workorder_id>/
+    url(r'workorders/print/(?P<pk>[0-9]+)/$', views.WorkOrderPrintView.as_view(), name='workorder-print'),
+
     # /main/workorders/<part_id>/delete/
     url(r'workorders/(?P<pk>[0-9]+)/delete/$', views.WorkOrderDeleteView.as_view(), name='workorder-delete'),
 
@@ -100,6 +103,9 @@ urlpatterns = [
     url(r'parts/(?P<pk>[0-9]+)/delete/$', views.PartDeleteView.as_view(), name='part-delete'),
 
     # /main/works/add/<workorder_id>/
+    # url(r'works/add/(?P<pk>[0-9]+)/$', views.WorkCreateView.as_view(), name='work-add'),
+
+    # /main/works/add/<workorder_id>/
     url(r'works/add/(?P<pk>[0-9]+)/$', views.WorkCreateView.as_view(), name='work-add'),
 
     # /main/works/update/<employee_id>/
@@ -112,4 +118,5 @@ urlpatterns = [
     url(r'^model-autocomplete/$', views.ModelAutocomplete.as_view(), name='model-autocomplete'),
     url(r'^vehicle-autocomplete/$', views.VehicleAutocomplete.as_view(), name='vehicle-autocomplete'),
     url(r'^client-autocomplete/$', views.ClientAutocomplete.as_view(), name='client-autocomplete'),
+    url(r'^subcategory-autocomplete/$', views.SubcategoryAutocomplete.as_view(), name='subcategory-autocomplete'),
 ]

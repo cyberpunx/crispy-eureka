@@ -10,20 +10,21 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="invoice-title">
-                    <h2>Orden de Trabajo # {{ workorder.id }} <span class="pull-right">{{ workorder.get_status_display }}</span></h2>
+                    <h2>Orden de Trabajo # {{ workorder.id }}
+                            <span class="pull-right">{{ workorder.get_status_display }}</span>
+                    </h2>
                 </div>
-                    <h5>Fecha: {{ workorder.date }}</h5>
+                    <h5>Fecha: {{ workorder.date|date:'d-m-Y' }}</h5>
                     <h5>Técnico: {{ workorder.employee }}</h5>
                 <hr>
                 <div class="row">
-                    <div class="col-xs-6">
-                        <div class="panel panel-default">
+                    <div class="col-xs-3">
+                        <div class="panel panel-default" >
                             <div class="panel-heading">Cliente</div>
-                            <div class="panel-body">
+                            <div class="panel-body" style="min-height: 16em">
                                 <strong>{{ workorder.vehicle.client.business_name }}</strong><br>
                                 {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}<br>
                                 {{ workorder.vehicle.client.phone }}<br>
-                                {{ workorder.vehicle.client.alt_phone }}<br>
                                 {{ workorder.vehicle.client.email }}<br>
                             </div>
                         </div>
@@ -31,42 +32,48 @@
                     <div class="col-xs-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">Automotor</div>
-                            <div class="panel-body">
+                            <div class="panel-body" style="min-height: 16em">
                                 <strong>{{ workorder.vehicle.model }}</strong><br>
                                 Año: {{ workorder.vehicle.year }}<br>
                                 Color: {{ workorder.vehicle.color }}<br>
                                 Patente: {{ workorder.vehicle.licence_plate }}<br>
-                                Transmisión: {{ workorder.vehicle.transmission }}<br>
+                                {% if workorder.vehicle.engine is not None %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
+                                {% if workorder.vehicle.vin is not None %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
+                                {% if workorder.vehicle.engine_number is not None %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
+                                Kilometraje: {{ workorder.vehicle.kilometers }}<br>
+                                Tanque combustible: {{ workorder.fuel_level }}<br>
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Notas</div>
-                            <div class="panel-body">
-                                Notas del automotor
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
+                            <div class="panel-heading">Descripción cliente</div>
+                            <div class="panel-body" style="min-height: 16em">
+                                {{ workorder.initial_obs }}
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Observaciones</div>
-                            <div class="panel-body">
-                                {{ workorder.note }}
+                            <div class="panel-heading">Diagnóstico</div>
+                            <div class="panel-body" style="min-height: 16em">
+                                {{ workorder.diagnostic }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">Observaciones</div>
+                    <div class="panel-body" style="min-height: 4em">
+                        {{ workorder.note }}
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -79,9 +86,10 @@
                                 <thead>
                                     <tr>
                                         <td colspan="2"><strong>Trabajo</strong></td>
-                                        <td class="text-center"><strong>Tiempo</strong></td>
                                         <td class="text-center"><strong>Descuento</strong></td>
-                                        <td class="text-right"><strong>Total</strong></td>
+                                        <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
+                                        <td class="text-center"><strong>Precio</strong></td>
+                                        <td class="text-right"><strong>Importe</strong></td>
                                         <td class="text-right"><strong></strong></td>
                                     </tr>
                                 </thead>
@@ -90,9 +98,10 @@
                                     <tr>
                                         <td>{{ work.work_name }}</td>
                                         <td>{{ work.subcategory }}</td>
-                                        <td class="text-center">{{ work.time_required }}</td>
                                         <td class="text-center">0%</td>
-                                        <td class="text-right">{{ work.work_price }}</td>
+                                        <td class="text-center">{{ work.time_required }}</td>
+                                        <td class="text-center">{{ work.labor_rate }}</td>
+                                        <td class="text-right">${{ work.work_price }}</td>
                                         <td class="text-right">
                                             <a href="{% url 'main:work-update' work.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                             <a href="{% url 'main:work-delete' work.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
@@ -103,9 +112,10 @@
                                 <thead>
                                     <tr>
                                         <td colspan="2"><strong>Repuestos</strong></td>
-                                        <td class="text-center"><strong>Precio</strong></td>
-                                        <td class="text-center"><strong>Descuento</strong></td>
-                                        <td class="text-right"><strong>Total</strong></td>
+                                        <td class="text-center"><strong></strong></td>
+                                        <td class="text-center"><strong></strong></td>
+                                        <td class="text-right"><strong></strong></td>
+                                        <td class="text-right"><strong></strong></td>
                                         <td class="text-right"><strong></strong></td>
                                     </tr>
                                 </thead>
@@ -114,9 +124,10 @@
                                     <tr>
                                         <td>{{ part.part_name }}</td>
                                         <td>{{ part.subcategory }}</td>
-                                        <td class="text-center">{{ part.price }}</td>
                                         <td class="text-center">0%</td>
-                                        <td class="text-right">{{ part.price }}</td>
+                                        <td class="text-center">{{ part.quantity }}</td>
+                                        <td class="text-center">{{ part.price }}</td>
+                                        <td class="text-right">{{ part.part_price }}</td>
                                         <td class="text-right">
                                             <a href="{% url 'main:part-update' part.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                             <a href="{% url 'main:part-delete' part.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
@@ -126,19 +137,22 @@
                                 </tbody>
                                 <tbody>
                                     <tr>
-                                        <td class="thick-line" colspan="3"></td>
-                                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                        <td class="thick-line text-right">$</td>
+                                        <td class="thick-line" colspan="4"></td>
+                                        <td class="thick-line text-right">Subtotal</td>
+                                        <td class="thick-line text-right">${{ workorder.total }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="no-line" colspan="3"></td>
-                                        <td class="no-line text-center"><strong>IVA</strong></td>
-                                        <td class="no-line text-right">0,00</td>
+                                        <td class="no-line" colspan="4"></td>
+                                        <td class="no-line text-right">0% IVA</td>
+                                        <td class="no-line text-right">0,0</td>
                                     </tr>
                                     <tr>
-                                        <td class="no-line" colspan="3"></td>
-                                        <td class="no-line text-center"><strong>Total</strong></td>
-                                        <td class="no-line text-right">$</td>
+                                        <td class="no-line"><strong>Repuestos: ${{ workorder.part_sum }}</strong></td>
+                                        <td class="no-line"><strong>Mano de obra: ${{ workorder.work_sum }}</strong></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-right"><strong>Total</strong></td>
+                                        <td class="no-line text-right">${{ workorder.total }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -150,6 +164,7 @@
         <a href="{% url 'main:work-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button></a>
         <a href="{% url 'main:part-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Repuesto</button></a>
         <a href="{% url 'main:workorder-update' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar Datos</button></a>
+        <a href="{% url 'main:workorder-print' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Imprimir</button></a>
         <a href="{% url 'main:workorder-delete' workorder.id %}"><button type="button" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-remove"></i> Eliminar Orden</button></a>
     </div>
 {% endblock %}

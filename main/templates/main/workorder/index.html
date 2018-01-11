@@ -19,57 +19,53 @@
                                 <thead>
                                     <tr>
                                         <th>Cliente</th>
+                                        <th>Cliente</th>
                                         <th>Automotor</th>
                                         <th>Técnico</th>
-                                        <th>Total</th>
                                         <th>Observaciones</th>
+                                        <th>Último movimiento</th>
+                                        <th>Fecha Entrada</th>
+                                        <th>Fecha Salida</th>
+                                        <th>Importe</th>
                                         <th>Estado</th>
-                                        <th>Fecha</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-
+                                <tbody>
                                 {% for workorder in object_list %}
-                                    <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>{{ workorder.vehicle.client.business_name }} - {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}</td>
-                                        <td>{{ workorder.vehicle.model }} / {{ workorder.vehicle.year }} / {{ workorder.vehicle.color }} / Patente: {{ workorder.vehicle.licence_plate }}</td>
+
+                                    <tr class="even gradeX">
+                                        <td>{{ workorder.id }}</td>
+                                        <td>
+                                            <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
+                                                {{ workorder.vehicle.client.business_name }} - {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
+                                                {{ workorder.vehicle.model }} /
+                                                {{ workorder.vehicle.year }} /
+                                                {{ workorder.vehicle.color }} /
+                                                Patente: {{ workorder.vehicle.licence_plate }}
+                                            </a>
+                                        </td>
                                         <td>{{ workorder.employee }}</td>
-                                        <td>{{ workorder.total }}</td>
                                         <td>{{ workorder.note }}</td>
-                                        {% if workorder.status == 'PRE' %}
-                                            <td class="info">{{ workorder.get_status_display }}</td>
-                                        {% endif %}
-                                        {% if workorder.status == 'ABI' %}
-                                            <td class="warning">{{ workorder.get_status_display }}</td>
-                                        {% endif %}
-                                        {% if workorder.status == 'PRO' %}
-                                            <td class="warning">{{ workorder.get_status_display }}</td>
-                                        {% endif %}
-                                        {% if workorder.status == 'PAU' %}
-                                            <td class="danger">{{ workorder.get_status_display }}</td>
-                                        {% endif %}
-                                        {% if workorder.status == 'COM' %}
-                                            <td class="success">{{ workorder.get_status_display }}</td>
-                                        {% endif %}
-                                        {% if workorder.status == 'CER' %}
-                                            <td class="succes">{{ workorder.get_status_display }}</td>
-                                        {% endif %}
-                                        {% if workorder.status == 'CAN' %}
-                                            <td class="danger">{{ workorder.get_status_display }}</td>
-                                        {% endif %}
-                                        <th>{{ workorder.date }}</th>
+                                        <th>{{ workorder.date|date:'d-m-Y H:i' }}</th>
+                                        <th>{{ workorder.date_in|date:'d-m-Y H:i' }}</th>
+                                        <th>{{ workorder.date_out|date:'d-m-Y H:i' }}</th>
+                                        <td>${{ workorder.total }}</td>
+                                        <td>{{ workorder.get_status_display }}</td>
                                         <td class="center">
                                             <a href="{% url 'main:workorder-detail' workorder.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                                             <a href="{% url 'main:workorder-update' workorder.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                {% endfor %}
 
+                                {% endfor %}
+                                </tbody>
                             </table>
                             <!-- /.table-responsive -->
-
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -81,7 +77,7 @@
 {% endblock %}
 
 {% block datatables_scripts %}
-    <!-- DataTables JavaScript -->s
+    <!-- DataTables JavaScript -->
     <script src="{% static 'main/sb_admin2/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'main/sb_admin2/vendor/datatables-plugins/dataTables.bootstrap.min.js' %}"></script>
     <script src="{% static 'main/sb_admin2/vendor/datatables-responsive/dataTables.responsive.js' %}"></script>
@@ -94,7 +90,31 @@
         var table = $('#dataTables-example').DataTable({
             "responsive": true,
             "processing": true,
-            "deferRender": true
+            "deferRender": true,
+            "language": {
+                "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
         });
     });
     </script>

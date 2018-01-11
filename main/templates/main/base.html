@@ -71,14 +71,14 @@
                 <div class="collapse navbar-collapse" id="topNavBar">
                     <ul class="nav navbar-nav">
                         <li class=""><a href="{% url 'main:client-index' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Clientes</a></li>
-                        <li class=""><a href="#"><span class="fa fa-file-text" aria-hidden="true"></span>&nbsp; Tickets</a></li>
+                        <li class=""><a href="{% url 'main:workorder-index' %}"><span class="fa fa-file-text" aria-hidden="true"></span>&nbsp; Ordenes</a></li>
                         <li class=""><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp; Calendario</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Nuevo Ticket
+                            <a href="{% url 'main:workorder-add' %}">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Nueva Orden
                             </a>
                         </li>
                         <li>
