@@ -11,7 +11,9 @@
 
     {% load staticfiles %}
 
-    <title>TITULO</title>
+    <title>
+        {% block pagetitle %}Admincar - ForAuto{% endblock %}
+    </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'main/sb_admin2/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">

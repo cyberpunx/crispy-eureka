@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import Client, Vehicle, Model, Brand, Category, SubCategory, Employee, WorkOrder, Work, Part
+from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part
 from dal import autocomplete
 from main import models
-from .forms import VehicleForm, WorkOrderForm, WorkForm
+from .forms import VehicleForm, WorkOrderForm, WorkForm, PartForm
 from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -116,33 +116,31 @@ class ModelCreateView(CreateView):
     success_url = reverse_lazy('main:model-index')
 
 
-class CategoryIndexView(generic.ListView):
-    template_name = 'main/category/index.html'
+class WorkCategoryIndexView(generic.ListView):
+    template_name = 'main/workcategory/index.html'
 
     def get_queryset(self):
-        return Category.objects.all()
+        return WorkCategory.objects.all()
 
 
-class CategoryCreateView(CreateView):
-    template_name = 'main/category/category_form.html'
-    model = Category
+class WorkCategoryCreateView(CreateView):
+    template_name = 'main/workcategory/workcategory_form.html'
+    model = WorkCategory
     fields = ['category_name', 'description']
-    success_url = reverse_lazy('main:category-index')
+    success_url = reverse_lazy('main:workcategory-index')
 
-
-class SubCategoryIndexView(generic.ListView):
-    template_name = 'main/subcategory/index.html'
+class PartCategoryIndexView(generic.ListView):
+    template_name = 'main/partcategory/index.html'
 
     def get_queryset(self):
-        return SubCategory.objects.all()
+        return PartCategory.objects.all()
 
 
-class SubCategoryCreateView(CreateView):
-    template_name = 'main/subcategory/subcategory_form.html'
-    model = SubCategory
-    fields = '__all__'
-    success_url = reverse_lazy('main:subcategory-index')
-
+class PartCategoryCreateView(CreateView):
+    template_name = 'main/partcategory/partcategory_form.html'
+    model = PartCategory
+    fields = ['category_name', 'description']
+    success_url = reverse_lazy('main:partcategory-index')
 
 class EmployeeIndexView(generic.ListView):
     template_name = 'main/employee/index.html'
@@ -159,14 +157,14 @@ class EmployeeDetailView(generic.DetailView):
 class EmployeeCreateView(CreateView):
     template_name = 'main/employee/employee_form.html'
     model = Employee
-    fields = ['first_name', 'last_name', 'email', 'phone', 'active']
+    fields = ['display_name', 'first_name', 'last_name', 'email', 'phone', 'active']
     success_url = reverse_lazy('main:employee-index')
 
 
 class EmployeeUpdateView(UpdateView):
     template_name = 'main/employee/employee_form.html'
     model = Employee
-    fields = ['first_name', 'last_name', 'email', 'phone', 'active']
+    fields = ['display_name', 'first_name', 'last_name', 'email', 'phone', 'active']
     success_url = reverse_lazy('main:employee-index')
 
 
@@ -230,24 +228,10 @@ class WorkCreateView(CreateView):
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
-
-# class WorkCreateView(CreateView):
-#     template_name = 'main/work/work_form.html'
-#     model = Work
-#     fields = ['work_name', 'subcategory', 'time_required']
-#
-#     def form_valid(self, form):
-#         form.instance.work_order_id = self.kwargs.get('pk')
-#         return super(WorkCreateView, self).form_valid(form)
-#
-#     def get_success_url(self):
-#         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
-
-
 class WorkUpdateView(UpdateView):
     template_name = 'main/work/work_form.html'
     model = Work
-    fields = ['work_name', 'subcategory', 'time_required']
+    fields = ['work_name', 'category', 'time_required']
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
@@ -260,11 +244,10 @@ class WorkDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
-
 class PartCreateView(CreateView):
-    template_name = 'main/part/part_form.html'
+    template_name = 'main/part/autocomplete_form.html'
     model = Part
-    fields = ['part_name', 'subcategory', 'price', 'quantity']
+    form_class = PartForm
 
     def form_valid(self, form):
         form.instance.work_order_id = self.kwargs.get('pk')
@@ -273,11 +256,10 @@ class PartCreateView(CreateView):
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
-
 class PartUpdateView(UpdateView):
     template_name = 'main/part/part_form.html'
     model = Part
-    fields = ['part_name', 'subcategory', 'price']
+    fields = ['part_name', 'category', 'price']
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
@@ -339,15 +321,28 @@ class VehicleAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
-class SubcategoryAutocomplete(autocomplete.Select2QuerySetView):
+class WorkCategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         #if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
-        qs = SubCategory.objects.all()
+        qs = WorkCategory.objects.all()
 
         if self.q:
-            qs = qs.filter(category__category_name__icontains=self.q) | qs.filter(subcategory_name__icontains=self.q)
+            qs = qs.filter(category_name__icontains=self.q)
+
+        return qs
+
+class PartCategoryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        #if not self.request.user.is_authenticated():
+        #    return Vehicle.objects.none()
+
+        qs = PartCategory.objects.all()
+
+        if self.q:
+            qs = qs.filter(category_name__icontains=self.q)
 
         return qs

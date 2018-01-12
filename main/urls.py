@@ -48,17 +48,17 @@ urlpatterns = [
     # main/models/add/
     url(r'models/add/$', views.ModelCreateView.as_view(), name='model-add'),
 
-    # main/category/
-    url(r'^category/$', views.CategoryIndexView.as_view(), name='category-index'),
+    # main/workcategory/
+    url(r'^workcategory/$', views.WorkCategoryIndexView.as_view(), name='workcategory-index'),
 
-    # main/category/add/
-    url(r'category/add/$', views.CategoryCreateView.as_view(), name='category-add'),
+    # main/workcategory/add/
+    url(r'workcategory/add/$', views.WorkCategoryCreateView.as_view(), name='workcategory-add'),
 
-    # main/subcat/
-    url(r'^subcat/$', views.SubCategoryIndexView.as_view(), name='subcategory-index'),
+    # main/partcategory/
+    url(r'^partcategory/$', views.PartCategoryIndexView.as_view(), name='partcategory-index'),
 
-    # main/subcat/add/
-    url(r'subcat/add/$', views.SubCategoryCreateView.as_view(), name='subcategory-add'),
+    # main/partcategory/add/
+    url(r'partcategory/add/$', views.PartCategoryCreateView.as_view(), name='partcategory-add'),
 
     # /main/employees/
     url(r'^employees/$', views.EmployeeIndexView.as_view(), name='employee-index'),
@@ -103,9 +103,6 @@ urlpatterns = [
     url(r'parts/(?P<pk>[0-9]+)/delete/$', views.PartDeleteView.as_view(), name='part-delete'),
 
     # /main/works/add/<workorder_id>/
-    # url(r'works/add/(?P<pk>[0-9]+)/$', views.WorkCreateView.as_view(), name='work-add'),
-
-    # /main/works/add/<workorder_id>/
     url(r'works/add/(?P<pk>[0-9]+)/$', views.WorkCreateView.as_view(), name='work-add'),
 
     # /main/works/update/<employee_id>/
@@ -118,5 +115,6 @@ urlpatterns = [
     url(r'^model-autocomplete/$', views.ModelAutocomplete.as_view(), name='model-autocomplete'),
     url(r'^vehicle-autocomplete/$', views.VehicleAutocomplete.as_view(), name='vehicle-autocomplete'),
     url(r'^client-autocomplete/$', views.ClientAutocomplete.as_view(), name='client-autocomplete'),
-    url(r'^subcategory-autocomplete/$', views.SubcategoryAutocomplete.as_view(), name='subcategory-autocomplete'),
+    url(r'^workcategory-autocomplete/$', views.WorkCategoryAutocomplete.as_view(), name='workcategory-autocomplete'),
+    url(r'^partcategory-autocomplete/$', views.PartCategoryAutocomplete.as_view(), name='partcategory-autocomplete'),
 ]

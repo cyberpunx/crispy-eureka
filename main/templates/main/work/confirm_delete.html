@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="well well-sm">
-                <h2>Se eliminó {{ work.subcategory }} {{ work.work_name }}</h2>
+                <h2>Se eliminó {{ work.category }} / {{ work.work_name }}</h2>
                 <form action="{% url 'main:work-delete' object.pk %}" method="post">
                 {% csrf_token %}
                 <input type="submit" class="btn btn-danger" value="Aceptar" />

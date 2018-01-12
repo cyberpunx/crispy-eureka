@@ -17,9 +17,17 @@
                             <span class="pull-right">{{ workorder.get_status_display }}</span>
                     </h2>
                 </div>
-                    <h5>Fecha: {{ workorder.date|date:'d-m-Y' }}</h5>
-                    <h5>Técnico: {{ workorder.employee }}</h5>
-                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Técnico: {{ workorder.employee }}</p>
+                         {% if workorder.ticket_number is not None %}<p>Nro. Factura: {{ workorder.ticket_number }}</p>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-right">Fecha Entrada: {{ workorder.date_in|date:'d-m-Y' }}</p>
+                        {% if workorder.date_out is not None %} <p class="text-right">Fecha Salida: {{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-xs-3">
                         <div class="panel panel-default" >
@@ -67,6 +75,7 @@
                 </div>
             </div>
         </div>
+        {% if workorder.note == None %}
         <div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default" >
@@ -77,6 +86,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -100,7 +110,7 @@
                                     {% for work in workorder.work_set.all %}
                                     <tr>
                                         <td>{{ work.work_name }}</td>
-                                        <td>{{ work.subcategory }}</td>
+                                        <td>{{ work.category }}</td>
                                         <td class="text-center">0%</td>
                                         <td class="text-center">{{ work.time_required }}</td>
                                         <td class="text-center">{{ work.labor_rate }}</td>
@@ -122,7 +132,7 @@
                                     {% for part in workorder.part_set.all %}
                                     <tr>
                                         <td>{{ part.part_name }}</td>
-                                        <td>{{ part.subcategory }}</td>
+                                        <td>{{ part.category }}</td>
                                         <td class="text-center">0%</td>
                                         <td class="text-center">{{ part.quantity }}</td>
                                         <td class="text-center">{{ part.price }}</td>

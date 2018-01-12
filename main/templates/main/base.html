@@ -11,7 +11,10 @@
 
     {% load staticfiles %}
 
-    <title>TITULO</title>
+
+    <title>
+        {% block pagetitle %}Admincar - ForAuto{% endblock %}
+    </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'main/sb_admin2/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -124,10 +127,10 @@
                                     <a href="{% url 'main:model-index' %}">Modelos</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'main:category-index' %}">Categorías</a>
+                                    <a href="{% url 'main:workcategory-index' %}">Trabajos Categorías</a>
                                 </li>
                                 <li>
-                                    <a href="{% url 'main:subcategory-index' %}">Subcategorías</a>
+                                    <a href="{% url 'main:partcategory-index' %}">Repuestos Categorías</a>
                                 </li>
                                 <li>
                                     <a href="{% url 'main:employee-index' %}">Empleados</a>

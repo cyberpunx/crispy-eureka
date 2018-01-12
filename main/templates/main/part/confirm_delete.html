@@ -9,11 +9,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="well well-sm">
-                <h2>¿Esta seguro que desea eliminar {{ part.part_name }} {{ part.subcategory }}?</h2>
+                <h2>Se eliminó {{ part.category }} / {{ part.part_name }} </h2>
                 <form action="{% url 'main:part-delete' object.pk %}" method="post">
                 {% csrf_token %}
-                <input type="submit" class="btn btn-danger" value="Eliminar" />
-                <button onclick="window.history.back();" class="btn btn-primary">Cancelar</button>
+                <input type="submit" class="btn btn-danger" value="Aceptar" />
                 </form>
             </div>
         </div>

@@ -76,24 +76,22 @@ class Vehicle(models.Model):
                self.color + ' / Patente: ' + self.licence_plate
 
 
-class Category(models.Model):
+class WorkCategory(models.Model):
     category_name = models.CharField(max_length=40, verbose_name="Categoría")
     description = models.TextField(blank=True, null=True, verbose_name="Descripción")
 
     def __str__(self):
         return self.category_name
 
-
-class SubCategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name="Categoría")
-    subcategory_name = models.CharField(max_length=40, verbose_name="Subcategoría")
+class PartCategory(models.Model):
+    category_name = models.CharField(max_length=40, verbose_name="Categoría")
     description = models.TextField(blank=True, null=True, verbose_name="Descripción")
 
     def __str__(self):
-        return self.category.category_name + ' / ' + self.subcategory_name
-
+        return self.category_name
 
 class Employee(models.Model):
+    display_name = models.CharField(max_length=20, verbose_name="Código", unique=True)
     first_name = models.CharField(max_length=20, verbose_name="Nombre")
     last_name = models.CharField(max_length=40, verbose_name="Apellido")
     email = models.EmailField(unique=True, verbose_name="Email")
@@ -101,7 +99,7 @@ class Employee(models.Model):
     active = models.BooleanField(default=True, verbose_name="Activo")
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.display_name
 
 
 class Status(models.Model):
@@ -158,6 +156,7 @@ class WorkOrder(models.Model):
     initial_obs = models.TextField(blank=True, null=True, verbose_name="Observaciones Iniciales")
     diagnostic = models.TextField(blank=True, null=True, verbose_name="Diagnóstico")
     fuel_level = models.CharField(max_length=10, choices=FUEL_CHOICES, verbose_name="Nivel combustible")
+    ticket_number = models.CharField(blank=True, null=True, max_length=100, verbose_name="Nro. Factura")
 
     @property
     def total(self):
@@ -186,7 +185,7 @@ class WorkOrder(models.Model):
 
 class Part(models.Model):
     part_name = models.CharField(max_length=40, verbose_name="Repuesto")
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name="SubCategoría")
+    category = models.ForeignKey(PartCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
     price = models.FloatField(verbose_name="Precio")
     quantity = models.IntegerField(default=1, verbose_name="Cantidad")
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
@@ -198,7 +197,7 @@ class Part(models.Model):
 
 class Work(models.Model):
     work_name = models.CharField(max_length=40, verbose_name="Trabajo")
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT, verbose_name="SubCategoría")
+    category = models.ForeignKey(WorkCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
     time_required = models.IntegerField(verbose_name="Tiempo")
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
 
