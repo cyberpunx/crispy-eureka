@@ -75,8 +75,8 @@
         <div class="row">
             <div class="col-md-12">
                 <p>
-                    <a href="{% url 'main:work-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button></a>
-                    <a href="{% url 'main:part-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Repuesto</button></a>
+                    <a href="{% url 'main:workorderworks-add' workorder.id  %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button></a>
+                    <a href="{% url 'main:workorderparts-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Repuesto</button></a>
                     <a href="{% url 'main:workorder-update' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar Datos</button></a>
                     <a href="{% url 'main:workorder-print' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> Imprimir</button></a>
                     <a href="{% url 'main:workorder-delete' workorder.id %}"><button type="button" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-remove"></i> Eliminar Orden</button></a>
@@ -103,10 +103,10 @@
                                     </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for work in workorder.work_set.all %}
+                                    {% for work in workorder.workorderworks_set.all %}
                                     <tr>
-                                        <td>{{ work.work_name }}</td>
-                                        <td>{{ work.category }}</td>
+                                        <td>{{ work.work.work_name }}</td>
+                                        <td>{{ work.work.category }}</td>
                                         <td class="text-center">0%</td>
                                         <td class="text-center">{{ work.time_required }}</td>
                                         <td class="text-center">{{ work.labor_rate }}</td>
@@ -129,10 +129,10 @@
                                     </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for part in workorder.part_set.all %}
+                                    {% for part in workorder.workorderparts_set.all %}
                                     <tr>
-                                        <td>{{ part.part_name }}</td>
-                                        <td>{{ part.category }}</td>
+                                        <td>{{ part.part.part_name }}</td>
+                                        <td>{{ part.part.category }}</td>
                                         <td class="text-center">0%</td>
                                         <td class="text-center">{{ part.quantity }}</td>
                                         <td class="text-center">{{ part.price }}</td>

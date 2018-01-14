@@ -123,6 +123,19 @@ class Status(models.Model):
 class Global(dbsettings.Group):
     labor_rate = dbsettings.PositiveIntegerValue(default='0', help_text='Valor de la hora de trabajo')
 
+class Part(models.Model):
+    part_name = models.CharField(max_length=40, verbose_name="Repuesto")
+    category = models.ForeignKey(PartCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
+
+    def __str__(self):
+        return self.category.category_name + ' / ' + self.part_name
+
+class Work(models.Model):
+    work_name = models.CharField(max_length=40, verbose_name="Trabajo")
+    category = models.ForeignKey(WorkCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
+
+    def __str__(self):
+        return self.category.category_name + ' / ' + self.work_name
 
 class WorkOrder(models.Model):
     vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT, verbose_name="Vehiculo")
@@ -157,6 +170,8 @@ class WorkOrder(models.Model):
     diagnostic = models.TextField(blank=True, null=True, verbose_name="Diagnóstico")
     fuel_level = models.CharField(max_length=10, choices=FUEL_CHOICES, verbose_name="Nivel combustible")
     ticket_number = models.CharField(blank=True, null=True, max_length=100, verbose_name="Nro. Factura")
+    parts = models.ManyToManyField(Part, through='WorkorderParts')
+    works = models.ManyToManyField(Work, through='WorkorderWorks')
 
     @property
     def total(self):
@@ -165,15 +180,15 @@ class WorkOrder(models.Model):
     @property
     def work_sum(self):
         work_sum = 0
-        for work in self.work_set.all():
+        for work in self.workorderworks_set.all():
             work_sum = work_sum + work.time_required
         return work_sum * WorkOrder.settings.labor_rate
 
     @property
     def part_sum(self):
         part_sum = 0
-        for part in self.part_set.all():
-            part_sum = part_sum + part.part_price
+        for part in self.workorderparts_set.all():
+            part_sum = part_sum + part.price
         return part_sum
 
     @property
@@ -182,24 +197,20 @@ class WorkOrder(models.Model):
 
     settings = Global('Global Settings')
 
-
-class Part(models.Model):
-    part_name = models.CharField(max_length=40, verbose_name="Repuesto")
-    category = models.ForeignKey(PartCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
+class WorkorderParts(models.Model):
+    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, verbose_name="Repuesto")
     price = models.FloatField(verbose_name="Precio")
     quantity = models.IntegerField(default=1, verbose_name="Cantidad")
-    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
 
     @property
     def part_price(self):
         return self.quantity * self.price
 
-
-class Work(models.Model):
-    work_name = models.CharField(max_length=40, verbose_name="Trabajo")
-    category = models.ForeignKey(WorkCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
-    time_required = models.IntegerField(verbose_name="Tiempo")
+class WorkorderWorks(models.Model):
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
+    work = models.ForeignKey(Work, on_delete=models.CASCADE, verbose_name="Trabajo")
+    time_required = models.IntegerField(default=1, verbose_name="Tiempo")
 
     @property
     def labor_rate(self):
@@ -208,6 +219,7 @@ class Work(models.Model):
     @property
     def work_price(self):
         return self.time_required * WorkOrder.settings.labor_rate
+
 
 
 

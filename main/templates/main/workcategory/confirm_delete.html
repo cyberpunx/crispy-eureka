@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Eliminar Categoría de Trabajos
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="well well-sm">
+                <h2>Se eliminó {{ workcategory.category_name }} </h2>
+                <form action="{% url 'main:workcategory-delete' object.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Aceptar" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

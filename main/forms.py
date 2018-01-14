@@ -1,6 +1,6 @@
 from dal import autocomplete
 from django import forms
-from .models import Vehicle, WorkOrder, Work, Part
+from .models import Vehicle, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks
 
 
 class VehicleForm(forms.ModelForm):
@@ -29,7 +29,7 @@ class WorkForm(forms.ModelForm):
 
     class Meta:
         model = Work
-        fields = ['work_name', 'category', 'time_required']
+        fields = ['work_name', 'category']
         widgets = {
             'category': autocomplete.ModelSelect2(url='main:workcategory-autocomplete'),
         }
@@ -38,9 +38,21 @@ class PartForm(forms.ModelForm):
 
     class Meta:
         model = Part
-        fields = ['part_name', 'category', 'price', 'quantity']
+        fields = ['part_name', 'category']
         widgets = {
             'category': autocomplete.ModelSelect2(url='main:partcategory-autocomplete'),
         }
+
+class WorkorderPartsForm(forms.ModelForm):
+
+    class Meta:
+        model = WorkorderParts
+        fields = ['part', 'price', 'quantity']
+
+class WorkorderWorksForm(forms.ModelForm):
+
+    class Meta:
+        model = WorkorderWorks
+        fields = ['work', 'time_required']
 
 

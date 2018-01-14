@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part
+from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks
 from dal import autocomplete
 from main import models
-from .forms import VehicleForm, WorkOrderForm, WorkForm, PartForm
+from .forms import VehicleForm, WorkOrderForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm
 from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -129,6 +129,11 @@ class WorkCategoryCreateView(CreateView):
     fields = ['category_name', 'description']
     success_url = reverse_lazy('main:workcategory-index')
 
+class WorkCategoryDeleteView(DeleteView):
+    template_name = 'main/workcategory/confirm_delete.html'
+    model = WorkCategory
+    success_url = reverse_lazy('main:workcategory-index')
+
 class PartCategoryIndexView(generic.ListView):
     template_name = 'main/partcategory/index.html'
 
@@ -140,6 +145,11 @@ class PartCategoryCreateView(CreateView):
     template_name = 'main/partcategory/partcategory_form.html'
     model = PartCategory
     fields = ['category_name', 'description']
+    success_url = reverse_lazy('main:partcategory-index')
+
+class PartCategoryDeleteView(DeleteView):
+    template_name = 'main/partcategory/confirm_delete.html'
+    model = PartCategory
     success_url = reverse_lazy('main:partcategory-index')
 
 class EmployeeIndexView(generic.ListView):
@@ -220,57 +230,77 @@ class WorkCreateView(CreateView):
     template_name = 'main/work/autocomplete_form.html'
     model = Work
     form_class = WorkForm
+    success_url = reverse_lazy('main:work-index')
 
-    def form_valid(self, form):
-        form.instance.work_order_id = self.kwargs.get('pk')
-        return super(WorkCreateView, self).form_valid(form)
+class WorkIndexView(generic.ListView):
+    template_name = 'main/work/index.html'
 
-    def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+    def get_queryset(self):
+        return Work.objects.all()
 
 class WorkUpdateView(UpdateView):
-    template_name = 'main/work/work_form.html'
+    template_name = 'main/work/autocomplete_form.html'
     model = Work
-    fields = ['work_name', 'category', 'time_required']
-
-    def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+    form_class = WorkForm
+    success_url = reverse_lazy('main:work-index')
 
 
 class WorkDeleteView(DeleteView):
     template_name = 'main/work/confirm_delete.html'
     model = Work
+    success_url = reverse_lazy('main:work-index')
+
+class WorkOrderWorksCreateView(CreateView):
+    template_name = 'main/workorderworks/autocomplete_form.html'
+    model = WorkorderWorks
+    form_class = WorkorderWorksForm
+    success_url = reverse_lazy('main:workorder-index')
+
+    def form_valid(self, form):
+        form.instance.work_order_id = self.kwargs.get('pk')
+        return super(WorkOrderWorksCreateView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+class WorkOrderPartsCreateView(CreateView):
+    template_name = 'main/workorderparts/autocomplete_form.html'
+    model = WorkorderParts
+    form_class = WorkorderPartsForm
+    success_url = reverse_lazy('main:workorder-index')
+
+    def form_valid(self, form):
+        form.instance.work_order_id = self.kwargs.get('pk')
+        return super(WorkOrderPartsCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+class PartIndexView(generic.ListView):
+    template_name = 'main/part/index.html'
+
+    def get_queryset(self):
+        return Part.objects.all()
 
 class PartCreateView(CreateView):
     template_name = 'main/part/autocomplete_form.html'
     model = Part
     form_class = PartForm
+    success_url = reverse_lazy('main:part-index')
 
-    def form_valid(self, form):
-        form.instance.work_order_id = self.kwargs.get('pk')
-        return super(PartCreateView, self).form_valid(form)
-
-    def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
 class PartUpdateView(UpdateView):
-    template_name = 'main/part/part_form.html'
+    template_name = 'main/part/autocomplete_form.html'
     model = Part
-    fields = ['part_name', 'category', 'price']
-
-    def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+    form_class = PartForm
+    success_url = reverse_lazy('main:part-index')
 
 
 class PartDeleteView(DeleteView):
     template_name = 'main/part/confirm_delete.html'
     model = Part
+    success_url = reverse_lazy('main:part-index')
 
-    def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
 
 # ---------------------- AUTOCOMPLETE VIEWS ---------------------- #

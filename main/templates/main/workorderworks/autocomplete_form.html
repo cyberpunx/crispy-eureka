@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Agregar Trabajo
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <form class="form-horizontal" action="" method="post" >
+        {% csrf_token %}
+        {% include 'main/form-template.html' %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">Aceptar</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block exta_script %}
+{{ form.media }}
+{% endblock %}

@@ -54,11 +54,17 @@ urlpatterns = [
     # main/workcategory/add/
     url(r'workcategory/add/$', views.WorkCategoryCreateView.as_view(), name='workcategory-add'),
 
+    # /main/workcategory/<workcategory_id>/delete/
+    url(r'workcategory/(?P<pk>[0-9]+)/delete/$', views.WorkCategoryDeleteView.as_view(), name='workcategory-delete'),
+
     # main/partcategory/
     url(r'^partcategory/$', views.PartCategoryIndexView.as_view(), name='partcategory-index'),
 
     # main/partcategory/add/
     url(r'partcategory/add/$', views.PartCategoryCreateView.as_view(), name='partcategory-add'),
+
+    # /main/partcategory/<partcategory_id>/delete/
+    url(r'partcategory/(?P<pk>[0-9]+)/delete/$', views.PartCategoryDeleteView.as_view(), name='partcategory-delete'),
 
     # /main/employees/
     url(r'^employees/$', views.EmployeeIndexView.as_view(), name='employee-index'),
@@ -93,23 +99,35 @@ urlpatterns = [
     # /main/workorders/update/<workorder_id>/
     url(r'workorders/update/(?P<pk>[0-9]+)/$', views.WorkOrderUpdateView.as_view(), name='workorder-update'),
 
-    # /main/parts/add/<workorder_id>/
-    url(r'parts/add/(?P<pk>[0-9]+)/$', views.PartCreateView.as_view(), name='part-add'),
+    # /main/parts/
+    url(r'parts/$', views.PartIndexView.as_view(), name='part-index'),
 
-    # /main/parts/update/<employee_id>/
+    # /main/parts/add/
+    url(r'parts/add/$', views.PartCreateView.as_view(), name='part-add'),
+
+    # /main/parts/update/<part_id>/
     url(r'parts/update/(?P<pk>[0-9]+)/$', views.PartUpdateView.as_view(), name='part-update'),
 
     # /main/parts/<part_id>/delete/
     url(r'parts/(?P<pk>[0-9]+)/delete/$', views.PartDeleteView.as_view(), name='part-delete'),
 
-    # /main/works/add/<workorder_id>/
-    url(r'works/add/(?P<pk>[0-9]+)/$', views.WorkCreateView.as_view(), name='work-add'),
+    # /main/works/
+    url(r'works/$', views.WorkIndexView.as_view(), name='work-index'),
 
-    # /main/works/update/<employee_id>/
+    # /main/works/add/
+    url(r'works/add/$', views.WorkCreateView.as_view(), name='work-add'),
+
+    # /main/works/update/<work_id>/
     url(r'works/update/(?P<pk>[0-9]+)/$', views.WorkUpdateView.as_view(), name='work-update'),
 
-    # /main/works/<part_id>/delete/
+    # /main/works/<work_id>/delete/
     url(r'works/(?P<pk>[0-9]+)/delete/$', views.WorkDeleteView.as_view(), name='work-delete'),
+
+    # /main/workorderparts/add/<workorder_id>/
+    url(r'parts/workorderparts/(?P<pk>[0-9]+)/$', views.WorkOrderPartsCreateView.as_view(), name='workorderparts-add'),
+
+    # /main/workorderworks/add/<workorder_id>/
+    url(r'parts/workorderworks/(?P<pk>[0-9]+)/$', views.WorkOrderWorksCreateView.as_view(), name='workorderworks-add'),
 
     # autocomplete
     url(r'^model-autocomplete/$', views.ModelAutocomplete.as_view(), name='model-autocomplete'),
