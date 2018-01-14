@@ -18,7 +18,6 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>ID</th>
                                         <th>Cliente</th>
                                         <th>Automotor</th>
@@ -29,17 +28,13 @@
                                         <th>Fecha Salida</th>
                                         <th>Importe</th>
                                         <th>Estado</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {% for workorder in object_list %}
 
                                     <tr class="even gradeX">
-                                        <td class="center">
-                                            <a href="{% url 'main:workorder-detail' workorder.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
-                                            <a href="{% url 'main:workorder-update' workorder.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="{% url 'main:workorder-print' workorder.id %}"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a>
-                                        </td>
                                         <td>{{ workorder.id }}</td>
                                         <td>
                                             <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
@@ -61,6 +56,11 @@
                                         <th>{{ workorder.date_out|date:'d-m-Y' }}</th>
                                         <td>${{ workorder.total }}</td>
                                         <td>{{ workorder.get_status_display }}</td>
+                                        <td class="center">
+                                            <a href="{% url 'main:workorder-detail' workorder.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:workorder-update' workorder.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:workorder-print' workorder.id %}"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a>
+                                        </td>
                                     </tr>
 
                                 {% endfor %}

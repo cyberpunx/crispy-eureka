@@ -152,7 +152,7 @@ class WorkOrder(models.Model):
     date = models.DateTimeField(auto_now=True)
     date_in = models.DateField(blank=True, null=True, verbose_name="Fecha Entrada")
     date_out = models.DateField(blank=True, null=True, verbose_name="Fecha Salida")
-    note = models.CharField(blank=True, max_length=140, verbose_name="Observaciones")
+    note = models.CharField(blank=True, max_length=140, verbose_name="Observaciones", default='')
     initial_obs = models.TextField(blank=True, null=True, verbose_name="Observaciones Iniciales")
     diagnostic = models.TextField(blank=True, null=True, verbose_name="Diagnóstico")
     fuel_level = models.CharField(max_length=10, choices=FUEL_CHOICES, verbose_name="Nivel combustible")
