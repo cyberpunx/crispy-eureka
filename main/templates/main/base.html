@@ -11,7 +11,6 @@
 
     {% load staticfiles %}
 
-
     <title>
         {% block pagetitle %}Admincar - ForAuto{% endblock %}
     </title>
@@ -75,7 +74,7 @@
                     <ul class="nav navbar-nav">
                         <li class=""><a href="{% url 'main:client-index' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Clientes</a></li>
                         <li class=""><a href="{% url 'main:workorder-index' %}"><span class="fa fa-file-text" aria-hidden="true"></span>&nbsp; Ordenes</a></li>
-                        <li class=""><a href="#"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp; Calendario</a></li>
+                        <li class=""><a href="{% url 'main:calendar' %}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp; Calendario</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -115,7 +114,7 @@
                             <a href="{% url 'main:workorder-index' %}"><i class="fa fa-file-text fa-fw"></i> Ordenes de Trabajo</a>
                         </li>
                         <li>
-                            <a href="index.html"><i class="glyphicon glyphicon-calendar fa-fw"></i> Calendario</a>
+                            <a href="{% url 'main:calendar' %}"><i class="glyphicon glyphicon-calendar fa-fw"></i> Calendario</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-list-alt fa-fw"></i> Administración<span class="fa arrow"></span></a>

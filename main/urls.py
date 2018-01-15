@@ -135,4 +135,8 @@ urlpatterns = [
     url(r'^client-autocomplete/$', views.ClientAutocomplete.as_view(), name='client-autocomplete'),
     url(r'^workcategory-autocomplete/$', views.WorkCategoryAutocomplete.as_view(), name='workcategory-autocomplete'),
     url(r'^partcategory-autocomplete/$', views.PartCategoryAutocomplete.as_view(), name='partcategory-autocomplete'),
+
+    url(r'^calendar/$', views.CalendarView.as_view(), name='calendar'),
+
+
 ]

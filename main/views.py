@@ -9,6 +9,7 @@ from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView
 
 
 def index_view(request):
@@ -376,3 +377,8 @@ class PartCategoryAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(category_name__icontains=self.q)
 
         return qs
+
+
+class CalendarView(TemplateView):
+    template_name = "main/calendar.html"
+
