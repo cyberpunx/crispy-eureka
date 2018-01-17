@@ -16,12 +16,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <p>Técnico: {{ workorder.employee }}</p>
-                         {% if workorder.ticket_number is not None %}<p>Nro. Factura: {{ workorder.ticket_number }}</p>{% endif %}
+                        {% if workorder.employee %}<p>Técnico: {{ workorder.employee }}</p>{% endif %}
+                        {% if workorder.ticket_number is not None %}<p>Nro. Factura: {{ workorder.ticket_number }}</p>{% endif %}
                     </div>
                     <div class="col-md-6">
-                        <p class="text-right">Fecha Entrada: {{ workorder.date_in|date:'d-m-Y' }}</p>
-                        {% if workorder.date_out is not None %} <p class="text-right">Fecha Salida: {{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
+                        {% if workorder.date_out %}<p class="text-right">Fecha Entrada: {{ workorder.date_in|date:'d-m-Y' }}</p>{% endif %}
+                        {% if workorder.date_out %} <p class="text-right">Fecha Salida: {{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
                     </div>
                 </div>
 
@@ -45,10 +45,10 @@
                                 Año: {{ workorder.vehicle.year }}<br>
                                 Color: {{ workorder.vehicle.color }}<br>
                                 Patente: {{ workorder.vehicle.licence_plate }}<br>
-                                {% if workorder.vehicle.engine is not None %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
-                                {% if workorder.vehicle.vin is not None %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
-                                {% if workorder.vehicle.engine_number is not None %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
-                                Kilometraje: {{ workorder.vehicle.kilometers }}<br>
+                                {% if workorder.vehicle.engine %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
+                                {% if workorder.vehicle.vin %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
+                                {% if workorder.vehicle.engine_number %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
+                                {% if workorder.kilometers %}Kilometraje: {{ workorder.kilometers }}<br>{% endif %}
                                 {% if workorder.fuel_level %}Tanque combustible: {{ workorder.get_fuel_level_display }}<br>{% endif %}
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                 <thead>
                                     <tr>
                                         <td colspan="2"><strong>Trabajo</strong></td>
-                                        <td class="text-center"><strong>Descuento</strong></td>
+                                        <td class="text-center"><strong></strong></td>
                                         <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
                                         <td class="text-center"><strong>Precio Unidad</strong></td>
                                         <td class="text-right"><strong>Importe</strong></td>
@@ -150,11 +150,6 @@
                                         {% else %}<td class="thick-line text-right">${{ workorder.total }}</td>{% endif %}
                                     </tr>
                                     <tr>
-                                        <td class="no-line" colspan="4"></td>
-                                        <td class="no-line text-right">0% IVA</td>
-                                        <td class="no-line text-right">0,0</td>
-                                    </tr>
-                                    <tr>
                                         <td class="no-line"><strong>{% if not workorder.total_manual %}Repuestos: ${{ workorder.part_sum }}{% endif %}</strong></td>
                                         <td class="no-line"><strong>{% if not workorder.total_manual %}Mano de obra: ${{ workorder.work_sum }}{% endif %}</strong></td>
                                         <td class="no-line"></td>
@@ -171,6 +166,7 @@
                 </div>
             </div>
         </div>
+    {% if workorder.note %}
      <div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default" >
@@ -182,4 +178,5 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endblock %}

@@ -21,8 +21,8 @@
                                         <th>Modelo</th>
                                         <th>Color</th>
                                         <th>Patente</th>
-                                        <th>Year</th>
-                                        <th>Transmision</th>
+                                        <th>Año</th>
+                                        <th>Motor</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -38,7 +38,7 @@
                                         <td>{{ vehicle.color }}</td>
                                         <td>{{ vehicle.licence_plate }}</td>
                                         <td>{{ vehicle.year }}</td>
-                                        <td>{{ vehicle.transmission }}</td>
+                                        <td>{{ vehicle.engine }}</td>
                                         <td class="center">
                                             <a href="{% url 'main:client-detail' vehicle.client.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                                             <a href="{% url 'main:vehicle-update' vehicle.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

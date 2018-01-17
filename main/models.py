@@ -62,11 +62,11 @@ class Model(models.Model):
 class Vehicle(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name="Cliente")
     licence_plate = models.CharField(max_length=20, verbose_name="Patente")
-    color = models.CharField(max_length=20, verbose_name="Color")
-    year = models.CharField(max_length=20, verbose_name="Año")
+    color = models.CharField(blank=True, null=True, max_length=20, verbose_name="Color")
+    year = models.CharField(blank=True, null=True, max_length=20, verbose_name="Año")
     model = models.ForeignKey(Model, on_delete=models.PROTECT, verbose_name="Modelo")
     engine = models.CharField(max_length=20, verbose_name="Motor")
-    kilometers = models.IntegerField(verbose_name="Kilometraje")
+    kilometers = models.IntegerField(blank=True, null=True, verbose_name="Kilometraje")
     note = models.TextField(blank=True, null=True, verbose_name="Observaciones")
     vin = models.CharField(blank=True, null=True,max_length=20, verbose_name="Nro. Serie")
     engine_number = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Motor")
@@ -178,7 +178,7 @@ class WorkOrder(models.Model):
         ('FULL', 'Lleno'),
     )
     status = models.CharField(max_length=3, choices=STATUS_CHOICES, verbose_name="Estado")
-    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name="Empleado", default='')
+    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Empleado", default='')
     date = models.DateTimeField(auto_now=True)
     date_in = models.DateField(blank=True, null=True, verbose_name="Fecha Entrada")
     date_out = models.DateField(blank=True, null=True, verbose_name="Fecha Salida")
@@ -186,6 +186,7 @@ class WorkOrder(models.Model):
     initial_obs = models.TextField(blank=True, null=True, verbose_name="Observaciones Iniciales")
     diagnostic = models.TextField(blank=True, null=True, verbose_name="Diagnóstico")
     fuel_level = models.CharField(blank=True, max_length=10, choices=FUEL_CHOICES, verbose_name="Nivel combustible")
+    kilometers = models.IntegerField(blank=True, null=True, verbose_name="Kilometraje")
     ticket_number = models.CharField(blank=True, null=True, max_length=100, verbose_name="Nro. Factura")
     parts = models.ManyToManyField(Part, through='WorkorderParts')
     works = models.ManyToManyField(Work, through='WorkorderWorks')
@@ -213,7 +214,7 @@ class WorkOrder(models.Model):
             if not part.price:
                 part_price = 0
             else:
-                part_price = part.price
+                part_price = part.price * part.quantity
             part_sum = part_sum + part_price
         return part_sum
 
