@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks
 from dal import autocomplete
 from main import models
-from .forms import VehicleForm, WorkOrderForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm
+from .forms import VehicleForm, VehicleClientForm, WorkOrderForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm
 from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -51,6 +51,13 @@ class ClientDeleteView(DeleteView):
     model = Client
     success_url = reverse_lazy('main:client-index')
 
+class ClientHistoryView(generic.ListView):
+    template_name = 'main/workorder/index.html'
+
+    def get_queryset(self):
+        qs = WorkOrder.objects.get_queryset().order_by('id')
+        qs = qs.filter(vehicle__client__id__exact=self.kwargs['pk'])
+        return qs
 
 class VehicleIndexView(generic.ListView):
     template_name = 'main/vehicle/index.html'
@@ -67,6 +74,14 @@ class VehicleCreateView(CreateView):
     def form_valid(self, form):
         form.instance.client_id = self.kwargs.get('pk')
         return super(VehicleCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('main:client-detail', kwargs={'pk': self.object.client.pk})
+
+class VehicleClientCreateView(CreateView):
+    template_name = 'main/vehicle/autocomplete_form.html'
+    form_class = VehicleClientForm
+    model = Vehicle
 
     def get_success_url(self):
         return reverse('main:client-detail', kwargs={'pk': self.object.client.pk})
@@ -88,6 +103,13 @@ class VehicleDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('main:client-detail', kwargs={'pk': self.object.client.pk})
 
+class VehicleHistoryView(generic.ListView):
+    template_name = 'main/workorder/index.html'
+
+    def get_queryset(self):
+        qs = WorkOrder.objects.get_queryset().order_by('id')
+        qs = qs.filter(vehicle__id__exact=self.kwargs['pk'])
+        return qs
 
 class BrandIndexView(generic.ListView):
     template_name = 'main/brand/index.html'
@@ -369,7 +391,7 @@ class VehicleAutocomplete(autocomplete.Select2QuerySetView):
                  | qs.filter(model__model_name__icontains=self.q) \
                  | qs.filter(model__brand__brand_name__icontains=self.q)
 
-            return qs
+        return qs
 
 class WorkCategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):

@@ -49,7 +49,7 @@
                                                 Patente: {{ workorder.vehicle.licence_plate }}
                                             </a>
                                         </td>
-                                        <td>{{ workorder.employee }}</td>
+                                        <td>{% if workorder.employee %}{{ workorder.employee }}{% endif %}</td>
                                         <td>{{ workorder.note }}</td>
                                         <th>{{ workorder.date|date:'d-m-Y H:i' }}</th>
                                         <th>{{ workorder.date_in|date:'d-m-Y' }}</th>
@@ -89,6 +89,7 @@
     <script>
     $(document).ready(function() {
         var table = $('#dataTables-example').DataTable({
+            "order": [[ 0, "desc" ]],
             "responsive": true,
             "processing": true,
             "deferRender": true,

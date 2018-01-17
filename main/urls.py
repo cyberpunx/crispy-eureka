@@ -21,11 +21,14 @@ urlpatterns = [
     # /main/client/<client_id>/delete/
     url(r'clients/(?P<pk>[0-9]+)/delete/$', views.ClientDeleteView.as_view(), name='client-delete'),
 
+    # /main/client/<client_id>/history/
+    url(r'clients/(?P<pk>[0-9]+)/history/$', views.ClientHistoryView.as_view(), name='client-history'),
+
     # main/vehicles/
     url(r'^vehicles/$', views.VehicleIndexView.as_view(), name='vehicle-index'),
 
     # main/vehicles/add/
-    url(r'vehicles/add/$', views.VehicleCreateView.as_view(), name='vehicle-add'),
+    url(r'vehicles/add/$', views.VehicleClientCreateView.as_view(), name='vehicleclient-add'),
 
     # main/vehicles/add/<client_id>/
     url(r'vehicles/add/(?P<pk>[0-9]+)/$', views.VehicleCreateView.as_view(), name='vehicle-add'),
@@ -35,6 +38,9 @@ urlpatterns = [
 
     # /main/vehicle/<vehicle_id>/delete/
     url(r'vehicles/(?P<pk>[0-9]+)/delete/$', views.VehicleDeleteView.as_view(), name='vehicle-delete'),
+
+    # /main/vehicle/<vehicle_id>/history/
+    url(r'vehicles/(?P<pk>[0-9]+)/history/$', views.VehicleHistoryView.as_view(), name='vehicle-history'),
 
     # main/brands/
     url(r'^brands/$', views.BrandIndexView.as_view(), name='brand-index'),

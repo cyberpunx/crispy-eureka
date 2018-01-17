@@ -6,12 +6,21 @@ from .models import Vehicle, WorkOrder, Work, Part, WorkorderParts, WorkorderWor
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
-        fields = ['licence_plate', 'color', 'year', 'model', 'engine', 'kilometers', 'vin', 'engine_number', 'note']
+        fields = ['licence_plate', 'color', 'year', 'model', 'engine' , 'vin', 'engine_number', 'note']
         widgets = {
             'model': autocomplete.ModelSelect2(url='main:model-autocomplete'),
             'note': forms.Textarea()
         }
 
+class VehicleClientForm(forms.ModelForm):
+    class Meta:
+        model = Vehicle
+        fields = ['client', 'licence_plate', 'color', 'year', 'model', 'engine', 'vin', 'engine_number', 'note']
+        widgets = {
+            'client': autocomplete.ModelSelect2(url='main:client-autocomplete'),
+            'model': autocomplete.ModelSelect2(url='main:model-autocomplete'),
+            'note': forms.Textarea()
+        }
 
 class WorkOrderForm(forms.ModelForm):
 

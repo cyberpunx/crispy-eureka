@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Cliente # {{ client.id }}
+
 {% endblock %}
 
 {% block body %}
@@ -29,6 +29,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-12">
+                    <div class="invoice-title">
+                        <h2>Cliente # {{ client.id }}</h2>
+                    </div>
                         {% if client.active %}
                             <span class="label label-success pull-right"><h5>Activo</h5></span>
                         {% else %}
@@ -39,12 +42,17 @@
 
                                 <div class="col-sm-6 col-md-4">
 
-                                    <h3>{{ client.business_name }}</h3>
-                                    <h4>{{ client.first_name }} {{ client.last_name }}</h4>
+                                    {% if client.business_name %}
+                                        <h3>{{ client.business_name }}</h3>
+                                        <h4>{{ client.first_name }} {{ client.last_name }}</h4>
+                                    {% else %}
+                                        <h3>{{ client.first_name }} {{ client.last_name }}</h3>
+                                    {% endif %}
+
                                     <p>
-                                        <i class="glyphicon glyphicon-envelope"></i> {{ client.email }} <br />
-                                        <i class="glyphicon glyphicon-phone"></i> {{ client.phone }} <br />
-                                        <i class="glyphicon glyphicon-earphone"></i> {{ client.alt_phone }}
+                                        {% if client.email %} <i class="glyphicon glyphicon-envelope"></i> Email: {{ client.email }} <br />{% endif %}
+                                        <i class="glyphicon glyphicon-phone"></i> Teléfono: {{ client.phone }} <br />
+                                        {% if client.email %} <i class="glyphicon glyphicon-earphone"></i> Teléfono Alternativo: {{ client.alt_phone }}{% endif %}
                                     </p>
                                 </div>
                                 <div class="col-sm-6 col-md-6">
@@ -57,7 +65,7 @@
                                             <hr>
                                             <a href="{% url 'main:client-update' client.id %}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> Editar</button></a>
                                             <a href="{% url 'main:vehicle-add' client.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Automotor</button></a>
-                                            <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> Historial</button>
+                                            <a href="{% url 'main:client-history' client.id %}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span> Historial</button></a>
                                             <a href="{% url 'main:client-delete' client.id %}"><span class="pull-right"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></span></a>
                                         </div>
                                     </div>
@@ -91,7 +99,7 @@
                                         <div class="col-md-12" style="margin: 0px;">
                                             <hr>
                                             <a href="{% url 'main:vehicle-update' vehicle.id %}"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Editar</button></a>
-                                            <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-list"></i> Historial</button>
+                                            <a href="{% url 'main:vehicle-history' vehicle.id %}"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Historial</button></a>
                                             <a href="{% url 'main:vehicle-delete' vehicle.id %}"><span class="pull-right"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></span></a>
                                         </div>
                                     </div>
