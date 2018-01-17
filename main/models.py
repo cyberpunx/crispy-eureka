@@ -14,7 +14,8 @@ class ClientManager(models.Manager):
 
 
 class Client(models.Model):
-    business_name = models.CharField(max_length=60, verbose_name="Nombre Comercial")
+    id = models.AutoField(verbose_name="Nro. Cliente", primary_key=True)
+    business_name = models.CharField(blank=True, max_length=60, verbose_name="Nombre Comercial")
     first_name = models.CharField(max_length=20, verbose_name="Nombre")
     last_name = models.CharField(max_length=40, verbose_name="Apellido")
     email = models.EmailField(blank=True, null=True, unique=True, verbose_name="Email")
@@ -28,7 +29,10 @@ class Client(models.Model):
         return reverse('main:client-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name + ' [' + self.business_name + ']'
+        if self.business_name:
+            return str(self.id) +' [' + self.business_name + ']' + self.first_name + ' ' + self.last_name
+        else:
+            return str(self.id) + ' / ' + self.first_name + ' ' + self.last_name
 
     objects = ClientManager()
     # usage: Client.objects.active() / Client.objects.inactive()
@@ -71,9 +75,14 @@ class Vehicle(models.Model):
         return reverse('main:vehicle-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.client.first_name + ' ' + self.client.last_name + ' [' + self.client.business_name + '] ' + \
-               self.model.model_name + ' - ' + self.model.brand.brand_name + ' / ' + \
-               self.color + ' / Patente: ' + self.licence_plate
+        if self.client.business_name:
+            return str(self.client.id) + ' ' + self.client.first_name + ' ' + self.client.last_name + ' [' + self.client.business_name + '] / ' + \
+                    self.model.model_name + ' - ' + self.model.brand.brand_name + ' / ' + \
+                    self.color + ' / Patente: ' + self.licence_plate
+        else:
+            return str(self.client.id) + ' ' + self.client.first_name + ' ' + self.client.last_name +' / '+ \
+                   self.model.model_name + ' - ' + self.model.brand.brand_name + ' / ' + \
+                   self.color + ' / Patente: ' + self.licence_plate
 
 
 class WorkCategory(models.Model):
@@ -94,7 +103,7 @@ class Employee(models.Model):
     display_name = models.CharField(max_length=20, verbose_name="Código", unique=True)
     first_name = models.CharField(max_length=20, verbose_name="Nombre")
     last_name = models.CharField(max_length=40, verbose_name="Apellido")
-    email = models.EmailField(unique=True, verbose_name="Email")
+    email = models.EmailField(blank=True, unique=True, verbose_name="Email")
     phone = models.CharField(max_length=40, verbose_name="Telefono")
     active = models.BooleanField(default=True, verbose_name="Activo")
 
@@ -125,17 +134,25 @@ class Global(dbsettings.Group):
 
 class Part(models.Model):
     part_name = models.CharField(max_length=40, verbose_name="Repuesto")
+    code = models.CharField(max_length=6, verbose_name="Código", blank=True, null=True, unique=True)
     category = models.ForeignKey(PartCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
 
     def __str__(self):
-        return self.category.category_name + ' / ' + self.part_name
+        if self.code:
+            return '['+self.code+'] ' + self.category.category_name + ' / ' + self.part_name
+        else:
+            return self.category.category_name + ' / ' + self.part_name
 
 class Work(models.Model):
     work_name = models.CharField(max_length=40, verbose_name="Trabajo")
+    code = models.CharField(max_length=6, verbose_name="Código", blank=True, null=True, unique=True)
     category = models.ForeignKey(WorkCategory, on_delete=models.PROTECT, verbose_name="Categoría", default='')
 
     def __str__(self):
-        return self.category.category_name + ' / ' + self.work_name
+        if self.code:
+            return '['+self.code+'] ' + self.category.category_name + ' / ' + self.work_name
+        else:
+            return self.category.category_name + ' / ' + self.work_name
 
 class WorkOrder(models.Model):
     vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT, verbose_name="Vehiculo")
@@ -168,10 +185,11 @@ class WorkOrder(models.Model):
     note = models.CharField(blank=True, max_length=140, verbose_name="Observaciones", default='')
     initial_obs = models.TextField(blank=True, null=True, verbose_name="Observaciones Iniciales")
     diagnostic = models.TextField(blank=True, null=True, verbose_name="Diagnóstico")
-    fuel_level = models.CharField(max_length=10, choices=FUEL_CHOICES, verbose_name="Nivel combustible")
+    fuel_level = models.CharField(blank=True, max_length=10, choices=FUEL_CHOICES, verbose_name="Nivel combustible")
     ticket_number = models.CharField(blank=True, null=True, max_length=100, verbose_name="Nro. Factura")
     parts = models.ManyToManyField(Part, through='WorkorderParts')
     works = models.ManyToManyField(Work, through='WorkorderWorks')
+    total_manual = models.DecimalField(blank=True, verbose_name="Total", null = True, max_digits=10, decimal_places=2)
 
     @property
     def total(self):
@@ -181,14 +199,22 @@ class WorkOrder(models.Model):
     def work_sum(self):
         work_sum = 0
         for work in self.workorderworks_set.all():
-            work_sum = work_sum + work.time_required
+            if not work.time_required:
+                time_required = 0
+            else:
+                time_required = work.time_required
+            work_sum = work_sum + time_required
         return work_sum * WorkOrder.settings.labor_rate
 
     @property
     def part_sum(self):
         part_sum = 0
         for part in self.workorderparts_set.all():
-            part_sum = part_sum + part.price
+            if not part.price:
+                part_price = 0
+            else:
+                part_price = part.price
+            part_sum = part_sum + part_price
         return part_sum
 
     @property
@@ -200,17 +226,20 @@ class WorkOrder(models.Model):
 class WorkorderParts(models.Model):
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
     part = models.ForeignKey(Part, on_delete=models.CASCADE, verbose_name="Repuesto")
-    price = models.FloatField(verbose_name="Precio")
-    quantity = models.IntegerField(default=1, verbose_name="Cantidad")
+    price = models.DecimalField(blank=True, verbose_name="Precio", null = True, max_digits=10, decimal_places=2)
+    quantity = models.IntegerField(blank=True, default=1, verbose_name="Cantidad")
 
     @property
     def part_price(self):
-        return self.quantity * self.price
+        if not self.price:
+            return 0
+        else:
+            return self.quantity * self.price
 
 class WorkorderWorks(models.Model):
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
     work = models.ForeignKey(Work, on_delete=models.CASCADE, verbose_name="Trabajo")
-    time_required = models.IntegerField(default=1, verbose_name="Tiempo")
+    time_required = models.DecimalField(blank=True, verbose_name="Tiempo", null = True, max_digits=5, decimal_places=1)
 
     @property
     def labor_rate(self):
@@ -218,7 +247,10 @@ class WorkorderWorks(models.Model):
 
     @property
     def work_price(self):
-        return self.time_required * WorkOrder.settings.labor_rate
+        if not self.time_required:
+            return 0
+        else:
+            return self.time_required * WorkOrder.settings.labor_rate
 
 
 

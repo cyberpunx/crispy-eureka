@@ -30,10 +30,10 @@
                         <div class="panel panel-default" >
                             <div class="panel-heading">Cliente</div>
                             <div class="panel-body" style="min-height: 16em">
-                                <strong>{{ workorder.vehicle.client.business_name }}</strong><br>
-                                {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}<br>
-                                {{ workorder.vehicle.client.phone }}<br>
-                                {{ workorder.vehicle.client.email }}<br>
+                                {% if workorder.vehicle.client.business_name %}<strong>{{ workorder.vehicle.client.business_name }}</strong><br>{% endif %}
+                                <strong>{{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}</strong><br>
+                                Teléfono: {{ workorder.vehicle.client.phone }}<br>
+                                {% if workorder.vehicle.client.email %}Email: {{ workorder.vehicle.client.email }}<br>{% endif %}
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                 {% if workorder.vehicle.vin is not None %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
                                 {% if workorder.vehicle.engine_number is not None %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
                                 Kilometraje: {{ workorder.vehicle.kilometers }}<br>
-                                Tanque combustible: {{ workorder.fuel_level }}<br>
+                                {% if workorder.fuel_level %}Tanque combustible: {{ workorder.get_fuel_level_display }}<br>{% endif %}
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                                         <td colspan="2"><strong>Trabajo</strong></td>
                                         <td class="text-center"><strong>Descuento</strong></td>
                                         <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
-                                        <td class="text-center"><strong>Precio</strong></td>
+                                        <td class="text-center"><strong>Precio Unidad</strong></td>
                                         <td class="text-right"><strong>Importe</strong></td>
                                         <td class="text-right"><strong></strong></td>
                                     </tr>
@@ -107,13 +107,12 @@
                                     <tr>
                                         <td>{{ work.work.work_name }}</td>
                                         <td>{{ work.work.category }}</td>
-                                        <td class="text-center">0%</td>
-                                        <td class="text-center">{{ work.time_required }}</td>
-                                        <td class="text-center">{{ work.labor_rate }}</td>
-                                        <td class="text-right">${{ work.work_price }}</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">{% if work.time_required %}{{ work.time_required }}{% endif %}</td>
+                                        <td class="text-center">{% if work.time_required %}{{ work.labor_rate }}{% endif %}</td>
+                                        <td class="text-right">{% if work.time_required %}${{ work.work_price }}{% endif %}</td>
                                         <td class="text-right">
-                                            <a href="{% url 'main:work-update' work.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="{% url 'main:work-delete' work.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:workorderworks-delete' work.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -133,13 +132,12 @@
                                     <tr>
                                         <td>{{ part.part.part_name }}</td>
                                         <td>{{ part.part.category }}</td>
-                                        <td class="text-center">0%</td>
-                                        <td class="text-center">{{ part.quantity }}</td>
-                                        <td class="text-center">{{ part.price }}</td>
-                                        <td class="text-right">{{ part.part_price }}</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">{% if part.price %}{{ part.quantity }}{% endif %}</td>
+                                        <td class="text-center">{% if part.price %}{{ part.price }}{% endif %}</td>
+                                        <td class="text-right">{% if part.price %}{{ part.part_price }}{% endif %}</td>
                                         <td class="text-right">
-                                            <a href="{% url 'main:part-update' part.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                            <a href="{% url 'main:part-delete' part.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:workorderparts-delete' part.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -148,7 +146,8 @@
                                     <tr>
                                         <td class="thick-line" colspan="4"></td>
                                         <td class="thick-line text-right">Subtotal</td>
-                                        <td class="thick-line text-right">${{ workorder.total }}</td>
+                                        {% if workorder.total_manual %}<td class="thick-line text-right">${{ workorder.total_manual }}</td>
+                                        {% else %}<td class="thick-line text-right">${{ workorder.total }}</td>{% endif %}
                                     </tr>
                                     <tr>
                                         <td class="no-line" colspan="4"></td>
@@ -156,12 +155,14 @@
                                         <td class="no-line text-right">0,0</td>
                                     </tr>
                                     <tr>
-                                        <td class="no-line"><strong>Repuestos: ${{ workorder.part_sum }}</strong></td>
-                                        <td class="no-line"><strong>Mano de obra: ${{ workorder.work_sum }}</strong></td>
+                                        <td class="no-line"><strong>{% if not workorder.total_manual %}Repuestos: ${{ workorder.part_sum }}{% endif %}</strong></td>
+                                        <td class="no-line"><strong>{% if not workorder.total_manual %}Mano de obra: ${{ workorder.work_sum }}{% endif %}</strong></td>
                                         <td class="no-line"></td>
                                         <td class="no-line"></td>
                                         <td class="no-line text-right"><strong>Total</strong></td>
-                                        <td class="no-line text-right">${{ workorder.total }}</td>
+                                        {% if workorder.total_manual %}<td class="no-line text-right">${{ workorder.total_manual }}</td>
+                                        {% else %}<td class="no-line text-right">${{ workorder.total }}</td>{% endif %}
+
                                     </tr>
                                 </tbody>
                             </table>

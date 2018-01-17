@@ -31,7 +31,7 @@
                                     <tr class="odd gradeX">
                                         <td>
                                             <a href="{% url 'main:client-detail' vehicle.client.id %}">
-                                                {{ vehicle.client.business_name }} - {{ vehicle.client.first_name }} {{ vehicle.client.last_name }}
+                                                {% if vehicle.client.business_name %}{{ vehicle.client.business_name }} - {% endif %}  {{ vehicle.client.first_name }} {{ vehicle.client.last_name }}
                                             </a>
                                         </td>
                                         <td>{{ vehicle.model }}</td>

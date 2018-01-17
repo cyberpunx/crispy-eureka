@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Cliente
+    Cliente # {{ client.id }}
 {% endblock %}
 
 {% block body %}
@@ -81,8 +81,9 @@
                                     <h3>Modelo: {{ vehicle.model }}</h3>
                                     <p>
                                         Año: {{ vehicle.year }}<br>
+                                        Patente: {{ vehicle.licence_plate }}<br>
                                         Color: {{ vehicle.color }}<br>
-                                        Transmisión: {{ vehicle.transmission }}<br>
+                                        Motor: {{ vehicle.engine }}<br>
                                     </p>
                                 </div>
                                 <div class="col-sm-6 col-md-12">

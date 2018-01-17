@@ -54,11 +54,9 @@
 
 
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container-fluid">
-
                 <!-- Header -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
@@ -73,8 +71,39 @@
                 <div class="collapse navbar-collapse" id="topNavBar">
                     <ul class="nav navbar-nav">
                         <li class=""><a href="{% url 'main:client-index' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Clientes</a></li>
-                        <li class=""><a href="{% url 'main:workorder-index' %}"><span class="fa fa-file-text" aria-hidden="true"></span>&nbsp; Ordenes</a></li>
+                        <li class=""><a href="{% url 'main:vehicle-index' %}"><span class="fa fa-truck" aria-hidden="true"></span>&nbsp; Automotores</a></li>
+                        <li class=""><a href="{% url 'main:workorder-index' %}"><span class="fa fa-file-text" aria-hidden="true"></span>&nbsp; Órdenes de Trabajo</a></li>
                         <li class=""><a href="{% url 'main:calendar' %}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp; Calendario</a></li>
+                       <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-list-alt fa-fw"></span> Administración<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li>
+                                    <a href="{% url 'main:brand-index' %}"><span class="fa fa-th-large"></span> Marcas</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:model-index' %}"><span class="fa fa-th"></span> Modelos</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:work-index' %}"><span class="fa fa-wrench"></span> Trabajos</a>
+                                </li>
+                                 <li>
+                                    <a href="{% url 'main:part-index' %}"><span class="fa fa-cog"></span> Repuestos</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:workcategory-index' %}"><span class="fa fa-wrench"></span> Categorías de Trabajos</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:partcategory-index' %}"><span class="fa fa-cog"></span> Categorías de Repuestos</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'main:employee-index' %}"><span class="fa fa-user"></span>  Empleados</a>
+                                </li>
+                                <li>
+                                    <a href="/settings"><span class="fa fa-cogs"></span> Configuración</a>
+                                </li>
+                        </ul>
+                      </li>
+
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -95,60 +124,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="navbar-default sidebar navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="{% url 'main:index' %}"><i class="glyphicon glyphicon-home fa-fw"></i> Inicio</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:client-index' %}"><i class="glyphicon glyphicon-user fa-fw"></i> Clientes</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:vehicle-index' %}"><i class="fa fa-truck fa-fw"></i> Automotores</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:workorder-index' %}"><i class="fa fa-file-text fa-fw"></i> Ordenes de Trabajo</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:calendar' %}"><i class="glyphicon glyphicon-calendar fa-fw"></i> Calendario</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="glyphicon glyphicon-list-alt fa-fw"></i> Administración<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="{% url 'main:brand-index' %}">Marcas</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'main:model-index' %}">Modelos</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'main:work-index' %}">Lista de Trabajos</a>
-                                </li>
-                                 <li>
-                                    <a href="{% url 'main:part-index' %}">Lista de Repuestos</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'main:workcategory-index' %}">Categorías de Trabajos</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'main:partcategory-index' %}">Categorías de Repuestos</a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'main:employee-index' %}">Lista de Empleados</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="/settings"><i class="glyphicon glyphicon-cog fa-fw"></i> Configuración</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side --> <!-- /Sidebar -->
         </nav>

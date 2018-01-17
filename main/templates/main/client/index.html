@@ -18,6 +18,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nombre Comercial</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
@@ -30,7 +31,8 @@
                                 <tbody>
                                 {% for client in object_list %}
                                     <tr class="odd gradeX">
-                                        <td><a href="{% url 'main:client-detail' client.id %}">{{ client.business_name }}</a></td>
+                                        <td><a href="{% url 'main:client-detail' client.id %}">{{ client.id }}</a></td>
+                                        <td>{{ client.business_name }}</td>
                                         <td>{{ client.first_name }}</td>
                                         <td>{{ client.last_name }}</td>
                                         <td class="center">{{ client.email }}</td>

@@ -225,7 +225,9 @@ class WorkOrderCreateView(CreateView):
     template_name = 'main/workorder/autocomplete_form.html'
     model = WorkOrder
     form_class = WorkOrderForm
-    success_url = reverse_lazy('main:workorder-index')
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.id})
 
 class WorkCreateView(CreateView):
     template_name = 'main/work/autocomplete_form.html'
@@ -264,6 +266,13 @@ class WorkOrderWorksCreateView(CreateView):
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
+class WorkOrderWorksDeleteView(DeleteView):
+    template_name = 'main/workorderworks/confirm_delete.html'
+    model = WorkorderWorks
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
 class WorkOrderPartsCreateView(CreateView):
     template_name = 'main/workorderparts/autocomplete_form.html'
     model = WorkorderParts
@@ -273,6 +282,13 @@ class WorkOrderPartsCreateView(CreateView):
     def form_valid(self, form):
         form.instance.work_order_id = self.kwargs.get('pk')
         return super(WorkOrderPartsCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+class WorkOrderPartsDeleteView(DeleteView):
+    template_name = 'main/workorderparts/confirm_delete.html'
+    model = WorkorderParts
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
@@ -313,10 +329,11 @@ class ModelAutocomplete(autocomplete.Select2QuerySetView):
         #if not self.request.user.is_authenticated():
         #    return Model.objects.none()
 
-        qs = Model.objects.all()
+        qs = Model.objects.get_queryset().order_by('id')
+
 
         if self.q:
-            qs = qs.filter(brand__brand_name__istartswith=self.q) | qs.filter(model_name__istartswith=self.q)
+            qs = qs.filter(brand__brand_name__icontains=self.q) | qs.filter(model_name__icontains=self.q)
 
         return qs
 
@@ -327,11 +344,11 @@ class ClientAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated():
             return Client.objects.none()
 
-        qs = Client.objects.all()
+        qs = Client.objects.get_queryset().order_by('id')
 
         if self.q:
-            qs = qs.filter(first_name__istartswith=self.q) | qs.filter(last_name__istartswith=self.q) \
-                 | qs.filter(business_name__istartswith=self.q)
+            qs = qs.filter(first_name__icontains=self.q) | qs.filter(last_name__icontains=self.q) \
+                 | qs.filter(business_name__icontains=self.q)
 
         return qs
 
@@ -342,15 +359,17 @@ class VehicleAutocomplete(autocomplete.Select2QuerySetView):
         #if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
-        qs = Vehicle.objects.all()
+        qs = Vehicle.objects.get_queryset().order_by('id')
 
         if self.q:
-            qs = qs.filter(client__first_name__istartswith=self.q) | qs.filter(client__last_name__istartswith=self.q) \
-                 | qs.filter(client__business_name__istartswith=self.q) \
-                 | qs.filter(model__model_name__istartswith=self.q) \
-                 | qs.filter(model__brand_brand_name__istartswith=self.q)
+            qs = qs.filter(client__first_name__icontains=self.q) \
+                 | qs.filter(client__last_name__icontains=self.q) \
+                 | qs.filter(client__business_name__icontains=self.q) \
+                 | qs.filter(licence_plate__icontains=self.q) \
+                 | qs.filter(model__model_name__icontains=self.q) \
+                 | qs.filter(model__brand__brand_name__icontains=self.q)
 
-        return qs
+            return qs
 
 class WorkCategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -358,7 +377,7 @@ class WorkCategoryAutocomplete(autocomplete.Select2QuerySetView):
         #if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
-        qs = WorkCategory.objects.all()
+        qs = WorkCategory.objects.get_queryset().order_by('id')
 
         if self.q:
             qs = qs.filter(category_name__icontains=self.q)
@@ -371,10 +390,38 @@ class PartCategoryAutocomplete(autocomplete.Select2QuerySetView):
         #if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
-        qs = PartCategory.objects.all()
+        qs = PartCategory.objects.get_queryset().order_by('id')
 
         if self.q:
             qs = qs.filter(category_name__icontains=self.q)
+
+        return qs
+
+class PartsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        #if not self.request.user.is_authenticated():
+        #    return Vehicle.objects.none()
+
+        qs = Part.objects.get_queryset().order_by('id')
+
+        if self.q:
+            qs = qs.filter(part_name__icontains=self.q) | qs.filter(category__category_name__icontains=self.q) \
+                    | qs.filter(code__icontains=self.q)
+
+        return qs
+
+class WorksAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        #if not self.request.user.is_authenticated():
+        #    return Vehicle.objects.none()
+
+        qs = Work.objects.get_queryset().order_by('id')
+
+        if self.q:
+            qs = qs.filter(work_name__icontains=self.q) | qs.filter(category__category_name__icontains=self.q) \
+                    | qs.filter(code__icontains=self.q)
 
         return qs
 

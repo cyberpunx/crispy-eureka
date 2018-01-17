@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-    Eliminar Trabajo
+    Eliminar Linea Trabajo
 {% endblock %}
 
 {% block body %}
@@ -9,8 +9,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="well well-sm">
-                <h2>Se eliminó {{ work.category }} / {{ work.work_name }} </h2>
-                <form action="{% url 'main:work-delete' object.pk %}" method="post">
+                <h2>Se eliminó {{ workorderwork.work.category }} / {{ workorderworks.work.work_name }} </h2>
+                <form action="{% url 'main:workorderworks-delete' object.pk %}" method="post">
                 {% csrf_token %}
                 <input type="submit" class="btn btn-danger" value="Aceptar" />
                 </form>

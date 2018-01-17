@@ -17,7 +17,8 @@ class WorkOrderForm(forms.ModelForm):
 
     class Meta:
         model = WorkOrder
-        fields = ['vehicle', 'status', 'date_in', 'date_out', 'employee', 'initial_obs', 'fuel_level', 'diagnostic', 'note', 'ticket_number']
+
+        fields = ['vehicle', 'status', 'date_in', 'date_out', 'employee', 'initial_obs', 'fuel_level', 'diagnostic', 'note', 'ticket_number', 'total_manual']
         widgets = {
             'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
             'note': forms.Textarea(),
@@ -29,7 +30,7 @@ class WorkForm(forms.ModelForm):
 
     class Meta:
         model = Work
-        fields = ['work_name', 'category']
+        fields = ['work_name', 'category', 'code']
         widgets = {
             'category': autocomplete.ModelSelect2(url='main:workcategory-autocomplete'),
         }
@@ -38,7 +39,7 @@ class PartForm(forms.ModelForm):
 
     class Meta:
         model = Part
-        fields = ['part_name', 'category']
+        fields = ['part_name', 'category', 'code']
         widgets = {
             'category': autocomplete.ModelSelect2(url='main:partcategory-autocomplete'),
         }
@@ -48,11 +49,18 @@ class WorkorderPartsForm(forms.ModelForm):
     class Meta:
         model = WorkorderParts
         fields = ['part', 'price', 'quantity']
+        widgets = {
+            'part': autocomplete.ModelSelect2(url='main:parts-autocomplete'),
+        }
 
 class WorkorderWorksForm(forms.ModelForm):
 
     class Meta:
         model = WorkorderWorks
         fields = ['work', 'time_required']
+        widgets = {
+            'work': autocomplete.ModelSelect2(url='main:works-autocomplete'),
+        }
+
 
 

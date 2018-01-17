@@ -9,11 +9,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="well well-sm">
-                <h2>¿Esta seguro que desea eliminar Orden de trabajo #{{ workorder.id }}?</h2>
+                <h2>Se eliminó Orden de trabajo #{{ workorder.id }}</h2>
                 <form action="{% url 'main:workorder-delete' object.pk %}" method="post">
                 {% csrf_token %}
                 <input type="submit" class="btn btn-danger" value="Eliminar" />
-                <button onclick="window.history.back();" class="btn btn-primary">Cancelar</button>
                 </form>
             </div>
         </div>
