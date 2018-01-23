@@ -2,84 +2,87 @@
 {% load staticfiles %}
 
 {% block title %}
-<div class="panel-title text-center">
-    <img src="{% static "/main/img/logo.png" %}" alt="Logo" width="215" height="100"/>
-    <hr />
-</div>
+
 {% endblock %}
 
 {% block body %}
     <div class="container">
+        <div class="row" style="margin-top: 10px">
+            <div class="col-xs-4">
+                <img src="{% static "/main/img/logo.png" %}" alt="Logo" width="215" height="100"/>
+            </div>
+            <div class="col-xs-4 text-center">
+                <span style="font-size: 42px">Orden de Trabajo</span>
+            </div>
+            <div class="col-xs-4">
+                <br>
+                {% if workorder.date_in %}<p class="text-right"><strong>Fecha Entrada: </strong>{{ workorder.date_in|date:'d-m-Y' }}</p>{% endif %}
+                {% if workorder.date_out %} <p class="text-right"><strong>Fecha Salida: </strong>{{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
+            </div>
+        </div>
+        <hr>
         <div class="row">
-            <div class="col-xs-12">
-                <div class="invoice-title">
-                    <h2>Orden de Trabajo # {{ workorder.id }}
-                            <span class="pull-right">{{ workorder.get_status_display }}</span>
-                    </h2>
+            <div class="col-xs-6">
+                <span>Nro. cliente: {{ workorder.vehicle.client.id }}</span><br>
+                <span>Nro. Orden de Trabajo: {{ workorder.id }}</span><br>
+                {% if workorder.ticket_number %}<span>Nro. Factura: {{ workorder.ticket_number }}</span><br>{% endif %}
+                {% if workorder.employee %}<span>Técnico: {{ workorder.employee }}</span><br>{% endif %}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="panel panel-default" style="min-height: 15em; border-color: #333333;">
+                    <div class="panel-heading text-center"><strong>Cliente</strong></div>
+                    <div class="panel-body">
+                        {% if workorder.vehicle.client.business_name %}Cliente: {{ workorder.vehicle.client.business_name }}<br>{% endif %}
+                        Nombre:{{ workorder.vehicle.client.first_name }}<br>
+                        Apellido:{{ workorder.vehicle.client.last_name }}<br>
+                        Teléfono:{{ workorder.vehicle.client.phone }}<br>
+                        {% if workorder.vehicle.client.alt_phone %}Tel. Alternativo: {{ workorder.vehicle.client.alt_phone }}<br>{% endif %}
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        {% if workorder.employee %}<p>Técnico: {{ workorder.employee }}</p>{% endif %}
-                        {% if workorder.ticket_number %}<p>Nro. Factura: {{ workorder.ticket_number }}</p>{% endif %}
-                    </div>
-                    <div class="col-md-6">
-                        {% if workorder.date_in %}<p class="text-right">Fecha Entrada: {{ workorder.date_in|date:'d-m-Y' }}</p>{% endif %}
-                        {% if workorder.date_out %} <p class="text-right">Fecha Salida: {{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
+            </div>
+            <div class="col-xs-3">
+                <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
+                    <div class="panel-heading text-center"><strong>Automotor</strong></div>
+                    <div class="panel-body">
+                        Modelo: {{ workorder.vehicle.model }}<br>
+                        Año: {{ workorder.vehicle.year }}<br>
+                        Color: {{ workorder.vehicle.color }}<br>
+                        Patente: {{ workorder.vehicle.licence_plate }}<br>
+                        {% if workorder.vehicle.engine %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
+                        {% if workorder.vehicle.vin %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
+                        {% if workorder.vehicle.engine_number %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
+                        {% if workorder.kilometers %}Kilometraje: {{ workorder.kilometers }}<br>{% endif %}
+                        {% if workorder.fuel_level %}Tanque combustible: {{ workorder.fuel_level }}<br>{% endif %}
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-xs-3">
-                        <div class="panel panel-default" >
-                            <div class="panel-heading">Cliente</div>
-                            <div class="panel-body" style="min-height: 16em">
-                                {% if workorder.vehicle.client.business_name %}<strong>{{ workorder.vehicle.client.business_name }}</strong><br>{% endif %}
-                                {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}<br>
-                                {{ workorder.vehicle.client.phone }}<br>
-                                {% if workorder.vehicle.client.email %}{{ workorder.vehicle.client.email }}<br>{% endif %}
-                            </div>
-                        </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
+                    <div class="panel-heading text-center"><strong>Observaciones Iniciales</strong></div>
+                    <div class="panel-body">
+                        {{ workorder.initial_obs }}
                     </div>
-                    <div class="col-xs-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Automotor</div>
-                            <div class="panel-body" style="min-height: 16em">
-                                <strong>{{ workorder.vehicle.model }}</strong><br>
-                                Año: {{ workorder.vehicle.year }}<br>
-                                Color: {{ workorder.vehicle.color }}<br>
-                                Patente: {{ workorder.vehicle.licence_plate }}<br>
-                                {% if workorder.vehicle.engine %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
-                                {% if workorder.vehicle.vin %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
-                                {% if workorder.vehicle.engine_number %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
-                                {% if workorder.kilometers %}Kilometraje: {{ workorder.kilometers }}<br>{% endif %}
-                                {% if workorder.fuel_level %}Tanque combustible: {{ workorder.fuel_level }}<br>{% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Descripción cliente</div>
-                            <div class="panel-body" style="min-height: 16em">
-                                {{ workorder.initial_obs }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Diagnóstico</div>
-                            <div class="panel-body" style="min-height: 16em">
-                                {{ workorder.diagnostic }}
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
+                    <div class="panel-heading text-center"><strong>Diagnóstico</strong></div>
+                    <div class="panel-body">
+                        {{ workorder.diagnostic }}
                     </div>
                 </div>
             </div>
         </div>
+
+
         {% if workorder.note %}
         <div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default" >
-                    <div class="panel-heading">Observaciones</div>
+                    <div class="panel-heading"><strong>Observaciones</strong></div>
                     <div class="panel-body" style="min-height: 4em">
                         {{ workorder.note }}
                     </div>
@@ -162,4 +165,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default" >
+                    <div class="panel-body" style="min-height: 4em">
+
+                    </div>
+                    <div class="panel-footer text-right"><strong>Firma</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

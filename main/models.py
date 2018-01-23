@@ -75,14 +75,28 @@ class Vehicle(models.Model):
         return reverse('main:vehicle-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        if self.client.business_name:
-            return str(self.client.id) + ' ' + self.client.first_name + ' ' + self.client.last_name + ' [' + self.client.business_name + '] / ' + \
-                    self.model.model_name + ' - ' + self.model.brand.brand_name + ' / ' + \
-                    self.color + ' / Patente: ' + self.licence_plate
+        client_id = str(self.client.id)
+        first_name = self.client.first_name
+        last_name = self.client.last_name
+        model_name = self.model.model_name
+        brand_name = self.model.brand.brand_name
+        licence_plate = self.licence_plate
+        if (self.client.business_name):
+            business_name = self.client.business_name
         else:
-            return str(self.client.id) + ' ' + self.client.first_name + ' ' + self.client.last_name +' / '+ \
-                   self.model.model_name + ' - ' + self.model.brand.brand_name + ' / ' + \
-                   self.color + ' / Patente: ' + self.licence_plate
+            business_name = ""
+
+        if (self.color):
+            color = self.color
+        else:
+            color = "No Color"
+
+        if self.client.business_name:
+            return client_id + ' ' + first_name + ' ' + last_name + ' [' + business_name + '] / ' + \
+                    model_name + ' - ' + brand_name + ' / ' + color + ' / Patente: ' + licence_plate
+        else:
+            return client_id + ' ' + first_name + ' ' + last_name + model_name + ' - ' + brand_name + ' / ' + \
+                   color + ' / Patente: ' + licence_plate
 
 
 class WorkCategory(models.Model):
