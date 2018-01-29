@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Eliminar Linea Repuesto
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="well well-sm">
+                <h2>Se eliminó {{ workorderparts.part.category }} / {{ workorderparts.part.part_name }} </h2>
+                <form action="{% url 'main:workorderparts-listdelete' object.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Aceptar" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

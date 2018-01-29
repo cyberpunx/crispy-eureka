@@ -135,11 +135,17 @@ urlpatterns = [
     # /main/workorderparts/<workorder_id>/delete
     url(r'parts/workorderparts/(?P<pk>[0-9]+)/delete$', views.WorkOrderPartsDeleteView.as_view(), name='workorderparts-delete'),
 
+    # /main/workorderparts/<workorder_id>/listdelete
+    url(r'parts/workorderparts/(?P<pk>[0-9]+)/listdelete$', views.WorkOrderPartsListDeleteView.as_view(), name='workorderparts-listdelete'),
+
     # /main/workorderworks/add/<workorder_id>/
     url(r'parts/workorderworks/(?P<pk>[0-9]+)/$', views.WorkOrderWorksCreateView.as_view(), name='workorderworks-add'),
 
     # /main/workorderworks/<workorder_id>/delete
     url(r'parts/workorderworks/(?P<pk>[0-9]+)/delete$', views.WorkOrderWorksDeleteView.as_view(), name='workorderworks-delete'),
+
+    # /main/workorderworks/<workorder_id>/listdelete
+    url(r'parts/workorderworks/(?P<pk>[0-9]+)/listdelete$', views.WorkOrderWorksListDeleteView.as_view(), name='workorderworks-listdelete'),
 
     # autocomplete
     url(r'^model-autocomplete/$', views.ModelAutocomplete.as_view(), name='model-autocomplete'),

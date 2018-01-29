@@ -2,20 +2,74 @@
 {% load static %}
 
 {% block title %}
-    Agregar Trabajo
+
 {% endblock %}
 
 {% block body %}
+
+
 <div class="container-fluid">
-    <form class="form-horizontal" action="" method="post" >
-        {% csrf_token %}
-        {% include 'main/form-template.html' %}
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-success">Aceptar</button>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="invoice-title">
+                <h2>Agregar Trabajo a Orden de Trabajo #{{ workorder_data.id }}</h2>
             </div>
         </div>
-    </form>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <form class="form-horizontal" action="" method="post" >
+                {% csrf_token %}
+                {% include 'main/form-template.html' %}
+                <div class="form-group">
+                    <div class="col-sm-offset-0 col-sm-10">
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button>
+                    </div>
+                </div>
+            </form>
+            <a href="{% url 'main:workorder-detail'  workorder_data.id %}"><button class="btn btn-primary">Aceptar</button></a>
+        </div>
+        <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Trabajos: Orden de Trabajo #{{ workorder_data.id }}</strong></h3>
+                    </div>
+                     <div class="panel-body">
+                          <div class="table-responsive">
+                              <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td colspan="2"><strong>Trabajo</strong></td>
+                                        <td class="text-center"><strong></strong></td>
+                                        <td class="text-center"><strong>Tiempo</strong></td>
+                                        <td class="text-center"><strong>Precio Unidad</strong></td>
+                                        <td class="text-right"><strong>Importe</strong></td>
+                                        <td class="text-right"><strong></strong></td>
+                                    </tr>
+                                </thead>
+                                {% for work in workorder_data.workorderworks_set.all %}
+                                    <tr>
+                                        <td>{{ work.work.work_name }}</td>
+                                        <td>{{ work.work.category }}</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">{% if work.time_required %}{{ work.time_required }}{% endif %}</td>
+                                        <td class="text-center">{% if work.time_required %}{{ work.labor_rate }}{% endif %}</td>
+                                        <td class="text-right">{% if work.time_required %}${{ work.work_price }}{% endif %}</td>
+                                        <td class="text-right">
+                                            <a href="{% url 'main:workorderworks-listdelete' work.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                              </table>
+                          </div>
+                     </div>
+                </div>
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
 </div>
 {% endblock %}
 

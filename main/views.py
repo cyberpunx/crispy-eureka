@@ -281,12 +281,18 @@ class WorkOrderWorksCreateView(CreateView):
     form_class = WorkorderWorksForm
     success_url = reverse_lazy('main:workorder-index')
 
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderWorksCreateView, self).get_context_data(**kwargs)
+        qs = WorkOrder.objects.get(pk=self.kwargs['pk'])
+        context['workorder_data'] = qs
+        return context
+
     def form_valid(self, form):
         form.instance.work_order_id = self.kwargs.get('pk')
         return super(WorkOrderWorksCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+        return reverse('main:workorderworks-add', kwargs={'pk': self.object.work_order.pk})
 
 class WorkOrderWorksDeleteView(DeleteView):
     template_name = 'main/workorderworks/confirm_delete.html'
@@ -295,18 +301,31 @@ class WorkOrderWorksDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
+class WorkOrderWorksListDeleteView(DeleteView):
+    template_name = 'main/workorderworks/confirm_listdelete.html'
+    model = WorkorderWorks
+
+    def get_success_url(self):
+        return reverse('main:workorderworks-add', kwargs={'pk': self.object.work_order.pk})
+
 class WorkOrderPartsCreateView(CreateView):
     template_name = 'main/workorderparts/autocomplete_form.html'
     model = WorkorderParts
     form_class = WorkorderPartsForm
     success_url = reverse_lazy('main:workorder-index')
 
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderPartsCreateView, self).get_context_data(**kwargs)
+        qs = WorkOrder.objects.get(pk=self.kwargs['pk'])
+        context['workorder_data'] = qs
+        return context
+
     def form_valid(self, form):
         form.instance.work_order_id = self.kwargs.get('pk')
         return super(WorkOrderPartsCreateView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+        return reverse('main:workorderparts-add', kwargs={'pk': self.object.work_order.pk})
 
 class WorkOrderPartsDeleteView(DeleteView):
     template_name = 'main/workorderparts/confirm_delete.html'
@@ -314,6 +333,13 @@ class WorkOrderPartsDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
+class WorkOrderPartsListDeleteView(DeleteView):
+    template_name = 'main/workorderparts/confirm_listdelete.html'
+    model = WorkorderParts
+
+    def get_success_url(self):
+        return reverse('main:workorderparts-add', kwargs={'pk': self.object.work_order.pk})
 
 class PartIndexView(generic.ListView):
     template_name = 'main/part/index.html'
