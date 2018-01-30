@@ -95,7 +95,7 @@ class Vehicle(models.Model):
             return client_id + ' ' + first_name + ' ' + last_name + ' [' + business_name + '] / ' + \
                     model_name + ' - ' + brand_name + ' / ' + color + ' / Patente: ' + licence_plate
         else:
-            return client_id + ' ' + first_name + ' ' + last_name + model_name + ' - ' + brand_name + ' / ' + \
+            return client_id + ' ' + first_name + ' ' + last_name + ' / ' + model_name + ' - ' + brand_name + ' / ' + \
                    color + ' / Patente: ' + licence_plate
 
 

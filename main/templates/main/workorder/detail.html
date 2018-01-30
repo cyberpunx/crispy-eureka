@@ -28,20 +28,21 @@
                 <div class="row">
                     <div class="col-xs-3">
                         <div class="panel panel-default" >
-                            <div class="panel-heading">Cliente</div>
-                            <div class="panel-body" style="min-height: 16em">
-                                {% if workorder.vehicle.client.business_name %}<strong>{{ workorder.vehicle.client.business_name }}</strong><br>{% endif %}
-                                <strong>{{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}</strong><br>
-                                Teléfono: {{ workorder.vehicle.client.phone }}<br>
-                                {% if workorder.vehicle.client.email %}Email: {{ workorder.vehicle.client.email }}<br>{% endif %}
+                            <div class="panel-heading"><strong>Cliente</strong></div>
+                            <div class="panel-body" style="min-height: 15em">
+                                {% if workorder.vehicle.client.business_name %}Cliente: {{ workorder.vehicle.client.business_name }}<br>{% endif %}
+                                Nombre:{{ workorder.vehicle.client.first_name }}<br>
+                                Apellido:{{ workorder.vehicle.client.last_name }}<br>
+                                Teléfono:{{ workorder.vehicle.client.phone }}<br>
+                                {% if workorder.vehicle.client.alt_phone %}Tel. Alternativo: {{ workorder.vehicle.client.alt_phone }}<br>{% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Automotor</div>
-                            <div class="panel-body" style="min-height: 16em">
-                                <strong>{{ workorder.vehicle.model }}</strong><br>
+                            <div class="panel-heading"><strong>Automotor</strong></div>
+                            <div class="panel-body" style="min-height: 15em">
+                                Modelo: {{ workorder.vehicle.model }}<br>
                                 Año: {{ workorder.vehicle.year }}<br>
                                 Color: {{ workorder.vehicle.color }}<br>
                                 Patente: {{ workorder.vehicle.licence_plate }}<br>
@@ -49,22 +50,22 @@
                                 {% if workorder.vehicle.vin %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
                                 {% if workorder.vehicle.engine_number %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
                                 {% if workorder.kilometers %}Kilometraje: {{ workorder.kilometers }}<br>{% endif %}
-                                {% if workorder.fuel_level %}Tanque combustible: {{ workorder.get_fuel_level_display }}<br>{% endif %}
+                                {% if workorder.fuel_level %}Tanque combustible: {{ workorder.fuel_level }}<br>{% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Descripción cliente</div>
-                            <div class="panel-body" style="min-height: 16em">
+                            <div class="panel-heading"><strong>Observaciones iniciales</strong></div>
+                            <div class="panel-body" style="min-height: 15em">
                                 {{ workorder.initial_obs }}
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Diagnóstico</div>
-                            <div class="panel-body" style="min-height: 16em">
+                            <div class="panel-heading"><strong>Diagnóstico</strong></div>
+                            <div class="panel-body" style="min-height: 15em">
                                 {{ workorder.diagnostic }}
                             </div>
                         </div>
