@@ -1,23 +1,18 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block title %}
+{% block pagetitle %}
+    OT #{{ workorder_data.id }} - Agregar Trabajos
+{% endblock %}
 
+{% block title %}
+    Agregar Trabajos a Orden de Trabajo #{{ workorder_data.id }}
 {% endblock %}
 
 {% block body %}
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="invoice-title">
-                <h2>Agregar Trabajo a Orden de Trabajo #{{ workorder_data.id }}</h2>
-            </div>
-        </div>
-    </div>
-    <hr>
-
     <div class="row">
         <div class="col-lg-3">
             <form class="form-horizontal" action="" method="post" >
@@ -34,7 +29,7 @@
         <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Trabajos: Orden de Trabajo #{{ workorder_data.id }}</strong></h3>
+                        <h3 class="panel-title"><strong>Detalle</strong></h3>
                     </div>
                      <div class="panel-body">
                           <div class="table-responsive">

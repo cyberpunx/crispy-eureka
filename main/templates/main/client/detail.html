@@ -1,8 +1,12 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
 
-{% block title %}
+{% block pagetitle %}
+    Cliente # {{ client.id }} - {{ client.first_name }} {{ client.last_name }}
+{% endblock %}
 
+{% block title %}
+    Cliente # {{ client.id }} - {{ client.first_name }} {{ client.last_name }}
 {% endblock %}
 
 {% block body %}
@@ -29,9 +33,6 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-12">
-                    <div class="invoice-title">
-                        <h2>Cliente # {{ client.id }}</h2>
-                    </div>
                         {% if client.active %}
                             <span class="label label-success pull-right"><h5>Activo</h5></span>
                         {% else %}
