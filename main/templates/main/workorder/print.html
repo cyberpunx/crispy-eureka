@@ -26,7 +26,6 @@
                 <span>Nro. cliente: {{ workorder.vehicle.client.id }}</span><br>
                 <span>Nro. Orden de Trabajo: {{ workorder.id }}</span><br>
                 {% if workorder.ticket_number %}<span>Nro. Factura: {{ workorder.ticket_number }}</span><br>{% endif %}
-                {% if workorder.employee %}<span>Técnico: {{ workorder.employee }}</span><br>{% endif %}
             </div>
         </div>
         <hr>
