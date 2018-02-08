@@ -31,22 +31,22 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-xs-3">
+            <div class="col-lg-3">
                 <div class="panel panel-default" style="min-height: 15em; border-color: #333333;">
                     <div class="panel-heading text-center"><strong>Cliente</strong></div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="font-size: 12px">
                         {% if workorder.vehicle.client.business_name %}Cliente: {{ workorder.vehicle.client.business_name }}<br>{% endif %}
                         Nombre:{{ workorder.vehicle.client.first_name }}<br>
                         Apellido:{{ workorder.vehicle.client.last_name }}<br>
                         Teléfono:{{ workorder.vehicle.client.phone }}<br>
-                        {% if workorder.vehicle.client.alt_phone %}Tel. Alternativo: {{ workorder.vehicle.client.alt_phone }}<br>{% endif %}
+                        {% if workorder.vehicle.client.alt_phone %}Tel. Alt: {{ workorder.vehicle.client.alt_phone }}<br>{% endif %}
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3">
+            <div class="col-lg-3">
                 <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
                     <div class="panel-heading text-center"><strong>Automotor</strong></div>
-                    <div class="panel-body">
+                    <div class="panel-body" style="font-size: 12px">
                         Modelo: {{ workorder.vehicle.model }}<br>
                         Año: {{ workorder.vehicle.year }}<br>
                         Color: {{ workorder.vehicle.color }}<br>
@@ -59,19 +59,19 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3">
+            <div class="col-lg-3">
                 <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
                     <div class="panel-heading text-center"><strong>Observaciones Iniciales</strong></div>
-                    <div class="panel-body">
-                        {{ workorder.initial_obs }}
+                    <div class="panel-body" style="font-size: 12px">
+                        {{ workorder.initial_obs|linebreaks  }}
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3">
+            <div class="col-lg-3">
                 <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
                     <div class="panel-heading text-center"><strong>Diagnóstico</strong></div>
-                    <div class="panel-body">
-                        {{ workorder.diagnostic }}
+                    <div class="panel-body" style="font-size: 12px">
+                        {{ workorder.diagnostic|linebreaks  }}
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
 
         {% if workorder.note %}
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-lg-12">
                 <div class="panel panel-default" style="border-color: #333333;">
                     <div class="panel-heading"><strong>Observaciones</strong></div>
                     <div class="panel-body" style="min-height: 4em">
@@ -91,7 +91,7 @@
         </div>
         {% endif %}
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-lg-12">
                 <div class="panel panel-default" style="border-color: #333333;">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Detalle</strong></h3>
@@ -167,13 +167,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default" >
-                    <div class="panel-body" style="min-height: 4em">
-
-                    </div>
-                    <div class="panel-footer text-right"><strong>Firma</strong></div>
-                </div>
+            <div class="col-lg-12">
+                <div class="panel-body" style="min-height: 4em"></div>
+                <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma</strong></div>
             </div>
         </div>
     </div>

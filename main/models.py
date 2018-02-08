@@ -18,12 +18,21 @@ class Client(models.Model):
     business_name = models.CharField(blank=True, max_length=60, verbose_name="Nombre Comercial")
     first_name = models.CharField(max_length=20, verbose_name="Nombre")
     last_name = models.CharField(max_length=40, verbose_name="Apellido")
+    full_name = models.CharField(max_length=60, verbose_name="Nombre Completo", blank=True)
     email = models.EmailField(blank=True, null=True, unique=True, verbose_name="Email")
     phone = models.CharField(max_length=40, verbose_name="Telefono")
     alt_phone = models.CharField(blank=True, null=True, max_length=40, verbose_name="Telefono Alternativo")
     cuit = models.CharField(blank=True, null=True, max_length=40, verbose_name="CUIT")
     active = models.BooleanField(default=True, verbose_name="Activo")
     note = models.TextField(blank=True, null=True, verbose_name="Notas")
+
+    def save(self):
+        fullname = self.first_name + ' ' + self.last_name
+        self.full_name = fullname
+        super(Client, self).save()
+
+    def get_full_name(self):
+        return self.first_name+" "+self.last_name
 
     def get_absolute_url(self):
         return reverse('main:client-detail', kwargs={'pk': self.pk})

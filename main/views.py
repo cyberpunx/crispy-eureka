@@ -389,14 +389,15 @@ class ModelAutocomplete(autocomplete.Select2QuerySetView):
 class ClientAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        if not self.request.user.is_authenticated():
-            return Client.objects.none()
+        #if not self.request.user.is_authenticated():
+        #    return Client.objects.none()
 
         qs = Client.objects.get_queryset().order_by('id')
 
         if self.q:
             qs = qs.filter(first_name__icontains=self.q) | qs.filter(last_name__icontains=self.q) \
-                 | qs.filter(business_name__icontains=self.q)
+                 | qs.filter(business_name__icontains=self.q) \
+                 | qs.filter(full_name__icontains=self.q)
 
         return qs
 
@@ -415,7 +416,8 @@ class VehicleAutocomplete(autocomplete.Select2QuerySetView):
                  | qs.filter(client__business_name__icontains=self.q) \
                  | qs.filter(licence_plate__icontains=self.q) \
                  | qs.filter(model__model_name__icontains=self.q) \
-                 | qs.filter(model__brand__brand_name__icontains=self.q)
+                 | qs.filter(model__brand__brand_name__icontains=self.q) \
+                 | qs.filter(client__full_name__icontains=self.q)
 
         return qs
 

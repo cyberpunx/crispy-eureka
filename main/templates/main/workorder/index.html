@@ -26,7 +26,7 @@
                                         <th>Cliente</th>
                                         <th>Automotor</th>
                                         <th>Técnico</th>
-                                        <th>Observaciones</th>
+                                        <th>Diagnóstico</th>
                                         <th>Último movimiento</th>
                                         <th>Fecha Entrada</th>
                                         <th>Fecha Salida</th>
@@ -54,7 +54,7 @@
                                             </a>
                                         </td>
                                         <td>{% if workorder.employee %}{{ workorder.employee }}{% endif %}</td>
-                                        <td>{{ workorder.note }}</td>
+                                        <td>{{ workorder.diagnostic}}</td>
                                         <th>{{ workorder.date|date:'d-m-Y H:i' }}</th>
                                         <th>{{ workorder.date_in|date:'d-m-Y' }}</th>
                                         <th>{{ workorder.date_out|date:'d-m-Y' }}</th>

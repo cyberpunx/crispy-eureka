@@ -39,9 +39,9 @@
                                         <td>{{ client.business_name }}</td>
                                         <td>{{ client.first_name }}</td>
                                         <td>{{ client.last_name }}</td>
-                                        <td class="center">{{ client.email }}</td>
+                                        <td class="center">{{ client.email|default_if_none:"" }}</td>
                                         <td class="center">{{ client.phone }}</td>
-                                        <td class="center">{{ client.alt_phone }}</td>
+                                        <td class="center">{{ client.alt_phone|default_if_none:"" }}</td>
                                         <td class="center">
                                             <a href="{% url 'main:client-detail' client.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                                             <a href="{% url 'main:client-detail' client.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

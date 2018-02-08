@@ -29,7 +29,7 @@
                     <div class="col-xs-3">
                         <div class="panel panel-default" >
                             <div class="panel-heading"><strong>Cliente</strong></div>
-                            <div class="panel-body" style="min-height: 15em">
+                            <div class="panel-body" style="min-height: 15em; font-size: 12px">
                                 {% if workorder.vehicle.client.business_name %}Cliente: {{ workorder.vehicle.client.business_name }}<br>{% endif %}
                                 Nombre:{{ workorder.vehicle.client.first_name }}<br>
                                 Apellido:{{ workorder.vehicle.client.last_name }}<br>
@@ -41,7 +41,7 @@
                     <div class="col-xs-3">
                         <div class="panel panel-default">
                             <div class="panel-heading"><strong>Automotor</strong></div>
-                            <div class="panel-body" style="min-height: 15em">
+                            <div class="panel-body" style="min-height: 15em; font-size: 12px">
                                 Modelo: {{ workorder.vehicle.model }}<br>
                                 Año: {{ workorder.vehicle.year }}<br>
                                 Color: {{ workorder.vehicle.color }}<br>
@@ -57,16 +57,16 @@
                     <div class="col-xs-3">
                         <div class="panel panel-default">
                             <div class="panel-heading"><strong>Observaciones iniciales</strong></div>
-                            <div class="panel-body" style="min-height: 15em">
-                                {{ workorder.initial_obs }}
+                            <div class="panel-body" style="min-height: 15em; font-size: 12px">
+                                {{ workorder.initial_obs|linebreaks }}
                             </div>
                         </div>
                     </div>
                     <div class="col-xs-3">
                         <div class="panel panel-default">
                             <div class="panel-heading"><strong>Diagnóstico</strong></div>
-                            <div class="panel-body" style="min-height: 15em">
-                                {{ workorder.diagnostic }}
+                            <div class="panel-body" style="min-height: 15em; font-size: 12px">
+                                {{ workorder.diagnostic|linebreaks }}
                             </div>
                         </div>
                     </div>
