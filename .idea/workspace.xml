@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4bc09ca1-5038-47c7-a7f8-6cb89c3e75c8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/main/models.py" afterPath="$PROJECT_DIR$/main/models.py" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/client/index.html" afterPath="$PROJECT_DIR$/main/templates/main/client/index.html" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/workorder/detail.html" afterPath="$PROJECT_DIR$/main/templates/main/workorder/detail.html" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/workorder/index.html" afterPath="$PROJECT_DIR$/main/templates/main/workorder/index.html" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/workorder/print.html" afterPath="$PROJECT_DIR$/main/templates/main/workorder/print.html" />
-      <change beforePath="$PROJECT_DIR$/main/views.py" afterPath="$PROJECT_DIR$/main/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -72,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
-              <caret line="420" column="0" lean-forward="true" selection-start-line="420" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
+              <caret line="420" column="0" lean-forward="false" selection-start-line="420" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
               <folding>
                 <element signature="e#25#60#0" expanded="true" />
               </folding>
@@ -92,11 +86,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/templates/main/client/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="731">
               <caret line="43" column="96" lean-forward="false" selection-start-line="43" selection-start-column="96" selection-end-line="43" selection-end-column="96" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="print.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/print.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-13">
+              <caret line="55" column="130" lean-forward="true" selection-start-line="55" selection-start-column="130" selection-end-line="55" selection-end-column="130" />
               <folding />
             </state>
           </provider>
@@ -202,12 +206,12 @@
         <option value="$PROJECT_DIR$/main/templates/main/vehicle/index.html" />
         <option value="$PROJECT_DIR$/main/templates/main/work/index.html" />
         <option value="$PROJECT_DIR$/main/templates/main/workcategory/index.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/workorder/print.html" />
         <option value="$PROJECT_DIR$/main/templates/main/workorder/detail.html" />
         <option value="$PROJECT_DIR$/main/templates/main/workorder/index.html" />
         <option value="$PROJECT_DIR$/main/models.py" />
         <option value="$PROJECT_DIR$/main/views.py" />
         <option value="$PROJECT_DIR$/main/templates/main/client/index.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/workorder/print.html" />
       </list>
     </option>
   </component>
@@ -217,7 +221,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="-19" />
     <option name="width" value="1920" />
     <option name="height" value="1072" />
@@ -545,7 +549,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -906,16 +910,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/print.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="64" column="67" lean-forward="false" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="67" />
-          <folding>
-            <element signature="e#3745#3768#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2312">
@@ -939,7 +933,7 @@
     <entry file="file://$PROJECT_DIR$/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
-          <caret line="420" column="0" lean-forward="true" selection-start-line="420" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
+          <caret line="420" column="0" lean-forward="false" selection-start-line="420" selection-start-column="0" selection-end-line="420" selection-end-column="0" />
           <folding>
             <element signature="e#25#60#0" expanded="true" />
           </folding>
@@ -976,6 +970,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
           <caret line="43" column="96" lean-forward="false" selection-start-line="43" selection-start-column="96" selection-end-line="43" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/workorder/print.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13">
+          <caret line="55" column="130" lean-forward="true" selection-start-line="55" selection-start-column="130" selection-end-line="55" selection-end-column="130" />
           <folding />
         </state>
       </provider>
