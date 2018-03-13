@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render
-from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks
+from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks, Movement
 from dal import autocomplete
 from main import models
-from .forms import VehicleForm, VehicleClientForm, WorkOrderForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm
+from .forms import VehicleForm, VehicleClientForm, WorkOrderForm, WorkOrderUpdateForm, WorkOrderUpdateDetailsForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm, MovementForm
 from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -223,6 +223,12 @@ class WorkOrderDetailView(generic.DetailView):
     template_name = 'main/workorder/detail.html'
     model = WorkOrder
 
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderDetailView, self).get_context_data(**kwargs)
+        last_status = Movement.objects.filter(work_order__id__exact=self.kwargs['pk']).order_by('-id')[:1].first()
+        context['status'] = last_status
+        return context
+
 class WorkOrderPrintView(generic.DetailView):
     template_name = 'main/workorder/print.html'
     model = WorkOrder
@@ -235,9 +241,17 @@ class WorkOrderDeleteView(DeleteView):
 
 
 class WorkOrderUpdateView(UpdateView):
-    template_name = 'main/workorder/workorder_form.html'
+    template_name = 'main/workorder/workorder_update.html'
     model = WorkOrder
-    form_class = WorkOrderForm
+    form_class = WorkOrderUpdateForm
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
+
+class WorkOrderUpdateDetailsView(UpdateView):
+    template_name = 'main/workorder/details_form.html'
+    model = WorkOrder
+    form_class = WorkOrderUpdateDetailsForm
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
@@ -249,7 +263,8 @@ class WorkOrderCreateView(CreateView):
     form_class = WorkOrderForm
 
     def get_success_url(self):
-        return reverse('main:workorder-detail', kwargs={'pk': self.object.id})
+        return reverse('main:movements-add', kwargs={'pk': self.object.id})
+
 
 class WorkCreateView(CreateView):
     template_name = 'main/work/autocomplete_form.html'
@@ -366,6 +381,18 @@ class PartDeleteView(DeleteView):
     model = Part
     success_url = reverse_lazy('main:part-index')
 
+
+class MovementCreateView(CreateView):
+    template_name = 'main/movement/movement_form.html'
+    form_class = MovementForm
+    model = Movement
+
+    def form_valid(self, form):
+        form.instance.work_order_id = self.kwargs.get('pk')
+        return super(MovementCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
 
 # ---------------------- AUTOCOMPLETE VIEWS ---------------------- #

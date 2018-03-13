@@ -1,6 +1,7 @@
 from dal import autocomplete
 from django import forms
-from .models import Vehicle, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks
+from django.forms.models import inlineformset_factory
+from .models import Vehicle, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks, Movement
 
 
 class VehicleForm(forms.ModelForm):
@@ -27,7 +28,33 @@ class WorkOrderForm(forms.ModelForm):
     class Meta:
         model = WorkOrder
 
-        fields = ['vehicle', 'status', 'date_in', 'date_out', 'employee', 'initial_obs', 'fuel_level', 'kilometers', 'diagnostic', 'note', 'ticket_number', 'total_manual']
+        fields = ['vehicle', 'initial_obs', 'fuel_level', 'kilometers', 'diagnostic', 'note', 'ticket_number', 'total_manual']
+        widgets = {
+            'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
+            'note': forms.Textarea(),
+            'date_in':  forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_out':  forms.widgets.DateInput(attrs={'type': 'date'}),
+        }
+
+class WorkOrderUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = WorkOrder
+
+        fields = ['initial_obs', 'fuel_level', 'kilometers', 'diagnostic', 'note', 'ticket_number', 'total_manual']
+        widgets = {
+            'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
+            'note': forms.Textarea(),
+            'date_in':  forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_out':  forms.widgets.DateInput(attrs={'type': 'date'}),
+        }
+
+class WorkOrderUpdateDetailsForm(forms.ModelForm):
+
+    class Meta:
+        model = WorkOrder
+
+        fields = ['fuel_level', 'kilometers', 'note', 'ticket_number', 'total_manual']
         widgets = {
             'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
             'note': forms.Textarea(),
@@ -71,5 +98,16 @@ class WorkorderWorksForm(forms.ModelForm):
             'work': autocomplete.ModelSelect2(url='main:works-autocomplete'),
         }
 
+class MovementForm(forms.ModelForm):
+
+    class Meta:
+        model = Movement
+        fields = ['status', 'employee', 'date', 'time', 'note']
+        widgets = {
+            'date':  forms.widgets.DateTimeInput(attrs={'type': 'date'}),
+            'time': forms.widgets.DateTimeInput(attrs={'type': 'time'}),
+            'note': forms.Textarea()
+        }
 
 
+MovementFormSet = inlineformset_factory(WorkOrder, Movement, form=MovementForm, extra=1)

@@ -10,9 +10,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="invoice-title">
-                    <h2>Orden de Trabajo # {{ workorder.id }}
-                            <span class="pull-right">{{ workorder.get_status_display }}</span>
-                    </h2>
+                    <h2>Orden de Trabajo # {{ workorder.id }}<span class="pull-right">{{ status.status }}</span></h2>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -78,9 +76,16 @@
                 <p>
                     <a href="{% url 'main:workorderworks-add' workorder.id  %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button></a>
                     <a href="{% url 'main:workorderparts-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Repuesto</button></a>
-                    <a href="{% url 'main:workorder-update' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Editar Datos</button></a>
+                    <a href="{% url 'main:movements-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Movimiento</button></a>
+                    <a href="{% url 'main:workorder-update-details' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> Datos Adicionales</button></a>
                     <a href="{% url 'main:workorder-print' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> Imprimir</button></a>
-                    <a href="{% url 'main:workorder-delete' workorder.id %}"><button type="button" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-remove"></i> Eliminar Orden</button></a>
+
+                    <a href="{% url 'main:workorder-delete' workorder.id %}"><button type="button" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-remove"></i> Eliminar Orden </button></a>
+                    <a href="{% url 'main:workorder-update' workorder.id %}">
+                        <button type="button" class="btn btn-success pull-right" style="margin-right:10px">
+                            <i class="glyphicon glyphicon-edit"></i> Editar
+                        </button>
+                    </a>
                 </p>
             </div>
         </div>
@@ -169,15 +174,52 @@
         </div>
     {% if workorder.note %}
      <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default" >
-                    <div class="panel-heading">Observaciones</div>
-                    <div class="panel-body" style="min-height: 4em">
-                        {{ workorder.note }}
-                    </div>
+        <div class="col-xs-12">
+            <div class="panel panel-default" >
+                <div class="panel-heading">Observaciones</div>
+                <div class="panel-body" style="min-height: 4em">
+                    {{ workorder.note }}
                 </div>
             </div>
         </div>
     </div>
     {% endif %}
+
+    <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Historial</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td width="15%"><strong>Movimiento</strong></td>
+                                        <td width="20%"><strong>Fecha</strong></td>
+                                        <td width="15%"><strong>Empleado</strong></td>
+                                        <td><strong>Nota</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="individual-form">
+                                    {% for movement in workorder.movement_set.all %}
+                                    <tr>
+                                        <td>{{ movement.status }}</td>
+                                        <td>{{ movement.date }}  - {{ movement.time }}</td>
+                                        <td>{% if movement.employee %}{{ movement.employee }}{% endif %}</td>
+                                        <td>{{ movement.note }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+
 {% endblock %}

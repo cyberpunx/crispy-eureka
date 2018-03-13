@@ -1,11 +1,14 @@
 {% extends 'main/base.html' %}
-
+{% load staticfiles %}
 
 {% block title %}
-    Inicio
+
 {% endblock %}
 
 {% block body %}
+                <div class="row" align="center" style="margin-bottom: 20px">
+                    <img src="{% static "/main/img/logo.png" %}" alt="Logo"/>
+                </div>
                 <div class="row">
 
                 <div class="col-lg-4 col-md-6">

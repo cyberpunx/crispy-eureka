@@ -25,13 +25,11 @@
                                         <th>ID</th>
                                         <th>Cliente</th>
                                         <th>Automotor</th>
-                                        <th>Técnico</th>
                                         <th>Diagnóstico</th>
-                                        <th>Último movimiento</th>
-                                        <th>Fecha Entrada</th>
-                                        <th>Fecha Salida</th>
-                                        <th>Importe</th>
                                         <th>Estado</th>
+                                        <th>Último movimiento</th>
+                                        <th>Técnico</th>
+                                        <th>Importe</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -53,13 +51,29 @@
                                                 Patente: {{ workorder.vehicle.licence_plate }}
                                             </a>
                                         </td>
-                                        <td>{% if workorder.employee %}{{ workorder.employee }}{% endif %}</td>
                                         <td>{{ workorder.diagnostic}}</td>
-                                        <th>{{ workorder.date|date:'d-m-Y H:i' }}</th>
-                                        <th>{{ workorder.date_in|date:'d-m-Y' }}</th>
-                                        <th>{{ workorder.date_out|date:'d-m-Y' }}</th>
+                                        <td>
+                                            {% for movement in workorder.movement_set.all %}
+                                                {% if forloop.last %}
+                                                    {{movement.status}}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for movement in workorder.movement_set.all %}
+                                                {% if forloop.last %}
+                                                    {{movement.date}} {{movement.time}}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for movement in workorder.movement_set.all %}
+                                                {% if forloop.last %}
+                                                    {% if movement.employee %}{{movement.employee}}{% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
                                         <td>${{ workorder.total }}</td>
-                                        <td>{{ workorder.get_status_display }}</td>
                                         <td class="center">
                                             <a href="{% url 'main:workorder-detail' workorder.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                                             <a href="{% url 'main:workorder-update' workorder.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

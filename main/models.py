@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.core.urlresolvers import reverse
+import datetime
 import dbsettings
 
 
@@ -134,24 +135,6 @@ class Employee(models.Model):
         return self.display_name
 
 
-class Status(models.Model):
-    STATUS_CHOICES = (
-        ('PRE', 'Presupuesto'),
-        ('REV', 'Revisión Inicial'),
-        ('ING', 'Esperando Ingreso'),
-        ('ABI', 'Abierta'),
-        ('INI', 'Iniciada'),
-        ('REP', 'Esperando repuestos'),
-        ('RET', 'Esperando Retiro'),
-        ('COM', 'Completa'),
-        ('CER', 'Cerrada'),
-        ('CAN', 'Cancelada'),
-    )
-    status = models.CharField(max_length=3, choices=STATUS_CHOICES, verbose_name="Estado")
-    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, verbose_name="Empleado")
-    date = models.DateTimeField(auto_now=True)
-
-
 class Global(dbsettings.Group):
     labor_rate = dbsettings.PositiveIntegerValue(default='0', help_text='Valor de la hora de trabajo')
 
@@ -179,20 +162,6 @@ class Work(models.Model):
 
 class WorkOrder(models.Model):
     vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT, verbose_name="Vehiculo")
-    #status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name="Estado")
-    STATUS_CHOICES = (
-        ('PRE', 'Presupuesto'),
-        ('REV', 'Revisión Inicial'),
-        ('ING', 'Esperando Ingreso'),
-        ('ABI', 'Abierta'),
-        ('INI', 'Iniciada'),
-        ('REP', 'Esperando repuestos'),
-        ('PAU', 'Pausada'),
-        ('RET', 'Esperando Retiro'),
-        ('COM', 'Completa'),
-        ('CER', 'Cerrada'),
-        ('CAN', 'Cancelada'),
-    )
     FUEL_CHOICES = (
         ('EMPTY', 'Vacío'),
         ('1/4', '1/4'),
@@ -200,12 +169,7 @@ class WorkOrder(models.Model):
         ('3/4', '3/4'),
         ('FULL', 'Lleno'),
     )
-    status = models.CharField(max_length=3, choices=STATUS_CHOICES, verbose_name="Estado")
-    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Empleado", default='')
-    date = models.DateTimeField(auto_now=True)
-    date_in = models.DateField(blank=True, null=True, verbose_name="Fecha Entrada")
-    date_out = models.DateField(blank=True, null=True, verbose_name="Fecha Salida")
-    note = models.CharField(blank=True, max_length=140, verbose_name="Observaciones", default='')
+    note = models.CharField(blank=True, max_length=140, verbose_name="Notas", default='')
     initial_obs = models.TextField(blank=True, null=True, verbose_name="Observaciones Iniciales")
     diagnostic = models.TextField(blank=True, null=True, verbose_name="Diagnóstico")
     fuel_level = models.CharField(blank=True, max_length=10, choices=FUEL_CHOICES, verbose_name="Nivel combustible")
@@ -213,7 +177,7 @@ class WorkOrder(models.Model):
     ticket_number = models.CharField(blank=True, null=True, max_length=100, verbose_name="Nro. Factura")
     parts = models.ManyToManyField(Part, through='WorkorderParts')
     works = models.ManyToManyField(Work, through='WorkorderWorks')
-    total_manual = models.DecimalField(blank=True, verbose_name="Total", null = True, max_digits=10, decimal_places=2)
+    total_manual = models.DecimalField(blank=True, verbose_name="Sobreescribir Total", null = True, max_digits=10, decimal_places=2)
 
     @property
     def total(self):
@@ -277,7 +241,30 @@ class WorkorderWorks(models.Model):
             return self.time_required * WorkOrder.settings.labor_rate
 
 
+class Movement(models.Model):
+    STATUS_CHOICES = (
+        ('Abierta', 'Abierta'),
+        ('En Progreso', 'En Progreso'),
+        ('Esperando repuestos', 'Esperando repuestos'),
+        ('Pausada', 'Pausada'),
+        ('Completa', 'Completa'),
+        ('Cerrada', 'Cerrada'),
+        ('Cancelada', 'Cancelada'),
+        ('Presupuesto', 'Presupuesto'),
+    )
+    status = models.CharField(max_length=64, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0], verbose_name="Estado", blank=False)
+    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
+    date = models.DateField(verbose_name="Fecha", blank=True)
+    time = models.TimeField(verbose_name="Hora", blank=True)
+    employee = models.ForeignKey(Employee, on_delete=models.PROTECT, blank=True, null=True, verbose_name="Empleado")
+    note = models.CharField(blank=True, max_length=140, verbose_name="Observaciones", default='')
 
+    def save(self, *args, **kwargs):
+        if not self.date:
+            self.date = datetime.datetime.now()
+        if not self.time:
+            self.time = datetime.datetime.now()
+        return super(Movement, self).save(*args, **kwargs)
 
 
 

@@ -105,6 +105,9 @@ urlpatterns = [
     # /main/workorders/update/<workorder_id>/
     url(r'workorders/update/(?P<pk>[0-9]+)/$', views.WorkOrderUpdateView.as_view(), name='workorder-update'),
 
+    # /main/workorders/updatedetails/<workorder_id>/
+    url(r'workorders/updatedetails/(?P<pk>[0-9]+)/$', views.WorkOrderUpdateDetailsView.as_view(), name='workorder-update-details'),
+
     # /main/parts/
     url(r'parts/$', views.PartIndexView.as_view(), name='part-index'),
 
@@ -146,6 +149,9 @@ urlpatterns = [
 
     # /main/workorderworks/<workorder_id>/listdelete
     url(r'parts/workorderworks/(?P<pk>[0-9]+)/listdelete$', views.WorkOrderWorksListDeleteView.as_view(), name='workorderworks-listdelete'),
+
+    # /main/movements/add/<workorder_id>/
+    url(r'parts/movements/(?P<pk>[0-9]+)/$', views.MovementCreateView.as_view(), name='movements-add'),
 
     # autocomplete
     url(r'^model-autocomplete/$', views.ModelAutocomplete.as_view(), name='model-autocomplete'),
