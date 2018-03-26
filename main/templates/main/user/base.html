@@ -46,18 +46,58 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+        .panel-tabs {
+            position: relative;
+            bottom: 30px;
+            clear:both;
+            border-bottom: 1px solid transparent;
+        }
+
+        .panel-tabs > li {
+            float: left;
+            margin-bottom: -1px;
+        }
+
+        .panel-tabs > li > a {
+            margin-right: 2px;
+            margin-top: 4px;
+            line-height: .85;
+            border: 1px solid transparent;
+            border-radius: 4px 4px 0 0;
+            color: #ffffff;
+        }
+
+        .panel-tabs > li > a:hover {
+            border-color: transparent;
+            color: #ffffff;
+            background-color: transparent;
+        }
+
+        .panel-tabs > li.active > a,
+        .panel-tabs > li.active > a:hover,
+        .panel-tabs > li.active > a:focus {
+            color: #fff;
+            cursor: default;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            background-color: rgba(255,255,255, .23);
+            border-bottom-color: transparent;
+        }
+    </style>
+
 </head>
 
 <body>
 
 
-
     <div id="wrapper">
     {% if user.is_authenticated %}
-        {% if user.is_staff %}
+        {% if not user.is_staff %}
         {% block navbar %}
             <!-- Navigation -->
-            <nav class="navbar navbar-fixed-top navbar-inverse">
+           <nav class="navbar navbar-static-top navbar-inverse">
                 <div class="container-fluid">
                     <!-- Header -->
                     <div class="navbar-header">
@@ -68,57 +108,12 @@
                         </button>
                         <a class="navbar-brand" href="{% url 'main:index' %}"  tabindex="-1">ForAuto</a>
                     </div>
-
-                    <!-- Items -->
                     <div class="collapse navbar-collapse" id="topNavBar">
                         <ul class="nav navbar-nav">
-                            <li class=""><a href="{% url 'main:client-index' %}"  tabindex="-1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Clientes</a></li>
-                            <li class=""><a href="{% url 'main:vehicle-index' %}"  tabindex="-1"><span class="fa fa-truck" aria-hidden="true"></span>&nbsp; Automotores</a></li>
-                            <li class=""><a href="{% url 'main:workorder-index' %}"  tabindex="-1"><span class="fa fa-file-text" aria-hidden="true"></span>&nbsp; Órdenes de Trabajo</a></li>
-                            <li class=""><a href="{% url 'main:calendar' %}"  tabindex="-1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp; Calendario</a></li>
-                           <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"  tabindex="-1"><span class="glyphicon glyphicon-list-alt fa-fw"></span> Administración<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li>
-                                        <a href="{% url 'main:brand-index' %}"><span class="fa fa-th-large"></span> Marcas</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'main:model-index' %}"><span class="fa fa-th"></span> Modelos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'main:work-index' %}"><span class="fa fa-wrench"></span> Trabajos</a>
-                                    </li>
-                                     <li>
-                                        <a href="{% url 'main:part-index' %}"><span class="fa fa-cog"></span> Repuestos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'main:workcategory-index' %}"><span class="fa fa-wrench"></span> Categorías de Trabajos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'main:partcategory-index' %}"><span class="fa fa-cog"></span> Categorías de Repuestos</a>
-                                    </li>
-                                    <li>
-                                        <a href="{% url 'main:employee-index' %}"><span class="fa fa-user"></span>  Empleados</a>
-                                    </li>
-                                    <li>
-                                        <a href="/settings"><span class="fa fa-cogs"></span> Configuración</a>
-                                    </li>
-                            </ul>
-                          </li>
-
+                            <li><a href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Afectaciones</a></li>
+                            <li class="active"><a href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Ordenes</a></li>
                         </ul>
-
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="{% url 'main:workorder-add' %}"  tabindex="-1">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Nueva Orden
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'main:client-add'%}"  tabindex="-1">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Nuevo Cliente
-                                </a>
-                            </li>
                             <li>
                                 <a href="{% url 'main:logout' %}"  tabindex="-1">
                                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Salir
@@ -126,12 +121,12 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
-                <!-- /.navbar-static-side --> <!-- /Sidebar -->
             </nav>
         {% endblock %}
         <!-- Page Content -->
-        <div id="page-wrapper" style="min-height: 100%; margin-top: 50px">
+        <div id="page-wrapper" style="min-height: 100%">
 
             <div class="container-fluid">
 

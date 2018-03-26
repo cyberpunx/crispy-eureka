@@ -54,18 +54,44 @@
 
 
     <div id="wrapper">
-        <!-- START CONTENT -->
-        {% block title %}Title{% endblock %}
+    <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container-fluid">
+            <!-- Header -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'main:index' %}"  tabindex="-1">ForAuto</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url 'main:logout' %}"  tabindex="-1">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Salir
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <img class="img-responsive center-block" src="{% static "/main/img/logo.png" %}" class="img-fluid" alt="Logo"/>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <div class="alert alert-info">Bienvenido {{ user.username }}.</div>
+                <a href="{% url 'main:index' %}"><div class="btn btn-primary btn-lg btn-block">Acceder</div></a>
+            {% else %}
+                <div class="alert alert-info">Bienvenido <strong>{{ user.username }}</strong>.</div>
+                <a href="{% url 'main:profile' %}"><div class="btn btn-primary btn-lg btn-block">Acceder</div></a>
+            {% endif %}
+        {% else %}
+            <div class="alert alert-danger">No ha iniciado sesión. Inicie sesión para acceder a este contenido</div>
+            <a href="{% url 'main:login' %}"><div class="btn btn-primary btn-lg btn-block">Iniciar sesión</div></a>
+        {% endif %}
+      </div>
+    </div>
 
-
-
-{% block content %}
-
-        {% endblock %}
-
-        <!-- END CONTENT -->
     </div>
     <!-- /#wrapper -->
+
 
     <!-- jQuery -->
     <script src="{% static 'main/sb_admin2/vendor/jquery/jquery.min.js' %}"></script>
@@ -89,6 +115,8 @@
 
     {% block exta_script %}
     {% endblock %}
+
+
 
 </body>
 

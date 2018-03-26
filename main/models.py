@@ -2,8 +2,12 @@
 
 from django.db import models
 from django.core.urlresolvers import reverse
-import datetime
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from datetime import timedelta
 import dbsettings
+import datetime
 
 
 class ClientManager(models.Manager):
@@ -124,12 +128,9 @@ class PartCategory(models.Model):
         return self.category_name
 
 class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     display_name = models.CharField(max_length=20, verbose_name="Código", unique=True)
-    first_name = models.CharField(max_length=20, verbose_name="Nombre")
-    last_name = models.CharField(max_length=40, verbose_name="Apellido")
-    email = models.EmailField(blank=True, unique=True, verbose_name="Email")
     phone = models.CharField(max_length=40, verbose_name="Telefono")
-    active = models.BooleanField(default=True, verbose_name="Activo")
 
     def __str__(self):
         return self.display_name
@@ -178,6 +179,11 @@ class WorkOrder(models.Model):
     parts = models.ManyToManyField(Part, through='WorkorderParts')
     works = models.ManyToManyField(Work, through='WorkorderWorks')
     total_manual = models.DecimalField(blank=True, verbose_name="Sobreescribir Total", null = True, max_digits=10, decimal_places=2)
+
+    @property
+    def last_movement(self):
+        last_movement = Movement.objects.filter(work_order__id__exact=self.id).order_by('-id')[:1].first()
+        return last_movement
 
     @property
     def total(self):
@@ -265,6 +271,35 @@ class Movement(models.Model):
         if not self.time:
             self.time = datetime.datetime.now()
         return super(Movement, self).save(*args, **kwargs)
+
+
+class Timer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
+    work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
+    start_time = models.DateTimeField(verbose_name="Inicio", default=datetime.datetime.now())
+    end_time = models.DateTimeField(blank=True, null=True, verbose_name="Fin")
+
+
+    @property
+    def is_running(self):
+        if self.start_time:
+            if self.end_time:
+                return False
+            else:
+                return True
+
+    @property
+    def total_time(self):
+        if self.start_time:
+            if self.end_time:
+                dt = self.end_time - self.start_time
+                seconds = dt.total_seconds()
+                hours = seconds // 3600
+                minutes = (seconds % 3600) // 60
+                seconds = seconds % 60
+                return datetime.timedelta(hours=hours, minutes=minutes, seconds=round(seconds, 0))
+            else:
+                return 0
 
 
 

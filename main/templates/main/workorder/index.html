@@ -9,8 +9,10 @@
     Ordenes de Trabajo
 {% endblock %}
 
-{% block body %}
 
+
+
+{% block content %}
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -53,27 +55,15 @@
                                         </td>
                                         <td>{{ workorder.diagnostic}}</td>
                                         <td>
-                                            {% for movement in workorder.movement_set.all %}
-                                                {% if forloop.last %}
-                                                    {{movement.status}}
-                                                {% endif %}
-                                            {% endfor %}
+                                            {{ workorder.last_movement.status }}
                                         </td>
                                         <td>
-                                            {% for movement in workorder.movement_set.all %}
-                                                {% if forloop.last %}
-                                                    {{movement.date}} {{movement.time}}
-                                                {% endif %}
-                                            {% endfor %}
+                                            {{ workorder.last_movement.date }}
                                         </td>
                                         <td>
-                                            {% for movement in workorder.movement_set.all %}
-                                                {% if forloop.last %}
-                                                    {% if movement.employee %}{{movement.employee}}{% endif %}
-                                                {% endif %}
-                                            {% endfor %}
+                                            {{ workorder.last_movement.employee }}
                                         </td>
-                                        <td>${{ workorder.total }}</td>
+                                        <td>${% if workorder.total_manual %}{{ workorder.total_manual }}{% else %}{{ workorder.total }}{% endif %}</td>
                                         <td class="center">
                                             <a href="{% url 'main:workorder-detail' workorder.id %}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                                             <a href="{% url 'main:workorder-update' workorder.id %}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

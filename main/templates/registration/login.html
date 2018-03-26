@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,21 +53,64 @@
 
 <body>
 
+<div id="wrapper">
+    <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container-fluid">
+            <!-- Header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'main:index' %}"  tabindex="-1">ForAuto</a>
+            </div>
+        </div>
+    </nav>
 
+    <div class="row">
 
-    <div id="wrapper">
-        <!-- START CONTENT -->
-        {% block title %}Title{% endblock %}
-
-
-
-{% block content %}
-
-        {% endblock %}
-
-        <!-- END CONTENT -->
+        <div class="col-lg-12">
+            <h1 class="page-header" style="padding-top: 10px">Iniciar sesión</h1>
+        </div>
     </div>
-    <!-- /#wrapper -->
+
+    <div class="row" style="margin: 20px">
+
+        <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="username" class="control-label col-lg-12">Nombre de usuario:</label>
+                                <input class="form-control" type="text" name="username">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="password" class="control-label col-lg-12">Contraseña:</label>
+                                <input class="form-control" type="password" name="password">
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <input class="btn btn-primary" type="submit" value="Ingresar">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+   </div>
+
+
+</div>
+
 
     <!-- jQuery -->
     <script src="{% static 'main/sb_admin2/vendor/jquery/jquery.min.js' %}"></script>
@@ -81,15 +126,16 @@
 
 
 
-    {% block datatables_scripts %}
-    {% endblock %}
+
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'main/sb_admin2/dist/js/sb-admin-2.js' %}"></script>
 
-    {% block exta_script %}
-    {% endblock %}
+
+
+
 
 </body>
 
 </html>
+

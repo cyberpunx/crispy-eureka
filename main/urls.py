@@ -1,10 +1,31 @@
 from django.conf.urls import url
 from . import views
+from django.contrib.auth import views as auth_views
+
+
 
 app_name = 'main'
 urlpatterns = [
     # /main/
     url(r'^$', views.index_view, name='index'),
+
+    # /main/welcome
+    url(r'^welcome/$', views.welcome_view, name='welcome'),
+
+    # /main/login/
+    url(r'^login/$', auth_views.LoginView.as_view(), name='login'),
+
+    # /main/profile/
+    url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
+
+    # /main/timer/add/<workorder_id>/
+    url(r'^timer/add/(?P<pk>[0-9]+)/$', views.timer_create_view, name='timer-add'),
+
+    # /main/timer/stop/<timer_id>/
+    url(r'^timer/stop/(?P<pk>[0-9]+)/$', views.timer_stop_view, name='timer-stop'),
+
+    # /main/logout/
+    url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
 
     # /main/clients/
     url(r'^clients/$', views.ClientIndexView.as_view(), name='client-index'),
@@ -72,20 +93,20 @@ urlpatterns = [
     # /main/partcategory/<partcategory_id>/delete/
     url(r'partcategory/(?P<pk>[0-9]+)/delete/$', views.PartCategoryDeleteView.as_view(), name='partcategory-delete'),
 
-    # /main/employees/
-    url(r'^employees/$', views.EmployeeIndexView.as_view(), name='employee-index'),
+    # /main/employee/
+    url(r'^employee/$', views.EmployeeIndexView.as_view(), name='employee-index'),
 
-    # /main/employees/<employee_id>/
-    url(r'^employees/(?P<pk>[0-9]+)/$', views.EmployeeDetailView.as_view(), name='employee-detail'),
+    # /main/employee/<employee_id>/
+    url(r'^employee/(?P<pk>[0-9]+)/$', views.EmployeeDetailView.as_view(), name='employee-detail'),
 
-    # /main/employees/add/
-    url(r'employees/add/$', views.EmployeeCreateView.as_view(), name='employee-add'),
+    # /main/employee/add/
+    url(r'employee/add/$', views.EmployeeCreateView.as_view(), name='employee-add'),
 
-    # /main/employees/update/<employee_id>/
-    url(r'employees/update/(?P<pk>[0-9]+)/$', views.EmployeeUpdateView.as_view(), name='employee-update'),
+    # /main/employee/update/<employee_id>/
+    url(r'employee/update/(?P<pk>[0-9]+)/$', views.EmployeeUpdateView.as_view(), name='employee-update'),
 
-    # /main/employees/<employee_id>/delete/
-    url(r'employees/(?P<pk>[0-9]+)/delete/$', views.EmployeeDeleteView.as_view(), name='employee-delete'),
+    # /main/employee/<employee_id>/delete/
+    url(r'employee/(?P<pk>[0-9]+)/delete/$', views.EmployeeDeleteView.as_view(), name='employee-delete'),
 
     # /main/workorders/
     url(r'workorders/$', views.WorkOrderIndexView.as_view(), name='workorder-index'),

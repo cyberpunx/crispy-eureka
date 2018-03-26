@@ -1,20 +1,50 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
-from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks, Movement
+from django.shortcuts import render, redirect
+from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks, Movement, Timer
+from django.contrib.auth.models import User
 from dal import autocomplete
 from main import models
-from .forms import VehicleForm, VehicleClientForm, WorkOrderForm, WorkOrderUpdateForm, WorkOrderUpdateDetailsForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm, MovementForm
+from .forms import VehicleForm, VehicleClientForm, WorkOrderForm, WorkOrderUpdateForm, WorkOrderUpdateDetailsForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm, MovementForm, EmployeeCreateForm
 from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from main.decorators import staff_required
+import datetime
 
 def index_view(request):
     return render(request, 'main/index.html', {})
 
+def welcome_view(request):
+    return render(request, 'main/welcome.html', {})
+
+class ProfileView(TemplateView):
+    template_name = "main/user/profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        workorders = WorkOrder.objects.all()
+        timers = Timer.objects.filter(user__id=self.request.user.id).order_by('-id')
+        last_timer = Timer.objects.filter(user__id=self.request.user.id).order_by('-id')[:1].first()
+        context['workorders'] = workorders
+        context['timers'] = timers
+        context['last_timer'] = last_timer
+        return context
+
+def timer_create_view(request, pk):
+    timer = Timer(user = request.user, work_order =  WorkOrder.objects.get(pk=pk), start_time=datetime.datetime.now())
+    timer.save()
+    return redirect('main:profile')
+
+def timer_stop_view(request, pk):
+    timer = Timer.objects.get(pk=pk)
+    timer.end_time = datetime.datetime.now()
+    timer.save()
+    return redirect('main:profile')
 
 class ClientIndexView(generic.ListView):
     template_name = 'main/client/index.html'
@@ -177,9 +207,10 @@ class PartCategoryDeleteView(DeleteView):
 
 class EmployeeIndexView(generic.ListView):
     template_name = 'main/employee/index.html'
+    model = User
 
     def get_queryset(self):
-        return Employee.objects.all()
+        return User.objects.all()
 
 
 class EmployeeDetailView(generic.DetailView):
@@ -189,16 +220,32 @@ class EmployeeDetailView(generic.DetailView):
 
 class EmployeeCreateView(CreateView):
     template_name = 'main/employee/employee_form.html'
-    model = Employee
-    fields = ['display_name', 'first_name', 'last_name', 'email', 'phone', 'active']
+    model = User
+    form_class = EmployeeCreateForm
     success_url = reverse_lazy('main:employee-index')
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeCreateView, self).get_context_data(**kwargs)
+        return context
+
+    def form_valid(self, form):
+        user = form.save()
+        return redirect('main:employee-index')
 
 
 class EmployeeUpdateView(UpdateView):
     template_name = 'main/employee/employee_form.html'
-    model = Employee
-    fields = ['display_name', 'first_name', 'last_name', 'email', 'phone', 'active']
+    model = User
+    form_class = EmployeeCreateForm
     success_url = reverse_lazy('main:employee-index')
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeUpdateView, self).get_context_data(**kwargs)
+        return context
+
+    def form_valid(self, form):
+        user = form.save()
+        return redirect('main:employee-index')
 
 
 class EmployeeDeleteView(DeleteView):
@@ -217,7 +264,6 @@ class WorkOrderIndexView(generic.ListView):
         context = super(WorkOrderIndexView, self).get_context_data(**kwargs)
         context['labor_rate'] = models.WorkOrder.settings.labor_rate
         return context
-
 
 class WorkOrderDetailView(generic.DetailView):
     template_name = 'main/workorder/detail.html'

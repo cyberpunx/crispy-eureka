@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,21 +53,37 @@
 
 <body>
 
-
-
-    <div id="wrapper">
-        <!-- START CONTENT -->
-        {% block title %}Title{% endblock %}
-
-
-
-{% block content %}
-
-        {% endblock %}
-
-        <!-- END CONTENT -->
+<div id="wrapper">
+    <nav class="navbar navbar-static-top navbar-inverse">
+        <div class="container-fluid">
+            <!-- Header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'main:index' %}"  tabindex="-1">ForAuto</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row" style="margin: 20px">
+       <div class="col-lg-12">
+           <div class="alert alert-info">Sesión terminada</div>
+           <a href="{% url 'main:login' %}"><div class="btn btn-primary">Iniciar sesión</div></a>
+        </div>
     </div>
-    <!-- /#wrapper -->
+
+
+
+
+
+
+
+
+
+</div>
+
 
     <!-- jQuery -->
     <script src="{% static 'main/sb_admin2/vendor/jquery/jquery.min.js' %}"></script>
@@ -81,15 +99,16 @@
 
 
 
-    {% block datatables_scripts %}
-    {% endblock %}
+
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'main/sb_admin2/dist/js/sb-admin-2.js' %}"></script>
 
-    {% block exta_script %}
-    {% endblock %}
+
+
+
 
 </body>
 
 </html>
+
