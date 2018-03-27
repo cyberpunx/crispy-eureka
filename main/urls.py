@@ -117,6 +117,9 @@ urlpatterns = [
     # /main/workorders/<workorder_id>/
     url(r'workorders/(?P<pk>[0-9]+)/$', views.WorkOrderDetailView.as_view(), name='workorder-detail'),
 
+    # /main/workorders-user/<workorder_id>/
+    url(r'workorders-user/(?P<pk>[0-9]+)/$', views.WorkOrderUserDetailView.as_view(), name='workorder-user-detail'),
+
     # /main/workorders/<workorder_id>/
     url(r'workorders/print/(?P<pk>[0-9]+)/$', views.WorkOrderPrintView.as_view(), name='workorder-print'),
 

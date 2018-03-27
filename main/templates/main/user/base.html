@@ -65,24 +65,24 @@
             line-height: .85;
             border: 1px solid transparent;
             border-radius: 4px 4px 0 0;
-            color: #ffffff;
+            color: #888888;
         }
 
         .panel-tabs > li > a:hover {
             border-color: transparent;
-            color: #ffffff;
-            background-color: transparent;
+            color: #000;
+            background-color: rgba(255,255,255, .5);
         }
 
         .panel-tabs > li.active > a,
         .panel-tabs > li.active > a:hover,
         .panel-tabs > li.active > a:focus {
-            color: #fff;
+            color: #000;
             cursor: default;
             -webkit-border-radius: 2px;
             -moz-border-radius: 2px;
             border-radius: 2px;
-            background-color: rgba(255,255,255, .23);
+            background-color: rgba(255,255,255, .75);
             border-bottom-color: transparent;
         }
     </style>
@@ -106,13 +106,9 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="{% url 'main:index' %}"  tabindex="-1">ForAuto</a>
+                        <a class="navbar-brand" href="{% url 'main:profile' %}"  tabindex="-1">ForAuto</a>
                     </div>
                     <div class="collapse navbar-collapse" id="topNavBar">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Afectaciones</a></li>
-                            <li class="active"><a href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; Ordenes</a></li>
-                        </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a href="{% url 'main:logout' %}"  tabindex="-1">

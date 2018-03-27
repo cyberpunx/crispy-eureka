@@ -275,6 +275,16 @@ class WorkOrderDetailView(generic.DetailView):
         context['status'] = last_status
         return context
 
+class WorkOrderUserDetailView(generic.DetailView):
+    template_name = 'main/user/workorder_detail.html'
+    model = WorkOrder
+
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderUserDetailView, self).get_context_data(**kwargs)
+        last_status = Movement.objects.filter(work_order__id__exact=self.kwargs['pk']).order_by('-id')[:1].first()
+        context['status'] = last_status
+        return context
+
 class WorkOrderPrintView(generic.DetailView):
     template_name = 'main/workorder/print.html'
     model = WorkOrder

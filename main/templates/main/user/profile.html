@@ -17,6 +17,13 @@
             <div class="panel-heading">
                 Timer en curso desde <strong>{{ last_timer.start_time }}</strong>
                 <br>
+                <span class="pull-right">
+                    <!-- Tabs -->
+                    <ul class="nav panel-tabs" >
+                        <li><a href="#tab1" data-toggle="tab">Afectaciones</a></li>
+                        <li class="active"><a href="#tab2" data-toggle="tab">Órdenes</a></li>
+                    </ul>
+                </span>
             </div>
             <div class="panel-body">
                  Orden de Trabajo #{{ last_timer.work_order.id }} //
@@ -35,6 +42,14 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Timer detenido
+                <br>
+                <span class="pull-right">
+                    <!-- Tabs -->
+                    <ul class="nav panel-tabs" >
+                        <li><a href="#tab1" data-toggle="tab">Afectaciones</a></li>
+                        <li class="active"><a href="#tab2" data-toggle="tab">Órdenes</a></li>
+                    </ul>
+                </span>
             </div>
             <div class="panel-body">
                 Para comenzar a contar el tiempo. Presione el botón play en alguna Orden de Trabajo de la lista.
@@ -52,7 +67,7 @@
 
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            Afectaciones
+                                            <strong>Afectaciones</strong>
                                         </div>
                                         <!-- /.panel-heading -->
                                         <div class="panel-body">
@@ -93,10 +108,9 @@
                             </div>
                             <div class="tab-pane active" id="tab2">
                                 <div class="row">
-
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
-                                                Ordenes de Trabajo - Abiertas
+                                                <strong>Ordenes de Trabajo - Abiertas</strong>
                                             </div>
                                             <!-- /.panel-heading -->
                                             <div class="panel-body">
@@ -113,19 +127,16 @@
                                                     {% for workorder in workorders %}
                                                         {% if workorder.last_movement.status == "Abierta" %}
                                                             <tr class="even gradeX">
-                                                                <td><a href="{% url 'main:workorder-detail'  workorder.id %}">{{ workorder.id }}</td>
+                                                                <td><a href="{% url 'main:workorder-user-detail'  workorder.id %}">{{ workorder.id }}</td>
                                                                 <td>
-                                                                    <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
-                                                                        {% if workorder.vehicle.client.business_name %}{{ workorder.vehicle.client.business_name }} - {% endif %}  {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}
-                                                                    </a>
+                                                                    {% if workorder.vehicle.client.business_name %}{{ workorder.vehicle.client.business_name }} - {% endif %}
+                                                                    {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}
                                                                 </td>
                                                                 <td>
-                                                                    <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
-                                                                        {{ workorder.vehicle.model }} /
-                                                                        {{ workorder.vehicle.year }} /
-                                                                        {{ workorder.vehicle.color }} /
-                                                                        Patente: {{ workorder.vehicle.licence_plate }}
-                                                                    </a>
+                                                                    {{ workorder.vehicle.model }} /
+                                                                    {{ workorder.vehicle.year }} /
+                                                                    {{ workorder.vehicle.color }} /
+                                                                    Patente: {{ workorder.vehicle.licence_plate }}
                                                                 </td>
                                                                 <td>
                                                                     {% if not last_timer.is_running %}
