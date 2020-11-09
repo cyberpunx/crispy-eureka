@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4bc09ca1-5038-47c7-a7f8-6cb89c3e75c8" name="Default" comment="agrego dbsettings a requirements.txt">
-      <change afterPath="$PROJECT_DIR$/main/static/main/img/logo_viejo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/admincar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/admincar.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4bc09ca1-5038-47c7-a7f8-6cb89c3e75c8" name="Default" comment="idea files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/static/main/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/img/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/print_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/print_base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/user/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/user/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/welcome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/registration/logged_out.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/registration/logged_out.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/registration/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/workorder/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/workorder/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,19 +61,19 @@
     </option>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Fenrir\dev\forauto\admincar\admincar\templates" />
-      <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates" />
-      <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates\main" />
-      <recent name="$PROJECT_DIR$/main/templates/main/vehicle" />
-      <recent name="$PROJECT_DIR$/main/templates/main" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates\main\user" />
       <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates\registration" />
       <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates" />
       <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates\main" />
       <recent name="C:\Users\Fenrir\dev\forauto\admincar\admincar\templates\registration" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Fenrir\dev\forauto\admincar\admincar\templates" />
+      <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates" />
+      <recent name="C:\Users\Fenrir\dev\forauto\admincar\main\templates\main" />
+      <recent name="$PROJECT_DIR$/main/templates/main/vehicle" />
+      <recent name="$PROJECT_DIR$/main/templates/main" />
     </key>
   </component>
   <component name="RunManager">
@@ -182,7 +172,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1497897299008</updated>
-      <workItem from="1604952442565" duration="4125000" />
+      <workItem from="1604952442565" duration="5988000" />
     </task>
     <task id="LOCAL-00001" summary="agrego dbsettings a requirements.txt">
       <created>1604954632388</created>
@@ -205,7 +195,21 @@
       <option name="project" value="LOCAL" />
       <updated>1604955987663</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="logo mustang garage">
+      <created>1604956824358</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604956824358</updated>
+    </task>
+    <task id="LOCAL-00005" summary="idea files">
+      <created>1604956839566</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604956839566</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,17 +219,19 @@
     <MESSAGE value="agrego dbsettings a requirements.txt" />
     <MESSAGE value="version correcta de dbsettings en requirements.txt" />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="logo mustang garage" />
+    <MESSAGE value="idea files" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1175" y="359" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604954527796">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
     <state x="1175" y="359" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604954527796" />
-    <state x="1153" y="117" width="1388" height="1215" key="CommitChangelistDialog2" timestamp="1604955987179">
+    <state x="1153" y="117" width="1388" height="1215" key="CommitChangelistDialog2" timestamp="1604956839069">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
-    <state x="1153" y="117" width="1388" height="1215" key="CommitChangelistDialog2/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604955987179" />
+    <state x="1153" y="117" width="1388" height="1215" key="CommitChangelistDialog2/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604956839069" />
     <state x="1435" y="633" key="FileChooserDialogImpl" timestamp="1604953589443">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
@@ -250,13 +256,13 @@
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
     <state x="1222" y="349" key="SettingsEditor/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604953758421" />
-    <state x="1313" y="437" key="Vcs.Push.Dialog.v2" timestamp="1604955989625">
+    <state x="1313" y="437" key="Vcs.Push.Dialog.v2" timestamp="1604956841553">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
-    <state x="1313" y="437" key="Vcs.Push.Dialog.v2/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604955989625" />
-    <state x="1428" y="304" width="1003" height="801" key="find.popup" timestamp="1604956647474">
+    <state x="1313" y="437" key="Vcs.Push.Dialog.v2/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604956841553" />
+    <state x="1428" y="304" width="1003" height="801" key="find.popup" timestamp="1604956784758">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
-    <state x="1428" y="304" width="1003" height="801" key="find.popup/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604956647474" />
+    <state x="1428" y="304" width="1003" height="801" key="find.popup/0.0.3440.1410/-1080.-310.1080.1890@0.0.3440.1410" timestamp="1604956784758" />
   </component>
 </project>

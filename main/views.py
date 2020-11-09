@@ -14,6 +14,7 @@ from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from main.decorators import staff_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
 
 def index_view(request):
@@ -256,12 +257,25 @@ class EmployeeDeleteView(DeleteView):
 
 class WorkOrderIndexView(generic.ListView):
     template_name = 'main/workorder/index.html'
+    paginate_by = 500
 
     def get_queryset(self):
         return WorkOrder.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(WorkOrderIndexView, self).get_context_data(**kwargs)
+        order_list = WorkOrder.objects.all()
+        paginator = Paginator(order_list, self.paginate_by)
+        page = self.request.GET.get('page')
+
+        try:
+            orders = paginator.page(page)
+        except PageNotAnInteger:
+            orders = paginator.page(1)
+        except EmptyPage:
+            orders = paginator.page(paginator.num_pages)
+
+        context["orders"] = orders
         context['labor_rate'] = models.WorkOrder.settings.labor_rate
         return context
 
