@@ -260,11 +260,11 @@ class WorkOrderIndexView(generic.ListView):
     paginate_by = 500
 
     def get_queryset(self):
-        return WorkOrder.objects.all()
+        return WorkOrder.objects.all().order_by('-id')
 
     def get_context_data(self, **kwargs):
         context = super(WorkOrderIndexView, self).get_context_data(**kwargs)
-        order_list = WorkOrder.objects.all()
+        order_list = WorkOrder.objects.all().order_by('-id')
         paginator = Paginator(order_list, self.paginate_by)
         page = self.request.GET.get('page')
 
