@@ -186,6 +186,11 @@ class WorkOrder(models.Model):
         return last_movement
 
     @property
+    def first_movement(self):
+        first_movement = Movement.objects.filter(work_order__id__exact=self.id).order_by('id')[:1].first()
+        return first_movement
+
+    @property
     def total(self):
         return self.work_sum + self.part_sum
 

@@ -22,9 +22,10 @@
 
             </div>
             <div class="col-xs-4">
-                <br>
-                {% if workorder.date_in %}<p class="text-right"><strong>Fecha Entrada: </strong>{{ workorder.date_in|date:'d-m-Y' }}</p>{% endif %}
-                {% if workorder.date_out %} <p class="text-right"><strong>Fecha Salida: </strong>{{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
+
+                <p class="text-right"><strong>Fecha Actual: </strong>: {% now 'd/m/Y H:i' %}</p>
+                {% if workorder.first_movement %}<p class="text-right"><strong>Fecha de Carga: </strong>{{ workorder.first_movement.date|date:'d/m/Y' }}</p>{% endif %}
+                {% if workorder.last_movement %} <p class="text-right"><strong>Último Estado: </strong>{{ workorder.last_movement.status }} ({{ workorder.last_movement.date|date:'d/m/Y' }})</p>{% endif %}
             </div>
         </div>
         <hr>
