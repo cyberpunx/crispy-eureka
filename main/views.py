@@ -83,7 +83,7 @@ class ClientDeleteView(DeleteView):
     success_url = reverse_lazy('main:client-index')
 
 class ClientHistoryView(generic.ListView):
-    template_name = 'main/workorder/index.html'
+    template_name = 'main/workorder/index_no_paginate.html'
 
     def get_queryset(self):
         qs = WorkOrder.objects.get_queryset().order_by('id')
@@ -135,7 +135,7 @@ class VehicleDeleteView(DeleteView):
         return reverse('main:client-detail', kwargs={'pk': self.object.client.pk})
 
 class VehicleHistoryView(generic.ListView):
-    template_name = 'main/workorder/index.html'
+    template_name = 'main/workorder/index_no_paginate.html'
 
     def get_queryset(self):
         qs = WorkOrder.objects.get_queryset().order_by('id')
