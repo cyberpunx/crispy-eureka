@@ -191,6 +191,9 @@ class WorkOrder(models.Model):
     total_manual = models.DecimalField(blank=True, verbose_name="Sobreescribir Total", null=True, max_digits=10, decimal_places=2)
     firma_entrada = JSignatureField(blank=True, null=True, verbose_name="Firma ingreso a taller")
     firma_salida = JSignatureField(blank=True, null=True, verbose_name="Firma salida de taller")
+    firma_texto_entrada = models.CharField(blank=True, null=True, verbose_name="Texto de Firma ingreso a taller", max_length=256)
+    firma_texto_salida = models.CharField(blank=True, null=True, verbose_name="Texto de Firma salida de taller",
+                                           max_length=256)
 
     @property
     def last_movement(self):

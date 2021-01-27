@@ -283,6 +283,7 @@ class WorkOrderIndexView(generic.ListView):
         context['labor_rate'] = models.WorkOrder.settings.labor_rate
         return context
 
+
 class WorkOrderDetailView(generic.DetailView):
     template_name = 'main/workorder/detail.html'
     model = WorkOrder
@@ -341,6 +342,10 @@ class WorkOrderSingatureInView(UpdateView):
     fields = ['firma_entrada']
 
     def get_success_url(self):
+        obj = self.object.pk
+        orden = WorkOrder.objects.get(id=self.object.pk)
+        orden.firma_texto_entrada = models.WorkOrder.settings.texto_firma_entrada
+        orden.save()
         return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):

@@ -202,7 +202,7 @@
                 <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma del cliente al entregar el
                     vehículo*</strong>
                 </div>
-                <p class="text-muted small">*{{ texto_firma_entrada }}</p>
+                <p class="text-muted small">*{{ workorder.firma_texto_entrada|default_if_none:"" }}</p>
             </div>
             <div class="col-lg-6">
                 {% if workorder.firma_salida %}
@@ -215,7 +215,7 @@
                 <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma del cliente al recibir el
                     vehículo*</strong>
                 </div>
-                <p class="text-muted small">*{{ texto_firma_salida }}</p>
+                <p class="text-muted small">*{{ workorder.firma_texto_salida|default_if_none:"" }}</p>
             </div>
         </div>
     </div>
