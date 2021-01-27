@@ -39,7 +39,7 @@
                                 {% for workorder in object_list %}
 
                                     <tr class="even gradeX">
-                                        <td><a href="{% url 'main:workorder-detail'  workorder.id %}">{{ workorder.id }}</td>
+                                        <td><a href="{% url 'main:workorder-detail'  workorder.id %}">{{ workorder.id }}</a></td>
                                         <td>
                                             <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
                                                 {% if workorder.vehicle.client.business_name %}{{ workorder.vehicle.client.business_name }} - {% endif %}  {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}

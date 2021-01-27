@@ -123,6 +123,9 @@ urlpatterns = [
     # /main/workorders/<workorder_id>/
     url(r'workorders/print/(?P<pk>[0-9]+)/$', views.WorkOrderPrintView.as_view(), name='workorder-print'),
 
+    url(r'workorders/signature_in/(?P<pk>[0-9]+)/$', views.WorkOrderSingatureInView.as_view(), name='workorder-signature-in'),
+    url(r'workorders/signature_out/(?P<pk>[0-9]+)/$', views.WorkOrderSingatureOutView.as_view(), name='workorder-signature-out'),
+
     # /main/workorders/<part_id>/delete/
     url(r'workorders/(?P<pk>[0-9]+)/delete/$', views.WorkOrderDeleteView.as_view(), name='workorder-delete'),
 

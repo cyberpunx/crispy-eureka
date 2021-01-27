@@ -3,11 +3,14 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django import forms
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from datetime import timedelta
 import dbsettings
 import datetime
+from django.utils import timezone
+from jsignature.fields import JSignatureField
 
 
 class ClientManager(models.Manager):
@@ -127,6 +130,7 @@ class PartCategory(models.Model):
     def __str__(self):
         return self.category_name
 
+
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     display_name = models.CharField(max_length=20, verbose_name="Código", unique=True)
@@ -138,6 +142,10 @@ class Employee(models.Model):
 
 class Global(dbsettings.Group):
     labor_rate = dbsettings.PositiveIntegerValue(default='0', help_text='Valor de la hora de trabajo')
+    texto_firma_entrada = dbsettings.StringValue(default='', help_text='Texto de firma al ingresar vehículo', widget=forms.Textarea, required=False)
+    texto_firma_salida = dbsettings.StringValue(default='', help_text='Texto de firma al salir vehículo',
+                                                 widget=forms.Textarea, required=False)
+
 
 class Part(models.Model):
     part_name = models.CharField(max_length=40, verbose_name="Repuesto")
@@ -150,6 +158,7 @@ class Part(models.Model):
         else:
             return self.category.category_name + ' / ' + self.part_name
 
+
 class Work(models.Model):
     work_name = models.CharField(max_length=40, verbose_name="Trabajo")
     code = models.CharField(max_length=6, verbose_name="Código", blank=True, null=True, unique=True)
@@ -160,6 +169,7 @@ class Work(models.Model):
             return '['+self.code+'] ' + self.category.category_name + ' / ' + self.work_name
         else:
             return self.category.category_name + ' / ' + self.work_name
+
 
 class WorkOrder(models.Model):
     vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT, verbose_name="Vehiculo")
@@ -178,7 +188,9 @@ class WorkOrder(models.Model):
     ticket_number = models.CharField(blank=True, null=True, max_length=100, verbose_name="Nro. Factura")
     parts = models.ManyToManyField(Part, through='WorkorderParts')
     works = models.ManyToManyField(Work, through='WorkorderWorks')
-    total_manual = models.DecimalField(blank=True, verbose_name="Sobreescribir Total", null = True, max_digits=10, decimal_places=2)
+    total_manual = models.DecimalField(blank=True, verbose_name="Sobreescribir Total", null=True, max_digits=10, decimal_places=2)
+    firma_entrada = JSignatureField(blank=True, null=True, verbose_name="Firma ingreso a taller")
+    firma_salida = JSignatureField(blank=True, null=True, verbose_name="Firma salida de taller")
 
     @property
     def last_movement(self):
@@ -281,7 +293,7 @@ class Movement(models.Model):
 class Timer(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
-    start_time = models.DateTimeField(verbose_name="Inicio", default=datetime.datetime.now())
+    start_time = models.DateTimeField(verbose_name="Inicio", auto_now=True)
     end_time = models.DateTimeField(blank=True, null=True, verbose_name="Fin")
 
 

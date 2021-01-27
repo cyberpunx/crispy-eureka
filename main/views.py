@@ -16,6 +16,7 @@ from django.contrib.auth.decorators import login_required
 from main.decorators import staff_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
+from django.conf import settings
 
 def index_view(request):
     return render(request, 'main/index.html', {})
@@ -109,6 +110,7 @@ class VehicleCreateView(CreateView):
     def get_success_url(self):
         return reverse('main:client-detail', kwargs={'pk': self.object.client.pk})
 
+
 class VehicleClientCreateView(CreateView):
     template_name = 'main/vehicle/autocomplete_form.html'
     form_class = VehicleClientForm
@@ -134,6 +136,7 @@ class VehicleDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('main:client-detail', kwargs={'pk': self.object.client.pk})
 
+
 class VehicleHistoryView(generic.ListView):
     template_name = 'main/workorder/index_no_paginate.html'
 
@@ -141,6 +144,7 @@ class VehicleHistoryView(generic.ListView):
         qs = WorkOrder.objects.get_queryset().order_by('id')
         qs = qs.filter(vehicle__id__exact=self.kwargs['pk'])
         return qs
+
 
 class BrandIndexView(generic.ListView):
     template_name = 'main/brand/index.html'
@@ -287,7 +291,10 @@ class WorkOrderDetailView(generic.DetailView):
         context = super(WorkOrderDetailView, self).get_context_data(**kwargs)
         last_status = Movement.objects.filter(work_order__id__exact=self.kwargs['pk']).order_by('-id')[:1].first()
         context['status'] = last_status
+        context['alto_firma'] = settings.JSIGNATURE_HEIGHT
+        context['ancho_firma'] = settings.JSIGNATURE_WIDTH
         return context
+
 
 class WorkOrderUserDetailView(generic.DetailView):
     template_name = 'main/user/workorder_detail.html'
@@ -299,9 +306,18 @@ class WorkOrderUserDetailView(generic.DetailView):
         context['status'] = last_status
         return context
 
+
 class WorkOrderPrintView(generic.DetailView):
     template_name = 'main/workorder/print.html'
     model = WorkOrder
+
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderPrintView, self).get_context_data(**kwargs)
+        context['texto_firma_entrada'] = models.WorkOrder.settings.texto_firma_entrada
+        context['texto_firma_salida'] = models.WorkOrder.settings.texto_firma_salida
+        context['alto_firma'] = settings.JSIGNATURE_HEIGHT
+        context['ancho_firma'] = settings.JSIGNATURE_WIDTH
+        return context
 
 
 class WorkOrderDeleteView(DeleteView):
@@ -317,6 +333,37 @@ class WorkOrderUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
+
+
+class WorkOrderSingatureInView(UpdateView):
+    template_name = 'main/workorder/firma_form.html'
+    model = WorkOrder
+    fields = ['firma_entrada']
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderSingatureInView, self).get_context_data(**kwargs)
+        context['texto_firma_entrada'] = models.WorkOrder.settings.texto_firma_entrada
+        context['texto_firma_salida'] = models.WorkOrder.settings.texto_firma_salida
+        return context
+
+
+class WorkOrderSingatureOutView(UpdateView):
+    template_name = 'main/workorder/firma_form.html'
+    model = WorkOrder
+    fields = ['firma_salida']
+
+    def get_success_url(self):
+        return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super(WorkOrderSingatureOutView, self).get_context_data(**kwargs)
+        context['texto_firma_entrada'] = models.WorkOrder.settings.texto_firma_entrada
+        context['texto_firma_salida'] = models.WorkOrder.settings.texto_firma_salida
+        return context
+
 
 class WorkOrderUpdateDetailsView(UpdateView):
     template_name = 'main/workorder/details_form.html'

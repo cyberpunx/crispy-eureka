@@ -1,5 +1,7 @@
 {% extends 'main/print_base.html' %}
 {% load staticfiles %}
+{% load jsignature_filters %}
+
 
 {% block title %}
 
@@ -22,10 +24,13 @@
 
             </div>
             <div class="col-xs-4">
-
                 <p class="text-right"><strong>Fecha Actual: </strong>: {% now 'd/m/Y H:i' %}</p>
-                {% if workorder.first_movement %}<p class="text-right"><strong>Fecha de Carga: </strong>{{ workorder.first_movement.date|date:'d/m/Y' }}</p>{% endif %}
-                {% if workorder.last_movement %} <p class="text-right"><strong>Último Estado: </strong>{{ workorder.last_movement.status }} ({{ workorder.last_movement.date|date:'d/m/Y' }})</p>{% endif %}
+                {% if workorder.first_movement %}<p class="text-right"><strong>Fecha de
+                    Carga: </strong>{{ workorder.first_movement.date|date:'d/m/Y' }}</p>{% endif %}
+                {% if workorder.last_movement.status == 'Completa' %}
+                    <p class="text-right"><strong>Fecha de
+                        Cierre: </strong>{{ workorder.last_movement.date|date:'d/m/Y' }}</p>
+                {% endif %}
             </div>
         </div>
         <hr>
@@ -42,11 +47,13 @@
                 <div class="panel panel-default" style="min-height: 15em; border-color: #333333;">
                     <div class="panel-heading text-center"><strong>Cliente</strong></div>
                     <div class="panel-body" style="font-size: 12px">
-                        {% if workorder.vehicle.client.business_name %}Cliente: {{ workorder.vehicle.client.business_name }}<br>{% endif %}
+                        {% if workorder.vehicle.client.business_name %}Cliente:
+                            {{ workorder.vehicle.client.business_name }}<br>{% endif %}
                         Nombre:{{ workorder.vehicle.client.first_name }}<br>
                         Apellido:{{ workorder.vehicle.client.last_name }}<br>
                         Teléfono:{{ workorder.vehicle.client.phone }}<br>
-                        {% if workorder.vehicle.client.alt_phone %}Tel. Alt: {{ workorder.vehicle.client.alt_phone }}<br>{% endif %}
+                        {% if workorder.vehicle.client.alt_phone %}Tel. Alt: {{ workorder.vehicle.client.alt_phone }}
+                            <br>{% endif %}
                     </div>
                 </div>
             </div>
@@ -60,7 +67,8 @@
                         Patente: {{ workorder.vehicle.licence_plate }}<br>
                         {% if workorder.vehicle.engine %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
                         {% if workorder.vehicle.vin %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
-                        {% if workorder.vehicle.engine_number %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
+                        {% if workorder.vehicle.engine_number %} Nro. Motor: {{ workorder.vehicle.engine_number }}
+                            <br> {% endif %}
                         {% if workorder.kilometers %}Kilometraje: {{ workorder.kilometers }}<br>{% endif %}
                         {% if workorder.fuel_level %}Tanque combustible: {{ workorder.fuel_level }}<br>{% endif %}
                     </div>
@@ -70,7 +78,7 @@
                 <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
                     <div class="panel-heading text-center"><strong>Observaciones Iniciales</strong></div>
                     <div class="panel-body" style="font-size: 12px">
-                        {{ workorder.initial_obs|linebreaks  }}
+                        {{ workorder.initial_obs|linebreaks }}
                     </div>
                 </div>
             </div>
@@ -78,7 +86,7 @@
                 <div class="panel panel-default" style="min-height: 15em; border-color: #0c0c0c">
                     <div class="panel-heading text-center"><strong>Diagnóstico</strong></div>
                     <div class="panel-body" style="font-size: 12px">
-                        {{ workorder.diagnostic|linebreaks  }}
+                        {{ workorder.diagnostic|linebreaks }}
                     </div>
                 </div>
             </div>
@@ -86,16 +94,16 @@
 
 
         {% if workorder.note %}
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default" style="border-color: #333333;">
-                    <div class="panel-heading"><strong>Observaciones</strong></div>
-                    <div class="panel-body" style="min-height: 4em">
-                        {{ workorder.note }}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default" style="border-color: #333333;">
+                        <div class="panel-heading"><strong>Observaciones</strong></div>
+                        <div class="panel-body" style="min-height: 4em">
+                            {{ workorder.note }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         {% endif %}
         <div class="row">
             <div class="col-lg-12">
@@ -107,39 +115,42 @@
                         <div class="table-responsive">
                             <table class="table table-condensed">
                                 <thead>
-                                    <tr>
-                                        <td colspan="2"><strong>Trabajo</strong></td>
-                                        <td class="text-center"><strong></strong></td>
-                                        <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
-                                        <td class="text-center"><strong>Precio</strong></td>
-                                        <td class="text-right"><strong>Importe</strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Trabajo</strong></td>
+                                    <td class="text-center"><strong></strong></td>
+                                    <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
+                                    <td class="text-center"><strong>Precio</strong></td>
+                                    <td class="text-right"><strong>Importe</strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for work in workorder.workorderworks_set.all %}
+                                {% for work in workorder.workorderworks_set.all %}
                                     <tr>
                                         <td>{{ work.work.work_name }}</td>
                                         <td>{{ work.work.category }}</td>
                                         <td class="text-center"></td>
-                                        <td class="text-center">{% if work.time_required %}{{ work.time_required }}{% endif %}</td>
-                                        <td class="text-center">{% if work.time_required %}{{ work.labor_rate }}{% endif %}</td>
-                                        <td class="text-right">{% if work.time_required %}${{ work.work_price }}{% endif %}</td>
+                                        <td class="text-center">
+                                            {% if work.time_required %}{{ work.time_required }}{% endif %}</td>
+                                        <td class="text-center">
+                                            {% if work.time_required %}{{ work.labor_rate }}{% endif %}</td>
+                                        <td class="text-right">{% if work.time_required %}$
+                                            {{ work.work_price }}{% endif %}</td>
                                     </tr>
-                                    {% endfor %}
+                                {% endfor %}
                                 </tbody>
                                 <thead>
-                                    <tr>
-                                        <td colspan="2"><strong>Repuestos</strong></td>
-                                        <td class="text-center"><strong></strong></td>
-                                        <td class="text-center"><strong></strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Repuestos</strong></td>
+                                    <td class="text-center"><strong></strong></td>
+                                    <td class="text-center"><strong></strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for part in workorder.workorderparts_set.all %}
+                                {% for part in workorder.workorderparts_set.all %}
                                     <tr>
                                         <td>{{ part.part.part_name }}</td>
                                         <td>{{ part.part.category }}</td>
@@ -148,24 +159,30 @@
                                         <td class="text-center">{% if part.price %}{{ part.price }}{% endif %}</td>
                                         <td class="text-right">{% if part.price %}{{ part.part_price }}{% endif %}</td>
                                     </tr>
-                                    {% endfor %}
+                                {% endfor %}
                                 </tbody>
                                 <tbody>
-                                    <tr>
-                                        <td class="thick-line" colspan="4"></td>
-                                        <td class="thick-line text-right">Subtotal</td>
-                                        {% if workorder.total_manual %}<td class="thick-line text-right">${{ workorder.total_manual }}</td>
-                                        {% else %}<td class="thick-line text-right">${{ workorder.total }}</td>{% endif %}
-                                    </tr>
-                                    <tr>
-                                        <td class="no-line"><strong>{% if not workorder.total_manual %}Repuestos: ${{ workorder.part_sum }}{% endif %}</strong></td>
-                                        <td class="no-line"><strong>{% if not workorder.total_manual %}Mano de obra: ${{ workorder.work_sum }}{% endif %}</strong></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line text-right"><strong>Total</strong></td>
-                                        {% if workorder.total_manual %}<td class="no-line text-right">${{ workorder.total_manual }}</td>
-                                        {% else %}<td class="no-line text-right">${{ workorder.total }}</td>{% endif %}
-                                    </tr>
+                                <tr>
+                                    <td class="thick-line" colspan="4"></td>
+                                    <td class="thick-line text-right">Subtotal</td>
+                                    {% if workorder.total_manual %}
+                                        <td class="thick-line text-right">${{ workorder.total_manual }}</td>
+                                    {% else %}
+                                        <td class="thick-line text-right">${{ workorder.total }}</td>{% endif %}
+                                </tr>
+                                <tr>
+                                    <td class="no-line"><strong>{% if not workorder.total_manual %}Repuestos: $
+                                        {{ workorder.part_sum }}{% endif %}</strong></td>
+                                    <td class="no-line"><strong>{% if not workorder.total_manual %}Mano de obra: $
+                                        {{ workorder.work_sum }}{% endif %}</strong></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-right"><strong>Total</strong></td>
+                                    {% if workorder.total_manual %}
+                                        <td class="no-line text-right">${{ workorder.total_manual }}</td>
+                                    {% else %}
+                                        <td class="no-line text-right">${{ workorder.total }}</td>{% endif %}
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -174,9 +191,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <div class="panel-body" style="min-height: 4em"></div>
-                <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma</strong></div>
+            <div class="col-lg-6">
+                {% if workorder.firma_entrada %}
+                    <div style="height: {{ alto_firma }}px">
+                        <img src="{{ workorder.firma_entrada|signature_base64 }}"/>
+                    </div>
+                {% else %}
+                    <div style="height: {{ alto_firma }}px"></div>
+                {% endif %}
+                <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma del cliente al entregar el
+                    vehículo*</strong>
+                </div>
+                <p class="text-muted small">*{{ texto_firma_entrada }}</p>
+            </div>
+            <div class="col-lg-6">
+                {% if workorder.firma_salida %}
+                    <div style="height: {{ alto_firma }}px">
+                        <img src="{{ workorder.firma_salida|signature_base64 }}"/>
+                    </div>
+                {% else %}
+                    <div style="height: {{ alto_firma }}px"></div>
+                {% endif %}
+                <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma del cliente al recibir el
+                    vehículo*</strong>
+                </div>
+                <p class="text-muted small">*{{ texto_firma_salida }}</p>
             </div>
         </div>
     </div>

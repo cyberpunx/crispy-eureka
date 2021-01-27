@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% load staticfiles %}
-
+{% load jsignature_filters %}
 {% block title %}
 
 {% endblock %}
@@ -17,24 +17,29 @@
                 <div class="row">
                     <div class="col-md-6">
                         {% if workorder.employee %}<p>Técnico: {{ workorder.employee }}</p>{% endif %}
-                        {% if workorder.ticket_number is not None %}<p>Nro. Factura: {{ workorder.ticket_number }}</p>{% endif %}
+                        {% if workorder.ticket_number is not None %}
+                            <p>Nro. Factura: {{ workorder.ticket_number }}</p>{% endif %}
                     </div>
                     <div class="col-md-6">
-                        {% if workorder.date_out %}<p class="text-right">Fecha Entrada: {{ workorder.date_in|date:'d-m-Y' }}</p>{% endif %}
-                        {% if workorder.date_out %} <p class="text-right">Fecha Salida: {{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
+                        {% if workorder.date_out %}
+                            <p class="text-right">Fecha Entrada: {{ workorder.date_in|date:'d-m-Y' }}</p>{% endif %}
+                        {% if workorder.date_out %}
+                            <p class="text-right">Fecha Salida: {{ workorder.date_out|date:'d-m-Y' }}</p>{% endif %}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-3">
-                        <div class="panel panel-default" >
+                        <div class="panel panel-default">
                             <div class="panel-heading"><strong>Cliente</strong></div>
                             <div class="panel-body" style="min-height: 15em; font-size: 12px">
-                                {% if workorder.vehicle.client.business_name %}Cliente: {{ workorder.vehicle.client.business_name }}<br>{% endif %}
+                                {% if workorder.vehicle.client.business_name %}Cliente:
+                                    {{ workorder.vehicle.client.business_name }}<br>{% endif %}
                                 Nombre:{{ workorder.vehicle.client.first_name }}<br>
                                 Apellido:{{ workorder.vehicle.client.last_name }}<br>
                                 Teléfono:{{ workorder.vehicle.client.phone }}<br>
-                                {% if workorder.vehicle.client.alt_phone %}Tel. Alternativo: {{ workorder.vehicle.client.alt_phone }}<br>{% endif %}
+                                {% if workorder.vehicle.client.alt_phone %}Tel. Alternativo:
+                                    {{ workorder.vehicle.client.alt_phone }}<br>{% endif %}
                             </div>
                         </div>
                     </div>
@@ -48,9 +53,11 @@
                                 Patente: {{ workorder.vehicle.licence_plate }}<br>
                                 {% if workorder.vehicle.engine %} Motor: {{ workorder.vehicle.engine }}<br> {% endif %}
                                 {% if workorder.vehicle.vin %} VIN: {{ workorder.vehicle.vin }}<br> {% endif %}
-                                {% if workorder.vehicle.engine_number %} Nro. Motor: {{ workorder.vehicle.engine_number }}<br> {% endif %}
+                                {% if workorder.vehicle.engine_number %} Nro. Motor:
+                                    {{ workorder.vehicle.engine_number }}<br> {% endif %}
                                 {% if workorder.kilometers %}Kilometraje: {{ workorder.kilometers }}<br>{% endif %}
-                                {% if workorder.fuel_level %}Tanque combustible: {{ workorder.fuel_level }}<br>{% endif %}
+                                {% if workorder.fuel_level %}Tanque combustible: {{ workorder.fuel_level }}
+                                    <br>{% endif %}
                             </div>
                         </div>
                     </div>
@@ -76,19 +83,63 @@
         <div class="row">
             <div class="col-md-12">
                 <p>
-                    <a href="{% url 'main:workorderworks-add' workorder.id  %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Trabajo</button></a>
-                    <a href="{% url 'main:workorderparts-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Repuesto</button></a>
-                    <a href="{% url 'main:movements-add' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar Movimiento</button></a>
-                    <a href="{% url 'main:workorder-update-details' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> Datos Adicionales</button></a>
-                    <a href="{% url 'main:workorder-print' workorder.id %}"><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> Imprimir</button></a>
+                <div class="btn-group">
+                    <a href="{% url 'main:workorderworks-add' workorder.id %}">
+                        <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar
+                            Trabajo
+                        </button>
+                    </a>
+                    <a href="{% url 'main:workorderparts-add' workorder.id %}">
+                        <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar
+                            Repuesto
+                        </button>
+                    </a>
+                    <a href="{% url 'main:movements-add' workorder.id %}">
+                        <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Agregar
+                            Movimiento
+                        </button>
+                    </a>
+                    <a href="{% url 'main:workorder-update-details' workorder.id %}">
+                        <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-list"></i> Datos
+                            Adicionales
+                        </button>
+                    </a>
+                </div>
+                </p>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 1%">
+            <div class="col-md-12">
+                <div class="btn-group">
+                    <a href="{% url 'main:workorder-signature-in' workorder.id %}">
+                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i> Firma
+                            Entrada
+                        </button>
+                    </a>
+                    <a href="{% url 'main:workorder-signature-out' workorder.id %}">
+                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-edit"></i> Firma
+                            Salida
+                        </button>
+                    </a>
+                    <a href="{% url 'main:workorder-print' workorder.id %}">
+                        <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> Imprimir
+                        </button>
+                    </a>
+                </div>
 
-                    <a href="{% url 'main:workorder-delete' workorder.id %}"><button type="button" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-remove"></i> Eliminar Orden </button></a>
+                <div class="btn-group pull-right">
+                    <a href="{% url 'main:workorder-delete' workorder.id %}">
+                        <button type="button" class="btn btn-danger"><i
+                                class="glyphicon glyphicon-remove"></i> Eliminar Orden
+                        </button>
+                    </a>
                     <a href="{% url 'main:workorder-update' workorder.id %}">
-                        <button type="button" class="btn btn-success pull-right" style="margin-right:10px">
+                        <button type="button" class="btn btn-success" style="margin-right:10px">
                             <i class="glyphicon glyphicon-edit"></i> Editar
                         </button>
                     </a>
-                </p>
+                </div>
+
             </div>
         </div>
         <div class="row">
@@ -101,42 +152,47 @@
                         <div class="table-responsive">
                             <table class="table table-condensed">
                                 <thead>
-                                    <tr>
-                                        <td colspan="2"><strong>Trabajo</strong></td>
-                                        <td class="text-center"><strong></strong></td>
-                                        <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
-                                        <td class="text-center"><strong>Precio Unidad</strong></td>
-                                        <td class="text-right"><strong>Importe</strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Trabajo</strong></td>
+                                    <td class="text-center"><strong></strong></td>
+                                    <td class="text-center"><strong>Tiempo / Cantidad</strong></td>
+                                    <td class="text-center"><strong>Precio Unidad</strong></td>
+                                    <td class="text-right"><strong>Importe</strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for work in workorder.workorderworks_set.all %}
+                                {% for work in workorder.workorderworks_set.all %}
                                     <tr>
                                         <td>{{ work.work.work_name }}</td>
                                         <td>{{ work.work.category }}</td>
                                         <td class="text-center"></td>
-                                        <td class="text-center">{% if work.time_required %}{{ work.time_required }}{% endif %}</td>
-                                        <td class="text-center">{% if work.time_required %}{{ work.labor_rate }}{% endif %}</td>
-                                        <td class="text-right">{% if work.time_required %}${{ work.work_price }}{% endif %}</td>
+                                        <td class="text-center">
+                                            {% if work.time_required %}{{ work.time_required }}{% endif %}</td>
+                                        <td class="text-center">
+                                            {% if work.time_required %}{{ work.labor_rate }}{% endif %}</td>
+                                        <td class="text-right">{% if work.time_required %}$
+                                            {{ work.work_price }}{% endif %}</td>
                                         <td class="text-right">
-                                            <a href="{% url 'main:workorderworks-delete' work.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:workorderworks-delete' work.id %}"><span
+                                                    class="glyphicon glyphicon-remove text-danger"
+                                                    aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
-                                    {% endfor %}
+                                {% endfor %}
                                 </tbody>
                                 <thead>
-                                    <tr>
-                                        <td colspan="2"><strong>Repuestos</strong></td>
-                                        <td class="text-center"><strong></strong></td>
-                                        <td class="text-center"><strong></strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                        <td class="text-right"><strong></strong></td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Repuestos</strong></td>
+                                    <td class="text-center"><strong></strong></td>
+                                    <td class="text-center"><strong></strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                    <td class="text-right"><strong></strong></td>
+                                </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for part in workorder.workorderparts_set.all %}
+                                {% for part in workorder.workorderparts_set.all %}
                                     <tr>
                                         <td>{{ part.part.part_name }}</td>
                                         <td>{{ part.part.category }}</td>
@@ -145,28 +201,36 @@
                                         <td class="text-center">{% if part.price %}{{ part.price }}{% endif %}</td>
                                         <td class="text-right">{% if part.price %}{{ part.part_price }}{% endif %}</td>
                                         <td class="text-right">
-                                            <a href="{% url 'main:workorderparts-delete' part.id %}"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></a>
+                                            <a href="{% url 'main:workorderparts-delete' part.id %}"><span
+                                                    class="glyphicon glyphicon-remove text-danger"
+                                                    aria-hidden="true"></span></a>
                                         </td>
                                     </tr>
-                                    {% endfor %}
+                                {% endfor %}
                                 </tbody>
                                 <tbody>
-                                    <tr>
-                                        <td class="thick-line" colspan="4"></td>
-                                        <td class="thick-line text-right">Subtotal</td>
-                                        {% if workorder.total_manual %}<td class="thick-line text-right">${{ workorder.total_manual }}</td>
-                                        {% else %}<td class="thick-line text-right">${{ workorder.total }}</td>{% endif %}
-                                    </tr>
-                                    <tr>
-                                        <td class="no-line"><strong>{% if not workorder.total_manual %}Repuestos: ${{ workorder.part_sum }}{% endif %}</strong></td>
-                                        <td class="no-line"><strong>{% if not workorder.total_manual %}Mano de obra: ${{ workorder.work_sum }}{% endif %}</strong></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line"></td>
-                                        <td class="no-line text-right"><strong>Total</strong></td>
-                                        {% if workorder.total_manual %}<td class="no-line text-right">${{ workorder.total_manual }}</td>
-                                        {% else %}<td class="no-line text-right">${{ workorder.total }}</td>{% endif %}
+                                <tr>
+                                    <td class="thick-line" colspan="4"></td>
+                                    <td class="thick-line text-right">Subtotal</td>
+                                    {% if workorder.total_manual %}
+                                        <td class="thick-line text-right">${{ workorder.total_manual }}</td>
+                                    {% else %}
+                                        <td class="thick-line text-right">${{ workorder.total }}</td>{% endif %}
+                                </tr>
+                                <tr>
+                                    <td class="no-line"><strong>{% if not workorder.total_manual %}Repuestos: $
+                                        {{ workorder.part_sum }}{% endif %}</strong></td>
+                                    <td class="no-line"><strong>{% if not workorder.total_manual %}Mano de obra: $
+                                        {{ workorder.work_sum }}{% endif %}</strong></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-right"><strong>Total</strong></td>
+                                    {% if workorder.total_manual %}
+                                        <td class="no-line text-right">${{ workorder.total_manual }}</td>
+                                    {% else %}
+                                        <td class="no-line text-right">${{ workorder.total }}</td>{% endif %}
 
-                                    </tr>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -174,20 +238,20 @@
                 </div>
             </div>
         </div>
-    {% if workorder.note %}
-     <div class="row">
-        <div class="col-xs-12">
-            <div class="panel panel-default" >
-                <div class="panel-heading">Observaciones</div>
-                <div class="panel-body" style="min-height: 4em">
-                    {{ workorder.note }}
+        {% if workorder.note %}
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Observaciones</div>
+                        <div class="panel-body" style="min-height: 4em">
+                            {{ workorder.note }}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    {% endif %}
+        {% endif %}
 
-    <div class="row">
+        <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -197,22 +261,22 @@
                         <div class="table-responsive">
                             <table class="table table-condensed">
                                 <thead>
-                                    <tr>
-                                        <td width="15%"><strong>Movimiento</strong></td>
-                                        <td width="20%"><strong>Fecha</strong></td>
-                                        <td width="15%"><strong>Empleado</strong></td>
-                                        <td><strong>Nota</strong></td>
-                                    </tr>
+                                <tr>
+                                    <td width="15%"><strong>Movimiento</strong></td>
+                                    <td width="20%"><strong>Fecha</strong></td>
+                                    <td width="15%"><strong>Empleado</strong></td>
+                                    <td><strong>Nota</strong></td>
+                                </tr>
                                 </thead>
                                 <tbody class="individual-form">
-                                    {% for movement in workorder.movement_set.all %}
+                                {% for movement in workorder.movement_set.all %}
                                     <tr>
                                         <td>{{ movement.status }}</td>
-                                        <td>{{ movement.date }}  - {{ movement.time }}</td>
+                                        <td>{{ movement.date }} - {{ movement.time }}</td>
                                         <td>{% if movement.employee %}{{ movement.employee }}{% endif %}</td>
                                         <td>{{ movement.note }}</td>
                                     </tr>
-                                    {% endfor %}
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -221,7 +285,37 @@
             </div>
         </div>
 
-</div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                {% if workorder.firma_entrada %}
+                    <div style="height: {{ alto_firma }}px">
+                        <img src="{{ workorder.firma_entrada|signature_base64 }}"/>
+                    </div>
+                {% else %}
+                    <div style="height: {{ alto_firma }}px"></div>
+                {% endif %}
+                <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma del cliente al entregar el
+                    vehículo*</strong>
+                </div>
+                <p class="text-muted small">*{{ texto_firma_entrada }}</p>
+            </div>
+            <div class="col-lg-6">
+                {% if workorder.firma_salida %}
+                    <div style="height: {{ alto_firma }}px">
+                        <img src="{{ workorder.firma_salida|signature_base64 }}"/>
+                    </div>
+                {% else %}
+                    <div style="height: {{ alto_firma }}px"></div>
+                {% endif %}
+                <div class="panel-footer" style="border-color: #0c0c0c"><strong>Firma del cliente al recibir el
+                    vehículo*</strong>
+                </div>
+                <p class="text-muted small">*{{ texto_firma_salida }}</p>
+            </div>
+        </div>
+
+    </div>
 
 
 {% endblock %}

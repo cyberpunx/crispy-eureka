@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'dbsettings',
     'dal',
     'dal_select2',
+    'jsignature',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,3 +134,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 LOGIN_REDIRECT_URL = reverse_lazy('main:welcome')
+
+
+# FIRMA
+JSIGNATURE_WIDTH = 500
+JSIGNATURE_HEIGHT = 200
+#JSIGNATURE_BACKGROUND_COLOR = "#f8f8f8"
