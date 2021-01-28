@@ -88,9 +88,9 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
-        'OPTIONS': {
-            'init_command': 'SET innodb_strict_mode=1',
-        },
+        #'OPTIONS': {
+        #    'init_command': 'SET innodb_strict_mode=1',
+        #},
     }
 }
 
