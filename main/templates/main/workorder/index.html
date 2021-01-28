@@ -43,20 +43,20 @@
                         {% for workorder in orders %}
 
                             <tr class="even gradeX">
-                                <td><a href="{% url 'main:workorder-detail'  workorder.id %}">{{ workorder.id }}</td>
+                                <td><a href="{% url 'main:workorder-detail'  workorder.id %}">{{ workorder.id }}</a></td>
                                 <td>
                                     <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
-                                        {% if workorder.vehicle.client.business_name %}
-                                            {{ workorder.vehicle.client.business_name }}
-                                            - {% endif %} {{ workorder.vehicle.client.first_name }} {{ workorder.vehicle.client.last_name }}
+                                        {% if workorder.client_business_name %}
+                                            {{ workorder.client_business_name }}
+                                            - {% endif %} {{ workorder.client_first_name }} {{ workorder.client_last_name }}
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{% url 'main:client-detail'  workorder.vehicle.client.id %}">
-                                        {{ workorder.vehicle.model }} /
-                                        {{ workorder.vehicle.year }} /
-                                        {{ workorder.vehicle.color }} /
-                                        Patente: {{ workorder.vehicle.licence_plate }}
+                                    <a href="{% url 'main:client-detail'  workorder.client_id %}">
+                                        {{ workorder.vehicle_model }} /
+                                        {{ workorder.vehicle_year }} /
+                                        {{ workorder.vehicle_color }} /
+                                        Patente: {{ workorder.vehicle_licence_plate }}
                                     </a>
                                 </td>
                                 <td>{{ workorder.diagnostic }}</td>

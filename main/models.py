@@ -197,18 +197,38 @@ class WorkOrder(models.Model):
     vehicle_licence_plate = models.CharField(blank=True, null=True, max_length=20, verbose_name="Patente")
     vehicle_color = models.CharField(blank=True, null=True, max_length=20, verbose_name="Color")
     vehicle_year = models.CharField(blank=True, null=True, max_length=20, verbose_name="Año")
-    vehicle_model = models.CharField(blank=True, null=True, max_length=20, verbose_name="Modelo")
+    vehicle_model = models.CharField(blank=True, null=True, max_length=60, verbose_name="Modelo")
     vehicle_engine = models.CharField(blank=True, null=True, max_length=20, verbose_name="Motor")
     vehicle_vin = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Serie")
     vehicle_engine_number = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Motor")
 
+    client_id = models.CharField(blank=True, null=True, max_length=10, verbose_name="Nro. Cliente")
     client_business_name = models.CharField(blank=True, null=True,max_length=60, verbose_name="Nombre Comercial")
     client_first_name = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nombre")
     client_last_name = models.CharField(blank=True, null=True, max_length=40, verbose_name="Apellido")
-    client_email = models.EmailField(blank=True, null=True, unique=True, verbose_name="Email")
+    client_email = models.EmailField(blank=True, null=True, verbose_name="Email")
     client_phone = models.CharField(blank=True, null=True, max_length=40, verbose_name="Telefono")
     client_alt_phone = models.CharField(blank=True, null=True, max_length=40, verbose_name="Telefono Alternativo")
     client_cuit = models.CharField(blank=True, null=True, max_length=40, verbose_name="CUIT")
+
+    def save(self, *args, **kwargs):
+        self.vehicle_licence_plate = self.vehicle.licence_plate
+        self.vehicle_color = self.vehicle.color
+        self.vehicle_year = self.vehicle.year
+        self.vehicle_model = str(self.vehicle.model.brand.brand_name) + ' ' + str(self.vehicle.model.model_name)
+        self.vehicle_engine = self.vehicle.engine
+        self.vehicle_vin = self.vehicle.vin
+        self.vehicle_engine_number = self.vehicle.engine_number
+
+        self.client_id = self.vehicle.client.id
+        self.client_business_name = self.vehicle.client.business_name
+        self.client_first_name = self.vehicle.client.first_name
+        self.client_last_name = self.vehicle.client.last_name
+        self.client_email = self.vehicle.client.email
+        self.client_phone = self.vehicle.client.phone
+        self.client_alt_phone = self.vehicle.client.alt_phone
+        self.client_cuit = self.vehicle.client.cuit
+        return super(WorkOrder, self).save(*args, **kwargs)
 
     @property
     def last_movement(self):
