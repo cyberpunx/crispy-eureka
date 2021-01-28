@@ -84,8 +84,8 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.mysql',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'admincar',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'flowi',
+        'PASSWORD': 'caracoles',
         'HOST': 'localhost',
         'PORT': '5432',
         #'OPTIONS': {
