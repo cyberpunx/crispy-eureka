@@ -9,11 +9,12 @@ from django.db import transaction
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
-        fields = ['licence_plate', 'color', 'year', 'model', 'engine' , 'vin', 'engine_number', 'note']
+        fields = ['licence_plate', 'color', 'year', 'model', 'engine', 'vin', 'engine_number', 'note']
         widgets = {
             'model': autocomplete.ModelSelect2(url='main:model-autocomplete'),
             'note': forms.Textarea()
         }
+
 
 class VehicleClientForm(forms.ModelForm):
     class Meta:
@@ -25,21 +26,22 @@ class VehicleClientForm(forms.ModelForm):
             'note': forms.Textarea()
         }
 
-class WorkOrderForm(forms.ModelForm):
 
+class WorkOrderForm(forms.ModelForm):
     class Meta:
         model = WorkOrder
 
-        fields = ['vehicle', 'initial_obs', 'fuel_level', 'kilometers', 'diagnostic', 'note', 'ticket_number', 'total_manual']
+        fields = ['vehicle', 'initial_obs', 'fuel_level', 'kilometers', 'diagnostic', 'note', 'ticket_number',
+                  'total_manual']
         widgets = {
             'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
             'note': forms.Textarea(),
-            'date_in':  forms.widgets.DateInput(attrs={'type': 'date'}),
-            'date_out':  forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_in': forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_out': forms.widgets.DateInput(attrs={'type': 'date'}),
         }
 
-class WorkOrderUpdateForm(forms.ModelForm):
 
+class WorkOrderUpdateForm(forms.ModelForm):
     class Meta:
         model = WorkOrder
 
@@ -47,12 +49,12 @@ class WorkOrderUpdateForm(forms.ModelForm):
         widgets = {
             'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
             'note': forms.Textarea(),
-            'date_in':  forms.widgets.DateInput(attrs={'type': 'date'}),
-            'date_out':  forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_in': forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_out': forms.widgets.DateInput(attrs={'type': 'date'}),
         }
 
-class WorkOrderUpdateDetailsForm(forms.ModelForm):
 
+class WorkOrderUpdateDetailsForm(forms.ModelForm):
     class Meta:
         model = WorkOrder
 
@@ -60,12 +62,12 @@ class WorkOrderUpdateDetailsForm(forms.ModelForm):
         widgets = {
             'vehicle': autocomplete.ModelSelect2(url='main:vehicle-autocomplete'),
             'note': forms.Textarea(),
-            'date_in':  forms.widgets.DateInput(attrs={'type': 'date'}),
-            'date_out':  forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_in': forms.widgets.DateInput(attrs={'type': 'date'}),
+            'date_out': forms.widgets.DateInput(attrs={'type': 'date'}),
         }
 
-class WorkForm(forms.ModelForm):
 
+class WorkForm(forms.ModelForm):
     class Meta:
         model = Work
         fields = ['work_name', 'category', 'code']
@@ -73,8 +75,8 @@ class WorkForm(forms.ModelForm):
             'category': autocomplete.ModelSelect2(url='main:workcategory-autocomplete'),
         }
 
-class PartForm(forms.ModelForm):
 
+class PartForm(forms.ModelForm):
     class Meta:
         model = Part
         fields = ['part_name', 'category', 'code']
@@ -82,8 +84,8 @@ class PartForm(forms.ModelForm):
             'category': autocomplete.ModelSelect2(url='main:partcategory-autocomplete'),
         }
 
-class WorkorderPartsForm(forms.ModelForm):
 
+class WorkorderPartsForm(forms.ModelForm):
     class Meta:
         model = WorkorderParts
         fields = ['part', 'price', 'quantity']
@@ -91,8 +93,8 @@ class WorkorderPartsForm(forms.ModelForm):
             'part': autocomplete.ModelSelect2(url='main:parts-autocomplete'),
         }
 
-class WorkorderWorksForm(forms.ModelForm):
 
+class WorkorderWorksForm(forms.ModelForm):
     class Meta:
         model = WorkorderWorks
         fields = ['work', 'time_required']
@@ -100,13 +102,13 @@ class WorkorderWorksForm(forms.ModelForm):
             'work': autocomplete.ModelSelect2(url='main:works-autocomplete'),
         }
 
-class MovementForm(forms.ModelForm):
 
+class MovementForm(forms.ModelForm):
     class Meta:
         model = Movement
         fields = ['status', 'employee', 'date', 'time', 'note']
         widgets = {
-            'date':  forms.widgets.DateTimeInput(attrs={'type': 'date'}),
+            'date': forms.widgets.DateTimeInput(attrs={'type': 'date'}),
             'time': forms.widgets.DateTimeInput(attrs={'type': 'time'}),
             'note': forms.Textarea()
         }
@@ -114,15 +116,14 @@ class MovementForm(forms.ModelForm):
 
 MovementFormSet = inlineformset_factory(WorkOrder, Movement, form=MovementForm, extra=1)
 
-class EmployeeCreateForm(UserCreationForm):
 
+class EmployeeCreateForm(UserCreationForm):
     display_name = forms.CharField(max_length=20, label='Código de empleado')
     first_name = forms.CharField(max_length=30, label='Nombre')
     last_name = forms.CharField(max_length=30, label='Apellido')
     phone = forms.CharField(max_length=40, label='Teléfono')
     email = forms.EmailField(required=False, label='Email')
     is_staff = forms.BooleanField(required=False, label='Es Administrativo?')
-
 
     class Meta(UserCreationForm.Meta):
         model = User

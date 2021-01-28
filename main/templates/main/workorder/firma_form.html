@@ -64,7 +64,7 @@
                         <div class="panel-heading text-center"><strong>Datos de Vehículo y Cliente</strong></div>
                         <div class="panel-body" style="font-size: 14px">
                             <ul>
-                                <li>Cliente: <b>{{ workorder.vehicle.client.full_name }}</b></li>
+                                <li>Cliente: <b>{{ workorder.vehicle.client.get_full_name }}</b></li>
                                 <li>Vehículo: <b>{{ workorder.vehicle.model }} ({{ workorder.vehicle.year }})</b></li>
                                 <li>Patente: <b>{{ workorder.vehicle.licence_plate }}</b></li>
                                 <li>Fecha: <b>{% now "l d" %} de {% now "F" %} del {% now "Y" %}</b></li>

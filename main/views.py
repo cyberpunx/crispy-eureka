@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, redirect
-from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, WorkorderParts, WorkorderWorks, Movement, Timer
+from .models import Client, Vehicle, Model, Brand, WorkCategory, PartCategory, Employee, WorkOrder, Work, Part, \
+    WorkorderParts, WorkorderWorks, Movement, Timer
 from django.contrib.auth.models import User
 from dal import autocomplete
 from main import models
-from .forms import VehicleForm, VehicleClientForm, WorkOrderForm, WorkOrderUpdateForm, WorkOrderUpdateDetailsForm, WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm, MovementForm, EmployeeCreateForm
+from .forms import VehicleForm, VehicleClientForm, WorkOrderForm, WorkOrderUpdateForm, WorkOrderUpdateDetailsForm, \
+    WorkForm, PartForm, WorkorderPartsForm, WorkorderWorksForm, MovementForm, EmployeeCreateForm
 from django.views import generic
 from django.db.models import Sum
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -18,11 +20,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
 from django.conf import settings
 
+
 def index_view(request):
     return render(request, 'main/index.html', {})
 
+
 def welcome_view(request):
     return render(request, 'main/welcome.html', {})
+
 
 class ProfileView(TemplateView):
     template_name = "main/user/profile.html"
@@ -37,16 +42,19 @@ class ProfileView(TemplateView):
         context['last_timer'] = last_timer
         return context
 
+
 def timer_create_view(request, pk):
-    timer = Timer(user = request.user, work_order =  WorkOrder.objects.get(pk=pk), start_time=datetime.datetime.now())
+    timer = Timer(user=request.user, work_order=WorkOrder.objects.get(pk=pk), start_time=datetime.datetime.now())
     timer.save()
     return redirect('main:profile')
+
 
 def timer_stop_view(request, pk):
     timer = Timer.objects.get(pk=pk)
     timer.end_time = datetime.datetime.now()
     timer.save()
     return redirect('main:profile')
+
 
 class ClientIndexView(generic.ListView):
     template_name = 'main/client/index.html'
@@ -83,6 +91,7 @@ class ClientDeleteView(DeleteView):
     model = Client
     success_url = reverse_lazy('main:client-index')
 
+
 class ClientHistoryView(generic.ListView):
     template_name = 'main/workorder/index_no_paginate.html'
 
@@ -90,6 +99,7 @@ class ClientHistoryView(generic.ListView):
         qs = WorkOrder.objects.get_queryset().order_by('id')
         qs = qs.filter(vehicle__client__id__exact=self.kwargs['pk'])
         return qs
+
 
 class VehicleIndexView(generic.ListView):
     template_name = 'main/vehicle/index.html'
@@ -187,10 +197,12 @@ class WorkCategoryCreateView(CreateView):
     fields = ['category_name', 'description']
     success_url = reverse_lazy('main:workcategory-index')
 
+
 class WorkCategoryDeleteView(DeleteView):
     template_name = 'main/workcategory/confirm_delete.html'
     model = WorkCategory
     success_url = reverse_lazy('main:workcategory-index')
+
 
 class PartCategoryIndexView(generic.ListView):
     template_name = 'main/partcategory/index.html'
@@ -205,10 +217,12 @@ class PartCategoryCreateView(CreateView):
     fields = ['category_name', 'description']
     success_url = reverse_lazy('main:partcategory-index')
 
+
 class PartCategoryDeleteView(DeleteView):
     template_name = 'main/partcategory/confirm_delete.html'
     model = PartCategory
     success_url = reverse_lazy('main:partcategory-index')
+
 
 class EmployeeIndexView(generic.ListView):
     template_name = 'main/employee/index.html'
@@ -394,11 +408,13 @@ class WorkCreateView(CreateView):
     form_class = WorkForm
     success_url = reverse_lazy('main:work-index')
 
+
 class WorkIndexView(generic.ListView):
     template_name = 'main/work/index.html'
 
     def get_queryset(self):
         return Work.objects.all()
+
 
 class WorkUpdateView(UpdateView):
     template_name = 'main/work/autocomplete_form.html'
@@ -411,6 +427,7 @@ class WorkDeleteView(DeleteView):
     template_name = 'main/work/confirm_delete.html'
     model = Work
     success_url = reverse_lazy('main:work-index')
+
 
 class WorkOrderWorksCreateView(CreateView):
     template_name = 'main/workorderworks/autocomplete_form.html'
@@ -431,6 +448,7 @@ class WorkOrderWorksCreateView(CreateView):
     def get_success_url(self):
         return reverse('main:workorderworks-add', kwargs={'pk': self.object.work_order.pk})
 
+
 class WorkOrderWorksDeleteView(DeleteView):
     template_name = 'main/workorderworks/confirm_delete.html'
     model = WorkorderWorks
@@ -438,12 +456,14 @@ class WorkOrderWorksDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
 
+
 class WorkOrderWorksListDeleteView(DeleteView):
     template_name = 'main/workorderworks/confirm_listdelete.html'
     model = WorkorderWorks
 
     def get_success_url(self):
         return reverse('main:workorderworks-add', kwargs={'pk': self.object.work_order.pk})
+
 
 class WorkOrderPartsCreateView(CreateView):
     template_name = 'main/workorderparts/autocomplete_form.html'
@@ -464,12 +484,14 @@ class WorkOrderPartsCreateView(CreateView):
     def get_success_url(self):
         return reverse('main:workorderparts-add', kwargs={'pk': self.object.work_order.pk})
 
+
 class WorkOrderPartsDeleteView(DeleteView):
     template_name = 'main/workorderparts/confirm_delete.html'
     model = WorkorderParts
 
     def get_success_url(self):
         return reverse('main:workorder-detail', kwargs={'pk': self.object.work_order.pk})
+
 
 class WorkOrderPartsListDeleteView(DeleteView):
     template_name = 'main/workorderparts/confirm_listdelete.html'
@@ -478,11 +500,13 @@ class WorkOrderPartsListDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('main:workorderparts-add', kwargs={'pk': self.object.work_order.pk})
 
+
 class PartIndexView(generic.ListView):
     template_name = 'main/part/index.html'
 
     def get_queryset(self):
         return Part.objects.all()
+
 
 class PartCreateView(CreateView):
     template_name = 'main/part/autocomplete_form.html'
@@ -523,11 +547,10 @@ class MovementCreateView(CreateView):
 class ModelAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        #if not self.request.user.is_authenticated():
+        # if not self.request.user.is_authenticated():
         #    return Model.objects.none()
 
         qs = Model.objects.get_queryset().order_by('id')
-
 
         if self.q:
             qs = qs.filter(brand__brand_name__icontains=self.q) | qs.filter(model_name__icontains=self.q)
@@ -538,15 +561,14 @@ class ModelAutocomplete(autocomplete.Select2QuerySetView):
 class ClientAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        #if not self.request.user.is_authenticated():
+        # if not self.request.user.is_authenticated():
         #    return Client.objects.none()
 
         qs = Client.objects.get_queryset().order_by('id')
 
         if self.q:
             qs = qs.filter(first_name__icontains=self.q) | qs.filter(last_name__icontains=self.q) \
-                 | qs.filter(business_name__icontains=self.q) \
-                 | qs.filter(full_name__icontains=self.q)
+                 | qs.filter(business_name__icontains=self.q)
 
         return qs
 
@@ -554,7 +576,7 @@ class ClientAutocomplete(autocomplete.Select2QuerySetView):
 class VehicleAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        #if not self.request.user.is_authenticated():
+        # if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
         qs = Vehicle.objects.get_queryset().order_by('id')
@@ -565,15 +587,15 @@ class VehicleAutocomplete(autocomplete.Select2QuerySetView):
                  | qs.filter(client__business_name__icontains=self.q) \
                  | qs.filter(licence_plate__icontains=self.q) \
                  | qs.filter(model__model_name__icontains=self.q) \
-                 | qs.filter(model__brand__brand_name__icontains=self.q) \
-                 | qs.filter(client__full_name__icontains=self.q)
+                 | qs.filter(model__brand__brand_name__icontains=self.q)
 
         return qs
+
 
 class WorkCategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        #if not self.request.user.is_authenticated():
+        # if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
         qs = WorkCategory.objects.get_queryset().order_by('id')
@@ -583,10 +605,11 @@ class WorkCategoryAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class PartCategoryAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        #if not self.request.user.is_authenticated():
+        # if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
         qs = PartCategory.objects.get_queryset().order_by('id')
@@ -596,35 +619,36 @@ class PartCategoryAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs
 
+
 class PartsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        #if not self.request.user.is_authenticated():
+        # if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
         qs = Part.objects.get_queryset().order_by('id')
 
         if self.q:
             qs = qs.filter(part_name__icontains=self.q) | qs.filter(category__category_name__icontains=self.q) \
-                    | qs.filter(code__icontains=self.q)
+                 | qs.filter(code__icontains=self.q)
 
         return qs
+
 
 class WorksAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
-        #if not self.request.user.is_authenticated():
+        # if not self.request.user.is_authenticated():
         #    return Vehicle.objects.none()
 
         qs = Work.objects.get_queryset().order_by('id')
 
         if self.q:
             qs = qs.filter(work_name__icontains=self.q) | qs.filter(category__category_name__icontains=self.q) \
-                    | qs.filter(code__icontains=self.q)
+                 | qs.filter(code__icontains=self.q)
 
         return qs
 
 
 class CalendarView(TemplateView):
     template_name = "main/calendar.html"
-

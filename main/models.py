@@ -26,7 +26,6 @@ class Client(models.Model):
     business_name = models.CharField(blank=True, max_length=60, verbose_name="Nombre Comercial")
     first_name = models.CharField(max_length=20, verbose_name="Nombre")
     last_name = models.CharField(max_length=40, verbose_name="Apellido")
-    full_name = models.CharField(max_length=60, verbose_name="Nombre Completo", blank=True)
     email = models.EmailField(blank=True, null=True, unique=True, verbose_name="Email")
     phone = models.CharField(max_length=40, verbose_name="Telefono")
     alt_phone = models.CharField(blank=True, null=True, max_length=40, verbose_name="Telefono Alternativo")
@@ -34,20 +33,15 @@ class Client(models.Model):
     active = models.BooleanField(default=True, verbose_name="Activo")
     note = models.TextField(blank=True, null=True, verbose_name="Notas")
 
-    def save(self):
-        fullname = self.first_name + ' ' + self.last_name
-        self.full_name = fullname
-        super(Client, self).save()
-
     def get_full_name(self):
-        return self.first_name+" "+self.last_name
+        return self.first_name + " " + self.last_name
 
     def get_absolute_url(self):
         return reverse('main:client-detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         if self.business_name:
-            return str(self.id) +' [' + self.business_name + ']' + self.first_name + ' ' + self.last_name
+            return str(self.id) + ' [' + self.business_name + ']' + self.first_name + ' ' + self.last_name
         else:
             return str(self.id) + ' / ' + self.first_name + ' ' + self.last_name
 
@@ -85,7 +79,7 @@ class Vehicle(models.Model):
     engine = models.CharField(max_length=20, verbose_name="Motor")
     kilometers = models.IntegerField(blank=True, null=True, verbose_name="Kilometraje")
     note = models.TextField(blank=True, null=True, verbose_name="Observaciones")
-    vin = models.CharField(blank=True, null=True,max_length=20, verbose_name="Nro. Serie")
+    vin = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Serie")
     engine_number = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Motor")
 
     def get_absolute_url(self):
@@ -110,7 +104,7 @@ class Vehicle(models.Model):
 
         if self.client.business_name:
             return client_id + ' ' + first_name + ' ' + last_name + ' [' + business_name + '] / ' + \
-                    model_name + ' - ' + brand_name + ' / ' + color + ' / Patente: ' + licence_plate
+                   model_name + ' - ' + brand_name + ' / ' + color + ' / Patente: ' + licence_plate
         else:
             return client_id + ' ' + first_name + ' ' + last_name + ' / ' + model_name + ' - ' + brand_name + ' / ' + \
                    color + ' / Patente: ' + licence_plate
@@ -122,6 +116,7 @@ class WorkCategory(models.Model):
 
     def __str__(self):
         return self.category_name
+
 
 class PartCategory(models.Model):
     category_name = models.CharField(max_length=40, verbose_name="Categoría")
@@ -142,9 +137,10 @@ class Employee(models.Model):
 
 class Global(dbsettings.Group):
     labor_rate = dbsettings.PositiveIntegerValue(default='0', help_text='Valor de la hora de trabajo')
-    texto_firma_entrada = dbsettings.StringValue(default='', help_text='Texto de firma al ingresar vehículo', widget=forms.Textarea, required=False)
-    texto_firma_salida = dbsettings.StringValue(default='', help_text='Texto de firma al salir vehículo',
+    texto_firma_entrada = dbsettings.StringValue(default='', help_text='Texto de firma al ingresar vehículo',
                                                  widget=forms.Textarea, required=False)
+    texto_firma_salida = dbsettings.StringValue(default='', help_text='Texto de firma al salir vehículo',
+                                                widget=forms.Textarea, required=False)
 
 
 class Part(models.Model):
@@ -154,7 +150,7 @@ class Part(models.Model):
 
     def __str__(self):
         if self.code:
-            return '['+self.code+'] ' + self.category.category_name + ' / ' + self.part_name
+            return '[' + self.code + '] ' + self.category.category_name + ' / ' + self.part_name
         else:
             return self.category.category_name + ' / ' + self.part_name
 
@@ -166,7 +162,7 @@ class Work(models.Model):
 
     def __str__(self):
         if self.code:
-            return '['+self.code+'] ' + self.category.category_name + ' / ' + self.work_name
+            return '[' + self.code + '] ' + self.category.category_name + ' / ' + self.work_name
         else:
             return self.category.category_name + ' / ' + self.work_name
 
@@ -188,12 +184,31 @@ class WorkOrder(models.Model):
     ticket_number = models.CharField(blank=True, null=True, max_length=100, verbose_name="Nro. Factura")
     parts = models.ManyToManyField(Part, through='WorkorderParts')
     works = models.ManyToManyField(Work, through='WorkorderWorks')
-    total_manual = models.DecimalField(blank=True, verbose_name="Sobreescribir Total", null=True, max_digits=10, decimal_places=2)
+    total_manual = models.DecimalField(blank=True, verbose_name="Sobreescribir Total", null=True, max_digits=10,
+                                       decimal_places=2)
     firma_entrada = JSignatureField(blank=True, null=True, verbose_name="Firma ingreso a taller")
     firma_salida = JSignatureField(blank=True, null=True, verbose_name="Firma salida de taller")
-    firma_texto_entrada = models.CharField(blank=True, null=True, verbose_name="Texto de Firma ingreso a taller", max_length=256)
-    firma_texto_salida = models.CharField(blank=True, null=True, verbose_name="Texto de Firma salida de taller",
+    firma_texto_entrada = models.CharField(blank=True, null=True, verbose_name="Texto de Firma ingreso a taller",
                                            max_length=256)
+    firma_texto_salida = models.CharField(blank=True, null=True, verbose_name="Texto de Firma salida de taller",
+                                          max_length=256)
+
+    # DATOS QUE SE PERISTEN JUNTO CON LA ORDEN PARA "CONGELARLOS" EN EL TIEMPO
+    vehicle_licence_plate = models.CharField(blank=True, null=True, max_length=20, verbose_name="Patente")
+    vehicle_color = models.CharField(blank=True, null=True, max_length=20, verbose_name="Color")
+    vehicle_year = models.CharField(blank=True, null=True, max_length=20, verbose_name="Año")
+    vehicle_model = models.CharField(blank=True, null=True, max_length=20, verbose_name="Modelo")
+    vehicle_engine = models.CharField(blank=True, null=True, max_length=20, verbose_name="Motor")
+    vehicle_vin = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Serie")
+    vehicle_engine_number = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Motor")
+
+    client_business_name = models.CharField(blank=True, null=True,max_length=60, verbose_name="Nombre Comercial")
+    client_first_name = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nombre")
+    client_last_name = models.CharField(blank=True, null=True, max_length=40, verbose_name="Apellido")
+    client_email = models.EmailField(blank=True, null=True, unique=True, verbose_name="Email")
+    client_phone = models.CharField(blank=True, null=True, max_length=40, verbose_name="Telefono")
+    client_alt_phone = models.CharField(blank=True, null=True, max_length=40, verbose_name="Telefono Alternativo")
+    client_cuit = models.CharField(blank=True, null=True, max_length=40, verbose_name="CUIT")
 
     @property
     def last_movement(self):
@@ -237,10 +252,11 @@ class WorkOrder(models.Model):
 
     settings = Global('Global Settings')
 
+
 class WorkorderParts(models.Model):
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
     part = models.ForeignKey(Part, on_delete=models.CASCADE, verbose_name="Repuesto")
-    price = models.DecimalField(blank=True, verbose_name="Precio", null = True, max_digits=10, decimal_places=2)
+    price = models.DecimalField(blank=True, verbose_name="Precio", null=True, max_digits=10, decimal_places=2)
     quantity = models.IntegerField(blank=True, default=1, verbose_name="Cantidad")
 
     @property
@@ -250,10 +266,11 @@ class WorkorderParts(models.Model):
         else:
             return self.quantity * self.price
 
+
 class WorkorderWorks(models.Model):
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
     work = models.ForeignKey(Work, on_delete=models.CASCADE, verbose_name="Trabajo")
-    time_required = models.DecimalField(blank=True, verbose_name="Tiempo", null = True, max_digits=5, decimal_places=1)
+    time_required = models.DecimalField(blank=True, verbose_name="Tiempo", null=True, max_digits=5, decimal_places=1)
 
     @property
     def labor_rate(self):
@@ -278,7 +295,8 @@ class Movement(models.Model):
         ('Cancelada', 'Cancelada'),
         ('Presupuesto', 'Presupuesto'),
     )
-    status = models.CharField(max_length=64, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0], verbose_name="Estado", blank=False)
+    status = models.CharField(max_length=64, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0],
+                              verbose_name="Estado", blank=False)
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
     date = models.DateField(verbose_name="Fecha", blank=True)
     time = models.TimeField(verbose_name="Hora", blank=True)
@@ -298,7 +316,6 @@ class Timer(models.Model):
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
     start_time = models.DateTimeField(verbose_name="Inicio", auto_now=True)
     end_time = models.DateTimeField(blank=True, null=True, verbose_name="Fin")
-
 
     @property
     def is_running(self):
@@ -320,6 +337,3 @@ class Timer(models.Model):
                 return datetime.timedelta(hours=hours, minutes=minutes, seconds=round(seconds, 0))
             else:
                 return 0
-
-
-

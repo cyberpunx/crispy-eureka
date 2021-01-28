@@ -289,7 +289,7 @@
         <div class="row">
             <div class="col-lg-6">
                 {% if workorder.firma_entrada %}
-                    <div style="height: {{ alto_firma }}px">
+                    <div style="height: {{ alto_firma }}px; display: flex; align-items: flex-end">
                         <img src="{{ workorder.firma_entrada|signature_base64 }}"/>
                     </div>
                 {% else %}
@@ -302,7 +302,7 @@
             </div>
             <div class="col-lg-6">
                 {% if workorder.firma_salida %}
-                    <div style="height: {{ alto_firma }}px">
+                    <div style="height: {{ alto_firma }}px; display: flex; align-items: flex-end">
                         <img src="{{ workorder.firma_salida|signature_base64 }}"/>
                     </div>
                 {% else %}
