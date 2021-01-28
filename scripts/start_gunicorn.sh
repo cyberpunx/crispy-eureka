@@ -2,7 +2,7 @@
 
 
 NAME="$1" # Name of the application
-DJANGODIR=/root/admincar/admincar # Django project directory
+DJANGODIR=/root/admincar # Django project directory
 SOCKFILE=/run/gunicorn_admincar.sock # we will communicte using this unix socket
 USER=root # the user to run as
 GROUP=root # the group to run as
