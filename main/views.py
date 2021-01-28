@@ -67,6 +67,12 @@ class ClientDetailView(generic.DetailView):
     template_name = 'main/client/detail.html'
     model = Client
 
+    def get_context_data(self, **kwargs):
+        context = super(ClientDetailView, self).get_context_data(**kwargs)
+        context['vehiculos_activos'] = self.object.vehicle_set.filter(active=True)
+        context['vehiculos_inactivos'] = self.object.vehicle_set.filter(active=False)
+        return context
+
 
 class ClientCreateView(CreateView):
     template_name = 'main/client/client_form.html'

@@ -81,6 +81,7 @@ class Vehicle(models.Model):
     note = models.TextField(blank=True, null=True, verbose_name="Observaciones")
     vin = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Serie")
     engine_number = models.CharField(blank=True, null=True, max_length=20, verbose_name="Nro. Motor")
+    active = models.BooleanField(default=True, verbose_name="Activo")
 
     def get_absolute_url(self):
         return reverse('main:vehicle-detail', kwargs={'pk': self.pk})

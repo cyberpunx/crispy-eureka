@@ -9,7 +9,7 @@ from django.db import transaction
 class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
-        fields = ['licence_plate', 'color', 'year', 'model', 'engine', 'vin', 'engine_number', 'note']
+        fields = ['licence_plate', 'color', 'year', 'model', 'engine', 'vin', 'engine_number', 'note', 'active']
         widgets = {
             'model': autocomplete.ModelSelect2(url='main:model-autocomplete'),
             'note': forms.Textarea()
