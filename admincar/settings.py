@@ -81,16 +81,16 @@ WSGI_APPLICATION = 'admincar.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.mysql',
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
+        #'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'admincar',
-        'USER': 'flowi',
-        'PASSWORD': 'caracoles',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '5432',
-        #'OPTIONS': {
-        #    'init_command': 'SET innodb_strict_mode=1',
-        #},
+        'PORT': '',
+        'OPTIONS': {
+            'init_command': 'SET innodb_strict_mode=1',
+        },
     }
 }
 

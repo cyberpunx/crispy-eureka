@@ -12,6 +12,16 @@ import datetime
 from django.utils import timezone
 from jsignature.fields import JSignatureField
 
+class Global(dbsettings.Group):
+    labor_rate = dbsettings.PositiveIntegerValue(default='0', help_text='Valor de la hora de trabajo')
+    texto_firma_entrada = dbsettings.StringValue(default='', help_text='Texto de firma al ingresar vehículo',
+                                                 widget=forms.Textarea, required=False)
+    texto_firma_salida = dbsettings.StringValue(default='', help_text='Texto de firma al salir vehículo',
+                                                widget=forms.Textarea, required=False)
+    workshop_name = dbsettings.StringValue(default='Mi Taller', help_text='Nombre del Taller', required=True)
+
+settings = Global('Global Settings')
+
 
 class ClientManager(models.Manager):
     def active(self):
@@ -135,15 +145,6 @@ class Employee(models.Model):
     def __str__(self):
         return self.display_name
 
-
-class Global(dbsettings.Group):
-    labor_rate = dbsettings.PositiveIntegerValue(default='0', help_text='Valor de la hora de trabajo')
-    texto_firma_entrada = dbsettings.StringValue(default='', help_text='Texto de firma al ingresar vehículo',
-                                                 widget=forms.Textarea, required=False)
-    texto_firma_salida = dbsettings.StringValue(default='', help_text='Texto de firma al salir vehículo',
-                                                widget=forms.Textarea, required=False)
-
-
 class Part(models.Model):
     part_name = models.CharField(max_length=40, verbose_name="Repuesto")
     code = models.CharField(max_length=6, verbose_name="Código", blank=True, null=True, unique=True)
@@ -249,12 +250,8 @@ class WorkOrder(models.Model):
     def work_sum(self):
         work_sum = 0
         for work in self.workorderworks_set.all():
-            if not work.time_required:
-                time_required = 0
-            else:
-                time_required = work.time_required
-            work_sum = work_sum + time_required
-        return work_sum * WorkOrder.settings.labor_rate
+            work_sum += work.work_price
+        return work_sum
 
     @property
     def part_sum(self):
@@ -269,9 +266,7 @@ class WorkOrder(models.Model):
 
     @property
     def labor_rate(self):
-        return WorkOrder.settings.labor_rate
-
-    settings = Global('Global Settings')
+        return settings.labor_rate
 
 
 class WorkorderParts(models.Model):
@@ -292,17 +287,16 @@ class WorkorderWorks(models.Model):
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
     work = models.ForeignKey(Work, on_delete=models.CASCADE, verbose_name="Trabajo")
     time_required = models.DecimalField(blank=True, verbose_name="Tiempo", null=True, max_digits=5, decimal_places=1)
+    labor_rate = models.IntegerField(verbose_name="Precio de la hora de Trabajo", default=0)
+    work_price = models.DecimalField(verbose_name="Precio total del Trabajo", max_digits=10, default=0, decimal_places=2)
 
-    @property
-    def labor_rate(self):
-        return WorkOrder.settings.labor_rate
-
-    @property
-    def work_price(self):
+    def save(self, *args, **kwargs):
+        self.labor_rate = settings.labor_rate
         if not self.time_required:
-            return 0
+            self.work_price = 0
         else:
-            return self.time_required * WorkOrder.settings.labor_rate
+            self.work_price = self.time_required * self.labor_rate
+        return super(WorkorderWorks, self).save(*args, **kwargs)
 
 
 class Movement(models.Model):
@@ -335,7 +329,7 @@ class Movement(models.Model):
 class Timer(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     work_order = models.ForeignKey(WorkOrder, on_delete=models.CASCADE, verbose_name="Orden de Servicio")
-    start_time = models.DateTimeField(verbose_name="Inicio", auto_now=True)
+    start_time = models.DateTimeField(verbose_name="Inicio")
     end_time = models.DateTimeField(blank=True, null=True, verbose_name="Fin")
 
     @property

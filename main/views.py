@@ -300,7 +300,7 @@ class WorkOrderIndexView(generic.ListView):
             orders = paginator.page(paginator.num_pages)
 
         context["orders"] = orders
-        context['labor_rate'] = models.WorkOrder.settings.labor_rate
+        context['labor_rate'] = models.settings.labor_rate
         return context
 
 
@@ -334,8 +334,8 @@ class WorkOrderPrintView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(WorkOrderPrintView, self).get_context_data(**kwargs)
-        context['texto_firma_entrada'] = models.WorkOrder.settings.texto_firma_entrada
-        context['texto_firma_salida'] = models.WorkOrder.settings.texto_firma_salida
+        context['texto_firma_entrada'] = models.settings.texto_firma_entrada
+        context['texto_firma_salida'] = models.settings.texto_firma_salida
         context['alto_firma'] = settings.JSIGNATURE_HEIGHT
         context['ancho_firma'] = settings.JSIGNATURE_WIDTH
         return context
@@ -364,14 +364,14 @@ class WorkOrderSingatureInView(UpdateView):
     def get_success_url(self):
         obj = self.object.pk
         orden = WorkOrder.objects.get(id=self.object.pk)
-        orden.firma_texto_entrada = models.WorkOrder.settings.texto_firma_entrada
+        orden.firma_texto_entrada = models.settings.texto_firma_entrada
         orden.save()
         return reverse('main:workorder-detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super(WorkOrderSingatureInView, self).get_context_data(**kwargs)
-        context['texto_firma_entrada'] = models.WorkOrder.settings.texto_firma_entrada
-        context['texto_firma_salida'] = models.WorkOrder.settings.texto_firma_salida
+        context['texto_firma_entrada'] = models.settings.texto_firma_entrada
+        context['texto_firma_salida'] = models.settings.texto_firma_salida
         return context
 
 
@@ -385,8 +385,8 @@ class WorkOrderSingatureOutView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(WorkOrderSingatureOutView, self).get_context_data(**kwargs)
-        context['texto_firma_entrada'] = models.WorkOrder.settings.texto_firma_entrada
-        context['texto_firma_salida'] = models.WorkOrder.settings.texto_firma_salida
+        context['texto_firma_entrada'] = models.settings.texto_firma_entrada
+        context['texto_firma_salida'] = models.settings.texto_firma_salida
         return context
 
 
