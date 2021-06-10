@@ -1,4 +1,4 @@
-Django==1.11.17
+Django==2.2.24
 django-dbsettings==0.10.0
 django-ajax-selects==1.3.5
 django-autocomplete-light==3.2.9
