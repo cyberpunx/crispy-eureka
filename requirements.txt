@@ -11,5 +11,5 @@ django-extra-views==0.9.0
 pytz==2017.2
 six==1.10.0
 #uWSGI==2.0.15
-pillow==8.1.0
+pillow==9.0.1
 django-jsignature==0.10
